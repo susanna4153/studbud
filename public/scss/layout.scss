@@ -1,0 +1,86 @@
+@import "base/reset.scss";
+@import "./components/kanban.scss";
+@import "./components/workspace.scss";
+@import "./components/flashcard.scss";
+
+img#logo {
+  width: 150px;
+  height: auto;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 60px;
+  padding-right: 20px;
+  width: calc(100% - 60px);
+}
+
+main {
+  margin-left: 100px;
+}
+
+.sidenav {
+  height: 100%;
+  width: 60px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #003049;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+
+  ul {
+    padding: 0;
+  }
+
+  li {
+    list-style-type: none;
+    margin: 0 0 40px;
+  }
+
+  a {
+    img {
+      width: 30px;
+      height: auto;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .sidenav {
+    height: 60px;
+    width: 100%;
+    top: auto;
+    bottom: 0;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    height: inherit;
+  }
+
+  main.page-content {
+    margin-left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header.page-heading {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+.box {
+  border: 1px solid green;
+}

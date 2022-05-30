@@ -1,3 +1,29 @@
+////////////////////////// Navigation between Time Links ////////////////////////
+
+//Setting up HTML DOM Elements
+const pomodoroLink = document.getElementsByClassName("pomodoro-link");
+const stopwatchLink = document.getElementsByClassName("stopwatch-link");
+const settingsLink = document.getElementsByClassName("settings-link");
+
+//Add an event listener to each time feature link
+for (var i = 0; i < pomodoroLink.length; i++) {
+  pomodoroLink[i].addEventListener("click", function () {
+    show("pomodoro-timer", "stopwatch", "settings");
+  });
+}
+
+for (var i = 0; i < stopwatchLink.length; i++) {
+  stopwatchLink[i].addEventListener("click", function () {
+    show("stopwatch", "pomodoro-timer", "settings");
+  });
+}
+
+for (var i = 0; i < settingsLink.length; i++) {
+  settingsLink[i].addEventListener("click", function () {
+    show("settings", "stopwatch", "pomodoro-timer");
+  });
+}
+
 // Function to show selected time feature and hide others
 function show(shown, hidden1, hidden2) {
   document.getElementById(shown).style.display = "block";
@@ -5,165 +31,212 @@ function show(shown, hidden1, hidden2) {
   document.getElementById(hidden2).style.display = "none";
 }
 
-//Setting up HTML DOM Elements 
-const pomodoroLink = document.getElementsByClassName("pomodoro-link");
-const stopwatchLink = document.getElementsByClassName("stopwatch-link");
-const settingsLink = document.getElementsByClassName("settings-link");
-
-//Add an event listener to each time feature link
-for (var i = 0; i < pomodoroLink.length; i++) {
-    pomodoroLink[i].addEventListener("click", function () {
-        show("pomodoro-timer", "stopwatch", "settings");
-      });
-}
-
-for (var i = 0; i < stopwatchLink.length; i++) {
-    stopwatchLink[i].addEventListener("click", function () {
-        show("stopwatch", "pomodoro-timer", "settings");
-      });
-}
-
-for (var i = 0; i < settingsLink.length; i++) {
-    settingsLink[i].addEventListener("click", function () {
-        show("settings", "stopwatch", "pomodoro-timer");
-      });
-}
-
 //Setting default to pomodoro-timer on page load
 window.onload = show("pomodoro-timer", "stopwatch", "settings");
 
-
-//Stopwatch - modelled off Clathy Dutton's JavaScript Stopwatch
-// https://codepen.io/cathydutton/pen/xxpOOw?editors=1010 
+////////////////////////// Stopwatch ////////////////////////
+// modelled off Clathy Dutton's JavaScript Stopwatch
 window.onload = function () {
-    var minutes = 00;
-    var seconds = 00; 
-    var tens = 00; 
-    var appendTens = document.getElementById("tens");
-    var appendSeconds = document.getElementById("seconds");
-    var appendMinutes = document.getElementById("minutes");
-    var buttonStart = document.getElementById('button-start');
-    var buttonStop = document.getElementById('button-stop');
-    var buttonReset = document.getElementById('button-reset');
-    var stopwatchInterval;
-  
-    buttonStart.onclick = function() {
-        clearInterval(stopwatchInterval);
-        stopwatchInterval = setInterval(startStopwatch, 10);
-    }
-    
-    buttonStop.onclick = function() {
-        clearInterval(stopwatchInterval);
-    }
-    
-  
-    buttonReset.onclick = function() {
-       clearInterval(stopwatchInterval);
-        tens = "00";
-        seconds = "00";
-        minutes= "00";
-        appendTens.innerHTML = tens;
-        appendSeconds.innerHTML = seconds;
-        appendMinutes.innerHTML = minutes;
-        
-    }
-    
-    
-    function startStopwatch () {
-      tens++;
-      
-      if(tens <= 9){
-        appendTens.innerHTML = "0" + tens;
-      }
-      
-      if (tens > 9){
-        appendTens.innerHTML = tens;
-        
-      } 
-      
-      if (tens > 99) {
-        seconds++;
-        appendSeconds.innerHTML = "0" + seconds;
-        tens = 0;
-        appendTens.innerHTML = "0" + 0;
-      }
-      
-      if (seconds > 9){
-        appendSeconds.innerHTML = seconds;
-      }
+  var stopwatchMinutes = 00;
+  var stopwatchSeconds = 00;
+  var stopwatchTens = 00;
+  var appendTens = document.getElementById("stopwatch-tens");
+  var appendSeconds = document.getElementById("stopwatch-seconds");
+  var appendMinutes = document.getElementById("stopwatch-minutes");
+  var buttonStart = document.getElementById("button-start");
+  var buttonStop = document.getElementById("button-stop");
+  var buttonReset = document.getElementById("button-reset");
+  var stopwatchInterval;
 
-      if (seconds > 59){
-          minutes++;
-          appendMinutes.innerHTML = "0" + minutes;
-          seconds = 0;
-          appendSeconds.innerHTML = "0" + 0
-      }
+  buttonStart.onclick = function () {
+    clearInterval(stopwatchInterval);
+    stopwatchInterval = setInterval(startStopwatch, 10);
+  };
+
+  buttonStop.onclick = function () {
+    clearInterval(stopwatchInterval);
+  };
+
+  buttonReset.onclick = function () {
+    clearInterval(stopwatchInterval);
+    stopwatchTens = "00";
+    stopwatchSeconds = "00";
+    stopwatchMinutes = "00";
+    appendTens.innerHTML = stopwatchTens;
+    appendSeconds.innerHTML = stopwatchSeconds;
+    appendMinutes.innerHTML = stopwatchMinutes;
+  };
+
+  function startStopwatch() {
+    stopwatchTens++;
+
+    if (stopwatchTens <= 9) {
+      appendTens.innerHTML = "0" + stopwatchTens;
+    }
+
+    if (stopwatchTens > 9) {
+      appendTens.innerHTML = stopwatchTens;
+    }
+
+    if (stopwatchTens > 99) {
+      stopwatchSeconds++;
+      appendSeconds.innerHTML = "0" + stopwatchSeconds;
+      stopwatchTens = 0;
+      appendTens.innerHTML = "0" + 0;
+    }
+
+    if (stopwatchSeconds > 9) {
+      appendSeconds.innerHTML = stopwatchSeconds;
+    }
+
+    if (stopwatchSeconds > 59) {
+      stopwatchMinutes++;
+      appendMinutes.innerHTML = "0" + stopwatchMinutes;
+      stopwatchSeconds = 0;
+      appendSeconds.innerHTML = "0" + 0;
     }
   }
+};
 
-//Pomodoro timer 
-var workMinutes = 25;
-var workSeconds = 00;
-var displayWorkMinutes = document.getElementById("pomodoro-minutes");
-var displayWorkSeconds = document.getElementById("pomodoro-seconds");
+//////////////////////// Settings ////////////////////////
+//Slider Controls
+var workDuration = document.getElementById("work-duration");
+var breakDuration = document.getElementById("break-duration");
+var numberOfSessions = document.getElementById("number-of-sessions");
+
+//Update pomodoro timer with user input
+function updateTimer() {
+  workDuration.addEventListener("input", function (event) {
+    var workDurationValue = document.getElementById("work-duration").value;
+    displayWorkMinutes.innerHTML = workDurationValue;
+  });
+
+  breakDuration.addEventListener("input", function (event) {
+    var breakDurationValue = document.getElementById("break-duration").value;
+    displayBreakMinutes.innerHTML = breakDurationValue;
+  });
+
+  numberOfSessions.addEventListener("input", function (event) {
+    var totalSessions = document.getElementById("total-sessions");
+    var numberOfSessionsValue =
+      document.getElementById("number-of-sessions").value;
+    totalSessions.innerHTML = numberOfSessionsValue;
+  });
+}
+window.onload = updateTimer();
+
+////////////////////////// Pomodoro Timer ////////////////////////
+//Set up button HTML DOM Elements
 var pomodoroStart = document.getElementById("pomodoro-start");
 var pomodoroStop = document.getElementById("pomodoro-stop");
 var pomodoroReset = document.getElementById("pomodoro-reset");
-var pomodoroInterval;
 
-pomodoroStart.addEventListener("click", function(){
-    clearInterval(pomodoroInterval);
-    pomodoroInterval = setInterval(pomodoroStart, 1000);
-})
+//Set up respective pomodoro timer and break HTML DOM Elements
+var displayWorkMinutes = document.getElementById("pomodoro-minutes");
+var displayWorkSeconds = document.getElementById("pomodoro-seconds");
+var displayBreakMinutes = document.getElementById("break-minutes");
+var displayBreakSeconds = document.getElementById("break-seconds");
+var currentSession = document.getElementById("current-session");
 
-pomodoroStop.onclick = function() {
-    clearInterval(Interval);
+//Store a reference to a timer variable
+var startTimer;
+
+pomodoroStart.addEventListener("click", function () {
+  timer();
+  if (startTimer === undefined) {
+    startTimer = setInterval(timer, 1000);
+  } else {
+    alert("Timer is already running");
+  }
+});
+
+//Timer Reset
+pomodoroReset.addEventListener("click", function () {
+  displayWorkMinutes.innerHTML = 25;
+  displayWorkSeconds.innerHTML = "00";
+  displayBreakMinutes.innerHTML = 5;
+  displayBreakSeconds.innerHTML = "00";
+
+  document.getElementById("current-session").innerText = 1;
+  stopInterval();
+  startTimer = undefined;
+});
+
+//Timer Pause
+pomodoroStop.addEventListener("click", function () {
+  stopInterval();
+  startTimer = undefined;
+});
+
+//Start Timer Function
+function timer() {
+  //Work timer Countdown
+  if (displayWorkSeconds.innerText != 0) {
+    displayWorkSeconds.innerText--;
+    if (
+      displayWorkSeconds.innerText <= 9 &&
+      displayWorkSeconds.innerText != 0
+    ) {
+      displayWorkSeconds.innerText = "0" + displayWorkSeconds.innerText;
+    }
+
+    if (displayWorkSeconds.innerText == 0) {
+      displayWorkSeconds.innerText = "00";
+    }
+  }
+
+  //Reset Seconds to 59 once minute has passed
+  else if (
+    displayWorkMinutes.innerText != 0 &&
+    displayWorkSeconds.innerText == 0
+  ) {
+    displayWorkSeconds.innerText = 59;
+    displayWorkMinutes.innerText--;
+  }
+
+  //Break Timer Countdown
+  if (displayWorkMinutes.innerText == 0 && displayWorkSeconds.innerText == 0) {
+    if (displayBreakSeconds.innerText != 0) {
+      displayBreakSeconds.innerText--;
+
+      if (
+        displayBreakSeconds.innerText <= 9 &&
+        displayBreakSeconds.innerText != 0
+      ) {
+        displayBreakSeconds.innerText = "0" + displayBreakSeconds.innerText;
+      }
+
+      if (displayBreakSeconds.innerText == 0) {
+        displayBreakSeconds.innerText = "00";
+      }
+    } else if (
+      displayBreakMinutes.innerText != 0 &&
+      displayBreakSeconds.innerText == 0
+    ) {
+      displayBreakSeconds.innerText = 59;
+      displayBreakMinutes.innerText--;
+    }
+  }
+
+  //Upon session completion, reset timer and increment current session number by one
+  if (
+    displayWorkMinutes.innerText == 0 &&
+    displayWorkSeconds.innerText == 0 &&
+    displayBreakMinutes.innerText == 0 &&
+    displayBreakSeconds.innerText == 0
+  ) {
+    //Reset Timer values
+    displayWorkMinutes.innerHTML = 25;
+    displayBreakMinutes.innerHTML = "00";
+    displayBreakMinutes.innerHTML = 5;
+    displayBreakSeconds.innerHTML = "00";
+
+    //Increment current session number
+    currentSession.innerHTML++;
+  }
 }
 
-function pomodoroStart() {
-
+//Stop interval Function
+function stopInterval() {
+  clearInterval(startTimer);
 }
-
-
-
-//Settings
-var workDuration = document.getElementById('work-duration');
-var breakDuration = document.getElementById('break-duration');
-var numberOfSessions = document.getElementById('number-of-sessions');
-
-//Retrieve user input for work duration
-workDuration.addEventListener("input", function(event){
-    //Retrieve
-    var workDurationValue = document.getElementById('work-duration').value
-
-    //Update
-    displayWorkMinutes.innerHTML = workDurationValue;
-    console.log(workDurationValue);
-})
-
-//Retrieve user input for break duration
-breakDuration.addEventListener("input", function(event){
-    var breakDurationValue = document.getElementById('break-duration').value
-    console.log(breakDurationValue);
-})
-
-//Retrieve user input for total number of sessions and update on pomodoro timer
-numberOfSessions.addEventListener("input", function(event){
-    //Retrieve
-    var numberOfSessionsValue = document.getElementById('number-of-sessions').value;
-
-    //Update
-    var totalSessions = document.getElementById('total-sessions');
-    totalSessions.innerHTML = numberOfSessionsValue;
-})
-
-
-
-
-
-
-
-
-
-
-

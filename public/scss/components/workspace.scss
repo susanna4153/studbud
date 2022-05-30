@@ -1,91 +1,87 @@
 //Layout of workspace page
 .row {
-    width: calc(100% - 60px);
+  width: calc(100% - 60px);
 }
 
 .box {
-    border: 1px solid;
-    border-radius: 4px;
-    padding: 20px;
+  border: 1px solid;
+  border-radius: 4px;
+  padding: 20px;
 
-    & + .box {
-        margin-top: 40px;
-    }
-    
-    &.progress-column {
-        background-color: #003049;
-        color: #fff;
-        height: 100%;
-    }
+  & + .box {
+    margin-top: 40px;
+  }
 
-    &.box-border {
-        border: 1px solid #A4A4A4;
-    }
+  &.progress-column {
+    background-color: #003049;
+    color: #fff;
+    height: 100%;
+  }
 
-    &.music-player {
-        padding: 0;
-    }
+  &.box-border {
+    border: 1px solid #a4a4a4;
+  }
+
+  &.music-player {
+    padding: 0;
+  }
 }
 
 //Creating two columns - left column for progress kanban column, right for pomodoro timer/stopwatch and music player
-.study-features{
-    padding: 20px;
-    height: 85vh;
+.study-features {
+  padding: 20px;
+  height: 85vh;
 
-    .time-features {
-        height: 45vh;
-        position: relative;
-    }
+  .time-features {
+    height: 45vh;
+    position: relative;
+  }
 
-    .music-player {
-
-    }
+  .music-player {
+  }
 }
 
 //Responsive Design
 @media screen and (max-width: 768px) {
-    .study-features {
-        .time-features {
-            height: 85vh;
-        }
-    
-        .music-player {
-            height: 85vh;
-        }
+  .study-features {
+    .time-features {
+      height: 85vh;
     }
 
+    .music-player {
+      height: 85vh;
+    }
+  }
 }
 
 //Time Features - Positioning Links
 div.time-links {
-    background-color: red;
-    width: 200px;
-    position: absolute;
-    right: 30px;
-    top: 20px;
+  width: 200px;
+  position: absolute;
+  right: 30px;
+  top: 20px;
 }
 
 //Settings - Slider Stlying
 .pomodoro-settings {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 50%;
+
+  input {
+    margin-top: 10px;
+  }
+
+  span {
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-direction: column;
-    width: 50%;
+    justify-content: space-between;
+    width: 100%;
+  }
 
-    input {
-        margin-top:10px;
-    }
-
-    span {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-    }
-
-    label {
-        width: 100%;
-        text-align: left;
-    }
-
+  label {
+    width: 100%;
+    text-align: left;
+  }
 }

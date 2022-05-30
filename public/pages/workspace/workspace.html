@@ -39,24 +39,34 @@
         <!--Study features - Pomodoro Timer, Stopwatch, Music layer-->
         <div class="col-md-8 study-features">
           <div class="box box-border time-features">
+            
             <!--Pomodoro Timer-->
             <div id="pomodoro-timer">
-              <p>Pomodoro Timer</p>
               <div id ="timer">
-                <h2>
-                  <span id="pomodoro-minutes">25</span>
-                  <span class="separator">:</span>
-                  <span id="pomodoro-seconds">00</span>
-                </h2>
-                <p id="work-or-break">FOCUS</p>
+                <div id ="work-timer">
+                  <h2>
+                    <span id="pomodoro-minutes">00</span>
+                    <span class="separator">:</span>
+                    <span id="pomodoro-seconds">03</span>
+                  </h2>
+                  <p>FOCUS</p>
+                </div>
+                <div id="break-timer">
+                  <h2>
+                    <span id="break-minutes">00</span>
+                    <span class="separator">:</span>
+                    <span id="break-seconds">03</span>
+                  </h2>
+                </div>
+                <p>BREAK</p>
               </div>
               <div class="pomodoro-buttons">
                 <button class="btn btn-primary" id="pomodoro-start">Start</button>
                 <button class="btn btn-secondary" id="pomodoro-stop">Stop</button>
-                <button class="btn btn-outline-warning" id="pomodoro-reset">Reset</button>
+                <button class="btn btn-secondary" id="pomodoro-reset">Reset</button>
               </div>
               <div class="number-of-sessions">
-                  <span id="current-sessions">1</span> 
+                  <span id="current-session">1</span> 
                   <span> out of </span> 
                   <span id="total-sessions">5</span>
                   <span> sessions</span>
@@ -73,7 +83,7 @@
             <!--Stopwatch-->
             <div id="stopwatch">
               <p>Stopwatch</p>
-              <h2><span id="minutes">00</span>:<span id="seconds">00</span>:<span id="tens">00</span></h2>
+              <h2><span id="stopwatch-minutes">00</span>:<span id="stopwatch-seconds">00</span>:<span id="stopwatch-tens">00</span></h2>
               <div class="stopwatch-buttons">
                 <button class="btn btn-primary" id="button-start">Start</button>
                 <button class="btn btn-secondary" id="button-stop">Stop</button>

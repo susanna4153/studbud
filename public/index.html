@@ -79,18 +79,10 @@
                   </select>
             
                   <br>
-            
-                  <button type="submit" id="task-button">Submit</button>
+                  <button type="submit"  class="btn btn-primary" id="task-button">Create Task</button>
                 </form>
-                <ul id="tasklist">
-                  
-                </ul>
+                <button type="button" class="btn btn-secondary"> Delete </button>
               </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-              <button type="button" class="btn btn-secondary"> Delete </button>
             </div>
           </div>
         </div>
@@ -121,52 +113,30 @@
 
      <section class="row" id="kanban">
       
-      <div class="col-md-4 hidden" id="column-template">
+      <div class="col-md-4" id="column-template">
         <div class="box kanban_column">
           <div class="column-heading">
-            <h3 class="column-title"></h3>
+            <h3 class="column-title">Column Template</h3>
           </div>
           <div id="tasklist">
-            <ul>
-              
-            </ul>
           </div>
         </div>
       </div>
 
-
-
-       <!--To do Column -->
-        <!-- <div class="col-md-4">
-          <div class="box kanban_column" id="to-do-column">
-            <div class="column-heading">
-              <h3>To do</h3>
-            </div>
-            <div id="tasklist">
-              <p id="emptyList">You have not added any tasks yet.</p>
-              <ul>
-                
-              </ul>
-            </div>
-          </div>
-        </div> -->
-
-        <!--In Progress Column -->
-        <!-- <div class="col-md-4">
-          <div class="box kanban_column" id="in-progress">
-            <h3>In Progress</h3>
-          </div>
-        </div> -->
-        
-        <!-- Done Column -->
-        <!-- <div class="col-md-4">
-          <div class="box kanban_column" id="done-column">
-            <div class="column-heading">
-              <h3>Done</h3>
-              <button class="btn btn-secondary" id="delete-column">Delete</button>
-            </div>
-          </div>
-        </div> -->
+      <div class="task-card hidden" id="task-card-template">
+        <p><strong class="task-name">Task Name</strong></p>
+        <div class="content-information">
+          <div class="task-tag green"><p><small class="task-class-name">LAW1023</small></p></div>
+          <div class="task-tag red"><p><small class="task-priority">High</small></p></div>
+        </div>
+        <div class="time-information">
+          <span>
+            <img src="images/clock.png" alt="clock icon" class="clock-icon">
+            <p class="estimated-completion-time">2 hours</p>
+          </span>
+          <p class="task-due-date">June 3rd, 2022</p>
+        </div>
+      </div>
     </section>
     </main>
   

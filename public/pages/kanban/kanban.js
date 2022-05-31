@@ -1,4 +1,4 @@
-////////////////////////////// COLUMN FUNCTIONS //////////////////////////////
+//////////////////////////////////////////////////////////// COLUMN FUNCTIONS ////////////////////////////////////////////////////////////
 //Set up variables for HTML elements using DOM selection
 const kanbanBoard = document.getElementById("kanban");
 const addTaskButton = document.getElementById("add-task");
@@ -64,7 +64,7 @@ function renderColumn() {
 //Load up the columns
 renderColumn();
 
-////////////////////////////// TASK MODAL  //////////////////////////////
+//////////////////////////////////////////////////////////// TASK MODAL  ////////////////////////////////////////////////////////////
 // Basic form DOM elements
 const taskForm = document.getElementById("taskform");
 const button = document.querySelector("#taskform > button");
@@ -79,128 +79,135 @@ var completionTimeInput = document.getElementById("completionTimeInput");
 var estimatedTimeInput = document.getElementById("estimatedTimeInput");
 var priorityInput = document.getElementById("priorityInput");
 
+// Access first To-do column of the column array
+const toDoColumn = document.querySelector("#column-0");
+
 // Task Form submission event listener
-taskform.addEventListener("submit", function (event) {
-  event.preventDefault();
-  let task = taskInput.value;
-  let dueDate = dueDateInput.value;
-  let completionTime = completionTimeInput.value;
-  let estimatedTime = estimatedTimeInput.value;
-  let priorityRating = priorityInput.options[priorityInput.selectedIndex].value;
-  if (task) {
-    addTask(
-      task,
-      dueDate,
-      estimatedTime,
-      priorityRating,
-      completionTime,
-      false
-    );
-  }
-});
+// taskform.addEventListener("submit", function (event) {
+//   event.preventDefault();
+
+//   let task = taskInput.value;
+//   let dueDate = dueDateInput.value;
+//   let completionTime = completionTimeInput.value;
+//   let estimatedTime = estimatedTimeInput.value;
+//   let priorityRating = priorityInput.options[priorityInput.selectedIndex].value;
+//   if (task) {
+//     addTask(
+//       task,
+//       dueDate,
+//       estimatedTime,
+//       priorityRating,
+//       completionTime,
+//       false
+//     );
+//   }
+// });
 
 // Create global array to track tasks
-var taskListArray = [];
+let taskListArray = [
+  {
+    taskName: "Finish Assignment",
+    className: "Maths",
+    priority: "High",
+    estimatedCompletionTime: "01/01/2023",
+    dueDate: "August 9th, 2023",
+  },
 
-// Function to add task with user inputs as parameters
-function addTask(
-  taskDescription,
-  dueDate,
-  estimatedTime,
-  priorityRating,
-  completionTime,
-  completionStatus
-) {
-  let d = new Date();
-  let dateCreated = d.getFullYear();
-  let task = {
-    id: Date.now(),
-    taskDescription,
-    dueDate,
-    dateCreated,
-    estimatedTime,
-    completionTime,
-    priorityRating,
-    estimatedTime,
-    completionStatus,
-  };
-  taskListArray.push(task);
-  console.log(taskListArray);
-  renderTask(task);
-}
+  {
+    taskName: "Finish this",
+    className: "Law",
+    priority: "low",
+    estimatedCompletionTime: "03/04/2023",
+    dueDate: "August 5thth, 2023",
+  },
 
-// Function to display task on screen
-function renderTask(task) {
-  // Call function - checks if a task has been added
-  updateEmpty();
+  {
+    taskName: "Finish Assignment",
+    className: "Maths",
+    priority: "High",
+    estimatedCompletionTime: "01/01/2023",
+    dueDate: "August 9th, 2023",
+  },
+];
 
-  // Create HTML elements
-  let item = document.createElement("li");
-  item.setAttribute("data-id", task.id);
-  item.innerHTML = "<p>" + task.taskDescription + "</p>";
+//Function to load up flashcards
+function renderTask() {
+  taskListArray.map((taskcard, index) => {
+    const newTaskCard = document
+      .getElementById("task-card-template")
+      .cloneNode(true);
+    newTaskCard.id = `task-card-${index}`;
+    newTaskCard.classList.remove("hidden");
+    newTaskCard.classList.add("task-card-template");
+    newTaskCard.querySelector(".task-name").innerText = taskName;
+    newTaskCard.querySelector(".task-class-name").innerText = className;
+    newTaskCard.querySelector(".task-priority").innerText = priority;
+    newTaskCard.querySelector(".estimated-completion-time").innerText =
+      estimatedCompletionTime;
+    newTaskCard.querySelector(".task-due-date").innerText = dueDate;
 
-  tasklist.appendChild(item);
-
-  // Extra Task DOM elements
-  let delButton = document.createElement("button");
-  let delButtonText = document.createTextNode("Delete Task");
-  delButton.appendChild(delButtonText);
-  item.appendChild(delButton);
-
-  // Event Listeners for DOM elements
-  delButton.addEventListener("click", function (event) {
-    event.preventDefault();
-    let id = event.target.parentElement.getAttribute("data-id");
-    let index = taskListArray.findIndex((task) => task.id === Number(id));
-    removeItemFromArray(taskListArray, index);
-    console.log(taskListArray);
-    updateEmpty();
-    item.remove();
+    //Append to appropriate column
+    toDoColumn.appendChild(newTaskCard);
   });
 
-  // Clear the input form
-  form.reset();
+  window.onload = renderTask();
+
+  ///
+  ///
+  ///
+
+  //   //Delete Button
+  //   let delButton = document.createElement("button");
+  //   let delButtonText = document.createTextNode("Delete Task");
+  //   delButton.appendChild(delButtonText);
+  //   item.appendChild(delButton);
+
+  //   // Event Listeners for DOM elements
+  //   delButton.addEventListener("click", function (event) {
+  //     event.preventDefault();
+  //     let id = event.target.parentElement.getAttribute("data-id");
+  //     let index = taskListArray.findIndex((task) => task.id === Number(id));
+  //     removeItemFromArray(taskListArray, index);
+  //     console.log(taskListArray);
+  //     updateEmpty();
+  //     item.remove();
+  //   });
+
+  //   // Clear the input form
+  //   form.reset();
 }
 
-// Function to remove item from array
-function removeItemFromArray(arr, index) {
-  if (index > -1) {
-    arr.splice(index, 1);
-  }
-  return arr;
-}
+// // Function to remove item from array
+// function removeItemFromArray(arr, index) {
+//   if (index > -1) {
+//     arr.splice(index, 1);
+//   }
+//   return arr;
+// }
 
-// Function to hide the 'you haven't added any tasks' text
-function updateEmpty() {
-  if (taskListArray.length > 0) {
-    document.getElementById("emptyList").style.display = "none";
-  } else {
-    document.getElementById("emptyList").style.display = "block";
-  }
-}
-
-// //Event Listener for "+ Column" Button Click
-// addColumn.addEventListener("click", function () {
-//   //Create container for each column
-//   let columnContainer = document.createElement("div");
-//   columnContainer.setAttribute("class", "col-md-4");
-//   kanbanBoard.appendChild(columnContainer);
-
-//   //Create column
-//   let kanbanColumn = document.createElement("div");
-//   kanbanColumn.setAttribute("class", "kanban_column box");
-//   columnContainer.appendChild(kanbanColumn);
-
-//   //Add Heading into column
-//   let columnHeading = document.createElement("h3");
-//   columnHeading.textContent = "New Column";
-//   kanbanColumn.appendChild(columnHeading);
-// });
-
-//Deleting a Column
-// const deleteColumnButton = document.getElementById("delete-column");
-
-// deleteColumnButton.addEventListener("click", function () {
-//   const columnToDelete = this.parentNode.parentNode.parentNode;
-//   columnToDelete.remove();
-// });
+// Function to add task with user inputs as parameters
+// function addTask(
+//   taskDescription,
+//   dueDate,
+//   estimatedTime,
+//   priorityRating,
+//   completionTime,
+//   completionStatus
+// ) {
+//   let d = new Date();
+//   let dateCreated = d.getFullYear();
+//   let task = {
+//     id: Date.now(),
+//     taskDescription,
+//     dueDate,
+//     dateCreated,
+//     estimatedTime,
+//     completionTime,
+//     priorityRating,
+//     estimatedTime,
+//     completionStatus,
+//   };
+//   taskListArray.push(task);
+//   console.log(taskListArray);
+//   renderTask(task);
+// }

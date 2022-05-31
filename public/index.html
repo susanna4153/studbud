@@ -34,9 +34,9 @@
     <main class="page-content">
       <div class="kanban-buttons">
         <!--Add Column Button-->
-        <button type="button" class="btn btn-primary" id="addDefault" > + Column </button>
+        <button type="button" class="btn btn-primary" id="add-column" > + Column </button>
         <!--Adding Task Button -->
-        <button type="button" class="btn btn-primary" id="addToDo" data-bs-toggle="modal" data-bs-target="#exampleModal"> + Task </button>
+        <button type="button" class="btn btn-primary" id="add-task" data-bs-toggle="modal" data-bs-target="#exampleModal"> + Task </button>
       </div>
   
       <!-- Task Modal -->
@@ -96,21 +96,39 @@
         </div>
       </div>
   
-      <!--Kanban Board-->
-      <!-- <div class="kanban">
-        <div class="kanban__column">
-          <div class="kanban__column-title"><h2>To Do</h2></div>
-          <div class="kanban__items">
-            <div  contenteditable class="kanban__item-input">Wash the dishes</div>
-            <div class="kanban__dropzone"></div>
+     <section class="row" id="kanban">
+       <!--To do Column -->
+        <div class="col-md-4">
+          <div class="box kanban_column" id="to-do-column">
+            <div class="column-heading">
+              <h3>To do</h3>
+              <button class="btn btn-secondary" id="delete-column">Delete</button>
+            </div>
+            <div class="kanban_items">
+              <div  contenteditable class="kanban_item-input">Wash the dishes</div>
+              <div class="kanban_dropzone"></div>
+            </div>
+            <button class="kanban_add-item btn btn-secondary" type="button">+ Add</button>
           </div>
-          <button class="kanban__add-item btn btn-secondary" type="button">+ Add</button>
         </div>
-      </div> -->
+
+        <!--In Progress Column -->
+        <div class="col-md-4">
+          <div class="box kanban_column" id="in-progress">
+            <h3>In Progress</h3>
+          </div>
+        </div>
+        
+        <!-- Done Column -->
+        <div class="col-md-4">
+          <div class="box kanban_column" id="done-column">
+             <h3>Done</h3>
+          </div>
+        </div>
+    </section>
     </main>
   
     
-    <script src="script.js"></script>
     <script src="./pages/kanban/kanban.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     

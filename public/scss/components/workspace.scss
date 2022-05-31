@@ -1,13 +1,5 @@
 //Layout of workspace page
-.row {
-  width: calc(100% - 60px);
-}
-
 .box {
-  border: 1px solid;
-  border-radius: 4px;
-  padding: 20px;
-
   & + .box {
     margin-top: 40px;
   }

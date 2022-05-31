@@ -26,7 +26,7 @@ for (var i = 0; i < settingsLink.length; i++) {
 
 // Function to show selected time feature and hide others
 function show(shown, hidden1, hidden2) {
-  document.getElementById(shown).style.display = "block";
+  document.getElementById(shown).style.display = "flex";
   document.getElementById(hidden1).style.display = "none";
   document.getElementById(hidden2).style.display = "none";
 }
@@ -105,7 +105,7 @@ const breakDuration = document.getElementById("break-duration");
 const numberOfSessions = document.getElementById("number-of-sessions");
 
 //Update pomodoro timer with user input
-function updateTimer() {
+function updatePomodoroTimer() {
   workDuration.addEventListener("input", function (event) {
     const workDurationValue = document.getElementById("work-duration").value;
     displayWorkMinutes.innerHTML = workDurationValue;
@@ -124,7 +124,7 @@ function updateTimer() {
   });
 }
 
-window.onload = updateTimer();
+window.onload = updatePomodoroTimer();
 
 ////////////////////////// Pomodoro Timer ////////////////////////
 //Set up button HTML DOM Elements

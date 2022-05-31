@@ -10,6 +10,7 @@
   integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link href="../../scss/layout.scss" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" type="text/css" href="../../scss/components/musicplayer.scss" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"/>
 </head>
 
 <body>
@@ -28,6 +29,7 @@
 
   <main>
       <section class="row">
+        
         <!-- Kanban Progress Column-->
         <div class="col-md-4 study-features">
           <div class="box progress-column">
@@ -42,7 +44,7 @@
             
             <!--Pomodoro Timer-->
             <div id="pomodoro-timer">
-              <div id ="timer">
+              <div class="timer" id ="timer">
                 <div id ="work-timer">
                   <h2>
                     <span id="pomodoro-minutes">25</span>
@@ -57,8 +59,8 @@
                     <span class="separator">:</span>
                     <span id="break-seconds">00</span>
                   </h2>
+                  <p>BREAK</p>
                 </div>
-                <p>BREAK</p>
               </div>
               <div class="pomodoro-buttons">
                 <button class="btn btn-primary" id="pomodoro-start">Start</button>
@@ -82,7 +84,6 @@
             
             <!--Stopwatch-->
             <div id="stopwatch">
-              <p>Stopwatch</p>
               <h2><span id="stopwatch-minutes">00</span>:<span id="stopwatch-seconds">00</span>:<span id="stopwatch-tens">00</span></h2>
               <div class="stopwatch-buttons">
                 <button class="btn btn-primary" id="button-start">Start</button>
@@ -134,266 +135,60 @@
           
           
           
-          <!--Music Player (from AmplitudeJS)-->
-          <div class="box box-border music-player">
-            <div id="blue-playlist-container">
+          <!--Music Player -->
+          <div class="box box-border">
+            <div class="music-player">
 
-              <!-- Amplitude Player -->
-              <div id="amplitude-player">
-        
-                <!-- Left Side Player -->
-                <div id="amplitude-left">
-                  <img data-amplitude-song-info="cover_art_url" class="album-art"/>
-                  <div class="amplitude-visualization" id="large-visualization">
-        
-                    </div>
-                  <div id="player-left-bottom">
-                    <div id="time-container">
-                      <span class="current-time">
-                        <span class="amplitude-current-minutes" ></span>:<span class="amplitude-current-seconds"></span>
-                      </span>
-                      <div id="progress-container">
-                        <div class="amplitude-wave-form">
-        
-                        </div>
-                        <input type="range" class="amplitude-song-slider"/>
-                        <progress id="song-played-progress" class="amplitude-song-played-progress"></progress>
-                        <progress id="song-buffered-progress" class="amplitude-buffered-progress" value="0"></progress>
-                      </div>
-                      <span class="duration">
-                        <span class="amplitude-duration-minutes"></span>:<span class="amplitude-duration-seconds"></span>
-                      </span>
-                    </div>
-        
-                    <div id="control-container">
-                      <div id="repeat-container">
-                        <div class="amplitude-repeat" id="repeat"></div>
-                        <div class="amplitude-shuffle amplitude-shuffle-off" id="shuffle"></div>
-                      </div>
-        
-                      <div id="central-control-container">
-                        <div id="central-controls">
-                          <div class="amplitude-prev" id="previous"></div>
-                          <div class="amplitude-play-pause" id="play-pause"></div>
-                          <div class="amplitude-next" id="next"></div>
-                        </div>
-                      </div>
-        
-                      <div id="volume-container">
-                        <div class="volume-controls">
-                          <div class="amplitude-mute amplitude-not-muted"></div>
-                          <input type="range" class="amplitude-volume-slider"/>
-                          <div class="ms-range-fix"></div>
-                        </div>
-                        <div class="amplitude-shuffle amplitude-shuffle-off" id="shuffle-right"></div>
-                      </div>
-                    </div>
-        
-                    <div id="meta-container">
-                      <span data-amplitude-song-info="name" class="song-name"></span>
-        
-                      <div class="song-artist-album">
-                        <span data-amplitude-song-info="artist"></span>
-                        <span data-amplitude-song-info="album"></span>
-                      </div>
-                    </div>
+              <!--Current Song Playing-->
+              <div class="player">
+                <div class="details">
+                  <div class="track-art"></div>
+                  <div class="track-details">
+                    <h2 class="track-name">Track Name</h2>
+                    <p class="track-artist">Track Artist</p>
                   </div>
                 </div>
-                <!-- End Left Side Player -->
-        
-                <!-- Right Side Player -->
-                <div id="amplitude-right">
-                  <div class="song amplitude-song-container amplitude-play-pause" data-amplitude-song-index="0">
-                    <div class="song-now-playing-icon-container">
-                      <div class="play-button-container">
-        
-                      </div>
-                      <img class="now-playing" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/now-playing.svg"/>
-                    </div>
-                    <div class="song-meta-data">
-                      <span class="song-title"> High (feat Raashan Ahmad)</span>
-                      <span class="song-artist">Ancient Astronauts</span>
-                    </div>
-                    <a href="https://switchstancerecordings.bandcamp.com/track/risin-high-feat-raashan-ahmad" class="bandcamp-link" target="_blank">
-                      <img class="bandcamp-grey" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/bandcamp-grey.svg"/>
-                      <img class="bandcamp-white" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/bandcamp-white.svg"/>
-                    </a>
-                    <span class="song-duration">3:30</span>
+                <div class="slider_container">
+                  <div class="current-time">00:00</div>
+                  <input
+                    type="range"
+                    min="1"
+                    max="100"
+                    value="0"
+                    class="seek_slider"
+                    onchange="seekTo()"
+                  />
+                  <div class="total-duration">00:00</div>
+                </div>
+                <div class="music-player-buttons">
+                  <div class="prev-track" onclick="prevTrack()">
+                    <i class="fa fa-step-backward fa-2x"></i>
                   </div>
-                  <div class="song amplitude-song-container amplitude-play-pause" data-amplitude-song-index="1">
-                    <div class="song-now-playing-icon-container">
-                      <div class="play-button-container">
-        
-                      </div>
-                      <img class="now-playing" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/now-playing.svg"/>
-                    </div>
-                    <div class="song-meta-data">
-                      <span class="song-title">The Gun</span>
-                      <span class="song-artist">Lorn</span>
-                    </div>
-                    <a href="https://lorn.bandcamp.com/" class="bandcamp-link" target="_blank">
-                      <img class="bandcamp-grey" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/bandcamp-grey.svg"/>
-                      <img class="bandcamp-white" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/bandcamp-white.svg"/>
-                    </a>
-                    <span class="song-duration">3:16</span>
+                  <div class="playpause-track" onclick="playpauseTrack()">
+                    <i class="fa fa-play-circle fa-2x"></i>
                   </div>
-                  <div class="song amplitude-song-container amplitude-play-pause" data-amplitude-song-index="2">
-                    <div class="song-now-playing-icon-container">
-                      <div class="play-button-container">
-        
-                      </div>
-                      <img class="now-playing" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/now-playing.svg"/>
-                    </div>
-                    <div class="song-meta-data">
-                      <span class="song-title">Anvil</span>
-                      <span class="song-artist">Lorn</span>
-                    </div>
-                    <a href="https://lorn.bandcamp.com/" class="bandcamp-link" target="_blank">
-                      <img class="bandcamp-grey" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/bandcamp-grey.svg"/>
-                      <img class="bandcamp-white" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/bandcamp-white.svg"/>
-                    </a>
-                    <span class="song-duration">3:32</span>
-                  </div>
-                  <div class="song amplitude-song-container amplitude-play-pause" data-amplitude-song-index="3">
-                    <div class="song-now-playing-icon-container">
-                      <div class="play-button-container">
-        
-                      </div>
-                      <img class="now-playing" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/now-playing.svg"/>
-                    </div>
-                    <div class="song-meta-data">
-                      <span class="song-title">I Came Running</span>
-                      <span class="song-artist">Ancient Astronauts</span>
-                    </div>
-                    <a href="https://switchstancerecordings.bandcamp.com/track/i-came-running" class="bandcamp-link" target="_blank">
-                      <img class="bandcamp-grey" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/bandcamp-grey.svg"/>
-                      <img class="bandcamp-white" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/bandcamp-white.svg"/>
-                    </a>
-                    <span class="song-duration">3:30</span>
-                  </div>
-                  <div class="song amplitude-song-container amplitude-play-pause" data-amplitude-song-index="4">
-                    <div class="song-now-playing-icon-container">
-                      <div class="play-button-container">
-        
-                      </div>
-                      <img class="now-playing" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/now-playing.svg"/>
-                    </div>
-                    <div class="song-meta-data">
-                      <span class="song-title">First Snow</span>
-                      <span class="song-artist">Emancipator</span>
-                    </div>
-                    <a href="https://emancipator.bandcamp.com" class="bandcamp-link" target="_blank">
-                      <img class="bandcamp-grey" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/bandcamp-grey.svg"/>
-                      <img class="bandcamp-white" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/bandcamp-white.svg"/>
-                    </a>
-                    <span class="song-duration">5:12</span>
-                  </div>
-                  <div class="song amplitude-song-container amplitude-play-pause" data-amplitude-song-index="5">
-                    <div class="song-now-playing-icon-container">
-                      <div class="play-button-container">
-        
-                      </div>
-                      <img class="now-playing" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/now-playing.svg"/>
-                    </div>
-                    <div class="song-meta-data">
-                      <span class="song-title">Terrain</span>
-                      <span class="song-artist">pg.lost</span>
-                    </div>
-                    <a href="https://pglost.bandcamp.com/track/terrain" class="bandcamp-link" target="_blank">
-                      <img class="bandcamp-grey" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/bandcamp-grey.svg"/>
-                      <img class="bandcamp-white" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/bandcamp-white.svg"/>
-                    </a>
-                    <span class="song-duration">5:29</span>
-                  </div>
-                  <div class="song amplitude-song-container amplitude-play-pause" data-amplitude-song-index="6">
-                    <div class="song-now-playing-icon-container">
-                      <div class="play-button-container">
-        
-                      </div>
-                      <img class="now-playing" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/now-playing.svg"/>
-                    </div>
-                    <div class="song-meta-data">
-                      <span class="song-title">Vorel</span>
-                      <span class="song-artist">Russian Circles</span>
-                    </div>
-                    <a href="https://russiancircles.bandcamp.com/track/vorel" class="bandcamp-link" target="_blank">
-                      <img class="bandcamp-grey" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/bandcamp-grey.svg"/>
-                      <img class="bandcamp-white" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/bandcamp-white.svg"/>
-                    </a>
-                    <span class="song-duration">5:29</span>
-                  </div>
-                  <div class="song amplitude-song-container amplitude-play-pause" data-amplitude-song-index="7">
-                    <div class="song-now-playing-icon-container">
-                      <div class="play-button-container">
-        
-                      </div>
-                      <img class="now-playing" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/now-playing.svg"/>
-                    </div>
-                    <div class="song-meta-data">
-                      <span class="song-title">Intro / Sweet Glory</span>
-                      <span class="song-artist">Jimkata</span>
-                    </div>
-                    <a href="http://jimkata.bandcamp.com/track/intro-sweet-glory" class="bandcamp-link" target="_blank">
-                      <img class="bandcamp-grey" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/bandcamp-grey.svg"/>
-                      <img class="bandcamp-white" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/bandcamp-white.svg"/>
-                    </a>
-                    <span class="song-duration">2:39</span>
-                  </div>
-                  <div class="song amplitude-song-container amplitude-play-pause" data-amplitude-song-index="8">
-                    <div class="song-now-playing-icon-container">
-                      <div class="play-button-container">
-        
-                      </div>
-                      <img class="now-playing" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/now-playing.svg"/>
-                    </div>
-                    <div class="song-meta-data">
-                      <span class="song-title">Offcut #6</span>
-                      <span class="song-artist">Little People</span>
-                    </div>
-                    <a href="https://littlepeople.bandcamp.com/track/offcut-6" class="bandcamp-link" target="_blank">
-                      <img class="bandcamp-grey" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/bandcamp-grey.svg"/>
-                      <img class="bandcamp-white" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/bandcamp-white.svg"/>
-                    </a>
-                    <span class="song-duration">1:00</span>
-                  </div>
-                  <div class="song amplitude-song-container amplitude-play-pause" data-amplitude-song-index="9">
-                    <div class="song-now-playing-icon-container">
-                      <div class="play-button-container">
-        
-                      </div>
-                      <img class="now-playing" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/now-playing.svg"/>
-                    </div>
-                    <div class="song-meta-data">
-                      <span class="song-title">Dusk To Dawn</span>
-                      <span class="song-artist">Emancipator</span>
-                    </div>
-                    <a href="https://emancipator.bandcamp.com/track/dusk-to-dawn-2" class="bandcamp-link" target="_blank">
-                      <img class="bandcamp-grey" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/bandcamp-grey.svg"/>
-                      <img class="bandcamp-white" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/bandcamp-white.svg"/>
-                    </a>
-                    <span class="song-duration">5:25</span>
-                  </div>
-                  <div class="song amplitude-song-container amplitude-play-pause" data-amplitude-song-index="10">
-                    <div class="song-now-playing-icon-container">
-                      <div class="play-button-container">
-        
-                      </div>
-                      <img class="now-playing" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/now-playing.svg"/>
-                    </div>
-                    <div class="song-meta-data">
-                      <span class="song-title">Anthem</span>
-                      <span class="song-artist">Emancipator</span>
-                    </div>
-                    <a href="https://emancipator.bandcamp.com/track/anthem" class="bandcamp-link" target="_blank">
-                      <img class="bandcamp-grey" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/bandcamp-grey.svg"/>
-                      <img class="bandcamp-white" src="https://521dimensions.com/img/open-source/amplitudejs/blue-player/bandcamp-white.svg"/>
-                    </a>
-                    <span class="song-duration">5:40</span>
+                  <div class="next-track" onclick="nextTrack()">
+                    <i class="fa fa-step-forward fa-2x"></i>
                   </div>
                 </div>
-                <!-- End Right Side Player -->
               </div>
-              <!-- End Amplitdue Player -->
+
+              <!--Playlist-->
+              <div class="playlist">
+                <div class="playlist-header">
+                  <h4 class="playlist-title">Playlist</h4>
+                </div>
+                <div class="playlist-body">
+                  <div id="playlist-card-template" class="hidden">
+                    <div class="playlist-track-number">1</div>
+                    <img class="playlist-track-image" />
+                    <div class="playlist-card-details">
+                      <div class="playlist-track-name">Track Name</div>
+                      <div class="playlist-track-artist">Track Artist</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

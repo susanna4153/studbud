@@ -102,13 +102,11 @@
           <div class="box kanban_column" id="to-do-column">
             <div class="column-heading">
               <h3>To do</h3>
-              <button class="btn btn-secondary" id="delete-column">Delete</button>
             </div>
             <div class="kanban_items">
               <div  contenteditable class="kanban_item-input">Wash the dishes</div>
               <div class="kanban_dropzone"></div>
             </div>
-            <button class="kanban_add-item btn btn-secondary" type="button">+ Add</button>
           </div>
         </div>
 
@@ -122,7 +120,10 @@
         <!-- Done Column -->
         <div class="col-md-4">
           <div class="box kanban_column" id="done-column">
-             <h3>Done</h3>
+            <div class="column-heading">
+              <h3>Done</h3>
+              <button class="btn btn-secondary" id="delete-column">Delete</button>
+            </div>
           </div>
         </div>
     </section>

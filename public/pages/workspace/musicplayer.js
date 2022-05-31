@@ -1,171 +1,194 @@
-/*
-  When the bandcamp link is pressed, stop all propagation so AmplitudeJS doesn't
-  play the song.
-*/
-let bandcampLinks = document.getElementsByClassName("bandcamp-link");
+let track_art = document.querySelector(".track-art");
+let track_name = document.querySelector(".track-name");
+let track_artist = document.querySelector(".track-artist");
 
-for (var i = 0; i < bandcampLinks.length; i++) {
-  bandcampLinks[i].addEventListener("click", function (e) {
-    e.stopPropagation();
+let playpause_btn = document.querySelector(".playpause-track");
+let next_btn = document.querySelector(".next-track");
+let prev_btn = document.querySelector(".prev-track");
+
+let seek_slider = document.querySelector(".seek_slider");
+let volume_slider = document.querySelector(".volume_slider");
+let curr_time = document.querySelector(".current-time");
+let total_duration = document.querySelector(".total-duration");
+
+let playlist = document.querySelector(".playlist");
+
+let track_index = 0;
+let isPlaying = false;
+let updateTimer;
+
+// Create new audio element
+let curr_track = document.createElement("audio");
+
+// Define the tracks that have to be played
+let track_list = [
+  {
+    name: "Night Owl",
+    artist: "Broke For Free",
+    image:
+      "https://images.pexels.com/photos/2264753/pexels-photo-2264753.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250&w=250",
+    path: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/WFMU/Broke_For_Free/Directionless_EP/Broke_For_Free_-_01_-_Night_Owl.mp3",
+  },
+  {
+    name: "Enthusiast",
+    artist: "Tours",
+    image:
+      "https://images.pexels.com/photos/3100835/pexels-photo-3100835.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250&w=250",
+    path: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3",
+  },
+  {
+    name: "Shipping Lanes",
+    artist: "Chad Crouch",
+    image:
+      "https://images.pexels.com/photos/1717969/pexels-photo-1717969.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250&w=250",
+    path: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Shipping_Lanes.mp3",
+  },
+  {
+    name: "Shipping Lanes",
+    artist: "Chad Crouch",
+    image:
+      "https://images.pexels.com/photos/1717969/pexels-photo-1717969.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250&w=250",
+    path: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Shipping_Lanes.mp3",
+  },
+];
+
+function loadTrack(track_index) {
+  clearInterval(updateTimer);
+  resetValues();
+
+  // Load a new track
+  curr_track.src = track_list[track_index].path;
+  curr_track.load();
+
+  // Update details of the track
+  track_art.style.backgroundImage =
+    "url(" + track_list[track_index].image + ")";
+  track_name.textContent = track_list[track_index].name;
+  track_artist.textContent = track_list[track_index].artist;
+
+  // Set an interval of 1000 milliseconds for updating the seek slider
+  updateTimer = setInterval(seekUpdate, 1000);
+
+  // Move to the next track if the current one finishes playing
+  curr_track.addEventListener("ended", nextTrack);
+
+  // Clear the playlist
+  playlist.querySelectorAll(".playlist-card").forEach((card) => {
+    card.remove();
   });
-}
 
-let songElements = document.getElementsByClassName("song");
+  // Load playlist
+  track_list.map((track, index) => {
+    const newTrackCard = document
+      .getElementById("playlist-card-template")
+      .cloneNode(true);
+    newTrackCard.id = `playlist-card-${index}`;
+    newTrackCard.classList.remove("hidden");
+    newTrackCard.classList.add("playlist-card");
+    newTrackCard.querySelector(".playlist-track-number").textContent =
+      index + 1;
+    newTrackCard.querySelector(".playlist-track-image").src = track.image;
+    newTrackCard.querySelector(".playlist-track-name").textContent = track.name;
+    newTrackCard.querySelector(".playlist-track-artist").textContent =
+      track.artist;
 
-for (var i = 0; i < songElements.length; i++) {
-  /*
-    Ensure that on mouseover, CSS styles don't get messed up for active songs.
-  */
-  songElements[i].addEventListener("mouseover", function () {
-    this.style.backgroundColor = "#00A0FF";
-
-    this.querySelectorAll(".song-meta-data .song-title")[0].style.color =
-      "#FFFFFF";
-    this.querySelectorAll(".song-meta-data .song-artist")[0].style.color =
-      "#FFFFFF";
-
-    if (!this.classList.contains("amplitude-active-song-container")) {
-      this.querySelectorAll(".play-button-container")[0].style.display =
-        "block";
+    // Apply active styling to the current playing track
+    if (index === track_index) {
+      newTrackCard.classList.add("active");
     }
 
-    this.querySelectorAll("img.bandcamp-grey")[0].style.display = "none";
-    this.querySelectorAll("img.bandcamp-white")[0].style.display = "block";
-    this.querySelectorAll(".song-duration")[0].style.color = "#FFFFFF";
-  });
+    // Add event listener to the track card
+    newTrackCard.addEventListener("click", () => {
+      loadTrack(index);
+    });
 
-  /*
-    Ensure that on mouseout, CSS styles don't get messed up for active songs.
-  */
-  songElements[i].addEventListener("mouseout", function () {
-    this.style.backgroundColor = "#FFFFFF";
-    this.querySelectorAll(".song-meta-data .song-title")[0].style.color =
-      "#272726";
-    this.querySelectorAll(".song-meta-data .song-artist")[0].style.color =
-      "#607D8B";
-    this.querySelectorAll(".play-button-container")[0].style.display = "none";
-    this.querySelectorAll("img.bandcamp-grey")[0].style.display = "block";
-    this.querySelectorAll("img.bandcamp-white")[0].style.display = "none";
-    this.querySelectorAll(".song-duration")[0].style.color = "#607D8B";
-  });
-
-  /*
-    Show and hide the play button container on the song when the song is clicked.
-  */
-  songElements[i].addEventListener("click", function () {
-    this.querySelectorAll(".play-button-container")[0].style.display = "none";
+    playlist.querySelector(".playlist-body").appendChild(newTrackCard);
   });
 }
 
-/*
-  Initializes AmplitudeJS
-*/
-Amplitude.init({
-  songs: [
-    {
-      name: "Bottle boo (feat Raashan Ahmad)",
-      artist: "Ancient Astronauts",
-      album: "We Are to Answer",
-      url: "https://521dimensions.com/song/Ancient Astronauts - Risin' High (feat Raashan Ahmad).mp3",
-      cover_art_url: "images/FlashcardIcon.png",
-    },
-    {
-      name: "The Gun",
-      artist: "Lorn",
-      album: "Ask The Dust",
-      url: "https://521dimensions.com/song/08 The Gun.mp3",
-      cover_art_url:
-        "https://521dimensions.com/img/open-source/amplitudejs/album-art/ask-the-dust.jpg",
-    },
-    {
-      name: "Anvil",
-      artist: "Lorn",
-      album: "Anvil",
-      url: "https://521dimensions.com/song/LORN - ANVIL.mp3",
-      cover_art_url:
-        "https://521dimensions.com/img/open-source/amplitudejs/album-art/anvil.jpg",
-    },
-    {
-      name: "I Came Running",
-      artist: "Ancient Astronauts",
-      album: "We Are to Answer",
-      url: "https://521dimensions.com/song/ICameRunning-AncientAstronauts.mp3",
-      cover_art_url:
-        "https://521dimensions.com/img/open-source/amplitudejs/album-art/we-are-to-answer.jpg",
-    },
-    {
-      name: "First Snow",
-      artist: "Emancipator",
-      album: "Soon It Will Be Cold Enough",
-      url: "https://521dimensions.com/song/FirstSnow-Emancipator.mp3",
-      cover_art_url:
-        "https://521dimensions.com/img/open-source/amplitudejs/album-art/soon-it-will-be-cold-enough.jpg",
-    },
-    {
-      name: "Terrain",
-      artist: "pg.lost",
-      album: "Key",
-      url: "https://521dimensions.com/song/Terrain-pglost.mp3",
-      cover_art_url:
-        "https://521dimensions.com/img/open-source/amplitudejs/album-art/key.jpg",
-    },
-    {
-      name: "Vorel",
-      artist: "Russian Circles",
-      album: "Guidance",
-      url: "https://521dimensions.com/song/Vorel-RussianCircles.mp3",
-      cover_art_url:
-        "https://521dimensions.com/img/open-source/amplitudejs/album-art/guidance.jpg",
-    },
-    {
-      name: "Intro / Sweet Glory",
-      artist: "Jimkata",
-      album: "Die Digital",
-      url: "https://521dimensions.com/song/IntroSweetGlory-Jimkata.mp3",
-      cover_art_url:
-        "https://521dimensions.com/img/open-source/amplitudejs/album-art/die-digital.jpg",
-    },
-    {
-      name: "Offcut #6",
-      artist: "Little People",
-      album: "We Are But Hunks of Wood Remixes",
-      url: "https://521dimensions.com/song/Offcut6-LittlePeople.mp3",
-      cover_art_url:
-        "https://521dimensions.com/img/open-source/amplitudejs/album-art/we-are-but-hunks-of-wood.jpg",
-    },
-    {
-      name: "Dusk To Dawn",
-      artist: "Emancipator",
-      album: "Dusk To Dawn",
-      url: "https://521dimensions.com/song/DuskToDawn-Emancipator.mp3",
-      cover_art_url:
-        "https://521dimensions.com/img/open-source/amplitudejs/album-art/from-dusk-to-dawn.jpg",
-    },
-    {
-      name: "Anthem",
-      artist: "Emancipator",
-      album: "Soon It Will Be Cold Enough",
-      url: "https://521dimensions.com/song/Anthem-Emancipator.mp3",
-      cover_art_url:
-        "https://521dimensions.com/img/open-source/amplitudejs/album-art/soon-it-will-be-cold-enough.jpg",
-    },
-  ],
-  callbacks: {
-    play: function () {
-      document.getElementById("album-art").style.visibility = "hidden";
-      document.getElementById("large-visualization").style.visibility =
-        "visible";
-    },
+// Reset Values
+function resetValues() {
+  curr_time.textContent = "00:00";
+  total_duration.textContent = "00:00";
+  seek_slider.value = 0;
+}
 
-    pause: function () {
-      document.getElementById("album-art").style.visibility = "visible";
-      document.getElementById("large-visualization").style.visibility =
-        "hidden";
-    },
-  },
-  waveforms: {
-    sample_rate: 50,
-  },
-});
-document.getElementById("large-visualization").style.height =
-  document.getElementById("album-art").offsetWidth + "px";
+function playpauseTrack() {
+  if (!isPlaying) playTrack();
+  else pauseTrack();
+}
+
+function playTrack() {
+  curr_track.play();
+  isPlaying = true;
+
+  // Replace icon with the pause icon
+  playpause_btn.innerHTML = '<i class="fa fa-pause-circle fa-2x"></i>';
+}
+
+function pauseTrack() {
+  curr_track.pause();
+  isPlaying = false;
+
+  // Replace icon with the play icon
+  playpause_btn.innerHTML = '<i class="fa fa-play-circle fa-2x"></i>';
+}
+
+function nextTrack() {
+  if (track_index < track_list.length - 1) track_index += 1;
+  else track_index = 0;
+  loadTrack(track_index);
+  playTrack();
+}
+
+function prevTrack() {
+  if (track_index > 0) track_index -= 1;
+  else track_index = track_list.length;
+  loadTrack(track_index);
+  playTrack();
+}
+
+function seekTo() {
+  seekto = curr_track.duration * (seek_slider.value / 100);
+  curr_track.currentTime = seekto;
+}
+
+function seekUpdate() {
+  let seekPosition = 0;
+
+  // Check if the current track duration is a legible number
+  if (!isNaN(curr_track.duration)) {
+    seekPosition = curr_track.currentTime * (100 / curr_track.duration);
+    seek_slider.value = seekPosition;
+
+    // Calculate the time left and the total duration
+    let currentMinutes = Math.floor(curr_track.currentTime / 60);
+    let currentSeconds = Math.floor(
+      curr_track.currentTime - currentMinutes * 60
+    );
+    let durationMinutes = Math.floor(curr_track.duration / 60);
+    let durationSeconds = Math.floor(
+      curr_track.duration - durationMinutes * 60
+    );
+
+    // Adding a zero to the single digit time values
+    if (currentSeconds < 10) {
+      currentSeconds = "0" + currentSeconds;
+    }
+    if (durationSeconds < 10) {
+      durationSeconds = "0" + durationSeconds;
+    }
+    if (currentMinutes < 10) {
+      currentMinutes = "0" + currentMinutes;
+    }
+    if (durationMinutes < 10) {
+      durationMinutes = "0" + durationMinutes;
+    }
+
+    curr_time.textContent = currentMinutes + ":" + currentSeconds;
+    total_duration.textContent = durationMinutes + ":" + durationSeconds;
+  }
+}
+
+// Load the first track in the tracklist
+loadTrack(track_index);

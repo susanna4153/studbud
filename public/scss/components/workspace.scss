@@ -1,7 +1,7 @@
 //Layout of workspace page
 .box {
   & + .box {
-    margin-top: 40px;
+    margin: 40px 0;
   }
 
   &.progress-column {
@@ -13,23 +13,15 @@
   &.box-border {
     border: 1px solid #a4a4a4;
   }
-
-  &.music-player {
-    padding: 0;
-  }
 }
 
 //Creating two columns - left column for progress kanban column, right for pomodoro timer/stopwatch and music player
 .study-features {
   padding: 20px;
-  height: 85vh;
 
   .time-features {
     height: 45vh;
     position: relative;
-  }
-
-  .music-player {
   }
 }
 
@@ -52,6 +44,40 @@ div.time-links {
   position: absolute;
   right: 30px;
   top: 20px;
+}
+
+//Pomodoro Timer Styling
+.timer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 30%;
+  justify-content: center;
+  padding: 50px 0;
+}
+
+.pomodoro-buttons,
+.number-of-sessions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+#work-timer,
+#break-timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#pomodoro-timer,
+#stopwatch {
+  height: calc(45vh - 40px);
+  width: 70%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }
 
 //Settings - Slider Stlying

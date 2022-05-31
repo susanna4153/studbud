@@ -36,67 +36,65 @@ window.onload = show("pomodoro-timer", "stopwatch", "settings");
 
 ////////////////////////// Stopwatch ////////////////////////
 // modelled off Clathy Dutton's JavaScript Stopwatch
-window.onload = function () {
-  var stopwatchMinutes = 00;
-  var stopwatchSeconds = 00;
-  var stopwatchTens = 00;
-  var appendTens = document.getElementById("stopwatch-tens");
-  var appendSeconds = document.getElementById("stopwatch-seconds");
-  var appendMinutes = document.getElementById("stopwatch-minutes");
-  var buttonStart = document.getElementById("button-start");
-  var buttonStop = document.getElementById("button-stop");
-  var buttonReset = document.getElementById("button-reset");
-  var stopwatchInterval;
+var stopwatchMinutes = 00;
+var stopwatchSeconds = 00;
+var stopwatchTens = 00;
+var appendTens = document.getElementById("stopwatch-tens");
+var appendSeconds = document.getElementById("stopwatch-seconds");
+var appendMinutes = document.getElementById("stopwatch-minutes");
+const stopwatchStart = document.getElementById("stopwatch-start");
+const stopwatchStop = document.getElementById("stopwatch-stop");
+const stopwatchReset = document.getElementById("stopwatch-reset");
+var stopwatchInterval;
 
-  buttonStart.onclick = function () {
-    clearInterval(stopwatchInterval);
-    stopwatchInterval = setInterval(startStopwatch, 10);
-  };
+stopwatchStart.addEventListener("click", () => {
+  clearInterval(stopwatchInterval);
+  stopwatchInterval = setInterval(startStopwatch, 10);
+});
 
-  buttonStop.onclick = function () {
-    clearInterval(stopwatchInterval);
-  };
+stopwatchStop.addEventListener("click", () => {
+  clearInterval(stopwatchInterval);
+});
 
-  buttonReset.onclick = function () {
-    clearInterval(stopwatchInterval);
-    stopwatchTens = "00";
-    stopwatchSeconds = "00";
-    stopwatchMinutes = "00";
-    appendTens.innerHTML = stopwatchTens;
-    appendSeconds.innerHTML = stopwatchSeconds;
-    appendMinutes.innerHTML = stopwatchMinutes;
-  };
+stopwatchReset.addEventListener("click", () => {
+  clearInterval(stopwatchInterval);
+  stopwatchTens = "00";
+  stopwatchSeconds = "00";
+  stopwatchMinutes = "00";
+  appendTens.innerHTML = stopwatchTens;
+  appendSeconds.innerHTML = stopwatchSeconds;
+  appendMinutes.innerHTML = stopwatchMinutes;
+});
 
-  function startStopwatch() {
-    stopwatchTens++;
+function startStopwatch() {
+  stopwatchTens++;
 
-    if (stopwatchTens <= 9) {
-      appendTens.innerHTML = "0" + stopwatchTens;
-    }
-
-    if (stopwatchTens > 9) {
-      appendTens.innerHTML = stopwatchTens;
-    }
-
-    if (stopwatchTens > 99) {
-      stopwatchSeconds++;
-      appendSeconds.innerHTML = "0" + stopwatchSeconds;
-      stopwatchTens = 0;
-      appendTens.innerHTML = "0" + 0;
-    }
-
-    if (stopwatchSeconds > 9) {
-      appendSeconds.innerHTML = stopwatchSeconds;
-    }
-
-    if (stopwatchSeconds > 59) {
-      stopwatchMinutes++;
-      appendMinutes.innerHTML = "0" + stopwatchMinutes;
-      stopwatchSeconds = 0;
-      appendSeconds.innerHTML = "0" + 0;
-    }
+  if (stopwatchTens <= 9) {
+    appendTens.innerHTML = "0" + stopwatchTens;
   }
-};
+
+  if (stopwatchTens > 9) {
+    appendTens.innerHTML = stopwatchTens;
+  }
+
+  if (stopwatchTens > 99) {
+    stopwatchSeconds++;
+    appendSeconds.innerHTML = "0" + stopwatchSeconds;
+    stopwatchTens = 0;
+    appendTens.innerHTML = "0" + 0;
+  }
+
+  if (stopwatchSeconds > 9) {
+    appendSeconds.innerHTML = stopwatchSeconds;
+  }
+
+  if (stopwatchSeconds > 59) {
+    stopwatchMinutes++;
+    appendMinutes.innerHTML = "0" + stopwatchMinutes;
+    stopwatchSeconds = 0;
+    appendSeconds.innerHTML = "0" + 0;
+  }
+}
 
 //////////////////////// Settings ////////////////////////
 //Slider Controls
@@ -106,17 +104,17 @@ const numberOfSessions = document.getElementById("number-of-sessions");
 
 //Update pomodoro timer with user input
 function updatePomodoroTimer() {
-  workDuration.addEventListener("input", function (event) {
+  workDuration.addEventListener("input", () => {
     const workDurationValue = document.getElementById("work-duration").value;
     displayWorkMinutes.innerHTML = workDurationValue;
   });
 
-  breakDuration.addEventListener("input", function (event) {
+  breakDuration.addEventListener("input", () => {
     const breakDurationValue = document.getElementById("break-duration").value;
     displayBreakMinutes.innerHTML = breakDurationValue;
   });
 
-  numberOfSessions.addEventListener("input", function (event) {
+  numberOfSessions.addEventListener("input", () => {
     const totalSessions = document.getElementById("total-sessions");
     const numberOfSessionsValue =
       document.getElementById("number-of-sessions").value;
@@ -186,7 +184,7 @@ function timer() {
     }
   }
 
-  //Reset Seconds to 59 once minute has passed
+  //Reset Seconds to 59 once the minute has passed
   else if (
     displayWorkMinutes.innerText != 0 &&
     displayWorkSeconds.innerText == 0

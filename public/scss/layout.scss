@@ -82,6 +82,15 @@ main {
 
 .row {
   width: calc(100% - 60px);
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .row {
+    flex-wrap: wrap;
+    overflow-x: none;
+  }
 }
 
 .box {

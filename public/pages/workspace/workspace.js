@@ -100,29 +100,30 @@ window.onload = function () {
 
 //////////////////////// Settings ////////////////////////
 //Slider Controls
-var workDuration = document.getElementById("work-duration");
-var breakDuration = document.getElementById("break-duration");
-var numberOfSessions = document.getElementById("number-of-sessions");
+const workDuration = document.getElementById("work-duration");
+const breakDuration = document.getElementById("break-duration");
+const numberOfSessions = document.getElementById("number-of-sessions");
 
 //Update pomodoro timer with user input
 function updateTimer() {
   workDuration.addEventListener("input", function (event) {
-    var workDurationValue = document.getElementById("work-duration").value;
+    const workDurationValue = document.getElementById("work-duration").value;
     displayWorkMinutes.innerHTML = workDurationValue;
   });
 
   breakDuration.addEventListener("input", function (event) {
-    var breakDurationValue = document.getElementById("break-duration").value;
+    const breakDurationValue = document.getElementById("break-duration").value;
     displayBreakMinutes.innerHTML = breakDurationValue;
   });
 
   numberOfSessions.addEventListener("input", function (event) {
-    var totalSessions = document.getElementById("total-sessions");
-    var numberOfSessionsValue =
+    const totalSessions = document.getElementById("total-sessions");
+    const numberOfSessionsValue =
       document.getElementById("number-of-sessions").value;
     totalSessions.innerHTML = numberOfSessionsValue;
   });
 }
+
 window.onload = updateTimer();
 
 ////////////////////////// Pomodoro Timer ////////////////////////
@@ -130,7 +131,6 @@ window.onload = updateTimer();
 var pomodoroStart = document.getElementById("pomodoro-start");
 var pomodoroStop = document.getElementById("pomodoro-stop");
 var pomodoroReset = document.getElementById("pomodoro-reset");
-
 //Set up respective pomodoro timer and break HTML DOM Elements
 var displayWorkMinutes = document.getElementById("pomodoro-minutes");
 var displayWorkSeconds = document.getElementById("pomodoro-seconds");
@@ -152,9 +152,10 @@ pomodoroStart.addEventListener("click", function () {
 
 //Timer Reset
 pomodoroReset.addEventListener("click", function () {
-  displayWorkMinutes.innerHTML = 25;
+  displayWorkMinutes.innerHTML = document.getElementById("work-duration").value;
   displayWorkSeconds.innerHTML = "00";
-  displayBreakMinutes.innerHTML = 5;
+  displayBreakMinutes.innerHTML =
+    document.getElementById("break-duration").value;
   displayBreakSeconds.innerHTML = "00";
 
   document.getElementById("current-session").innerText = 1;
@@ -226,9 +227,11 @@ function timer() {
     displayBreakSeconds.innerText == 0
   ) {
     //Reset Timer values
-    displayWorkMinutes.innerHTML = 25;
+    displayWorkMinutes.innerHTML =
+      document.getElementById("work-duration").value;
     displayBreakMinutes.innerHTML = "00";
-    displayBreakMinutes.innerHTML = 5;
+    displayBreakMinutes.innerHTML =
+      document.getElementById("break-duration").value;
     displayBreakSeconds.innerHTML = "00";
 
     //Increment current session number

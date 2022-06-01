@@ -50,14 +50,32 @@ function renderColumn() {
 
   //Duplicate Column Template
   columnArray.map((column, index) => {
+    //Clone HTML column template
     const newColumn = document
       .getElementById("column-template")
       .cloneNode(true);
+
+    //Give it a unique id
     newColumn.id = `column-${index}`;
     newColumn.classList.add("column-template");
+
+    //Remove hidden class to show on page
     newColumn.classList.remove("hidden");
+
+    //Give unique id to tasklist within
     newColumn.querySelector("#taskList").id = `taskList-${index}`;
+
+    //Enter in user input for the column name
     newColumn.querySelector(".column-title").textContent = column.title;
+
+    //Give delete button a unique id
+    newColumn.querySelector("#delete-col").id = `delete-col-${index}`;
+    var columnDeleteButton = newColumn.querySelector(`#delete-col-${index}`);
+    columnDeleteButton.addEventListener("click", function () {
+      document.getElementById(`column-${index}`).remove();
+    });
+
+    //Add to Kanbanboard
     kanbanBoard.appendChild(newColumn);
   });
 }
@@ -116,37 +134,20 @@ let taskListArray = [
 
   {
     taskName: "Finish this",
-    className: "Law",
-    priority: "low",
+    className: "English",
+    priority: "Low",
     estimatedCompletionTime: "03/04/2023",
     dueDate: "August 5thth, 2023",
-  },
-
-  {
-    taskName: "Finish Assignment",
-    className: "Maths",
-    priority: "High",
-    estimatedCompletionTime: "01/01/2023",
-    dueDate: "August 9th, 2023",
-  },
-  {
-    taskName: "Finish Assignment",
-    className: "Maths",
-    priority: "High",
-    estimatedCompletionTime: "01/01/2023",
-    dueDate: "August 9th, 2023",
-  },
-  {
-    taskName: "Finish Assignment",
-    className: "Maths",
-    priority: "High",
-    estimatedCompletionTime: "01/01/2023",
-    dueDate: "August 9th, 2023",
   },
 ];
 
 //Function to load up flashcards
 function renderTask() {
+  //Clear Task List array before load to prevent duplicates
+  toDoColumn.querySelectorAll(".task-card-template").forEach((taskcard) => {
+    taskcard.remove();
+  });
+
   taskListArray.map((taskcard, index) => {
     const newTaskCard = document
       .getElementById("task-card-template")

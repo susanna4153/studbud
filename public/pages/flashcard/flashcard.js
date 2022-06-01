@@ -1,118 +1,115 @@
 // Retrieve existing flashcards, otherwise start with empty array of flashcards
 var flashcards = localStorage.getItem("flashcards")
   ? JSON.parse(localStorage.getItem("flashcards"))
-  : [];
+  : [
+      {
+        question: "Why did the chicken cross the road?",
+        answer: "I don't really know",
+        links: ["https://www.facebook.com/messages/t/100008350746646"],
+      },
+      { question: "Hello hello hello", answer: "Bye bye bye", links: [] },
+      { question: "Wei wei wei", answer: "wei wei wei", links: [] },
+    ];
 
 //Set up DOM Elements
 const flashcardButton = document.getElementById("add-flashcard");
 
-// Store flashcards
-// const flashcards = [{"title": "title test 1", "body": "body test 1", "links": ["link 1", "link 2"]}, {"title": "title test 2", "body": "body test 2", "links": ["link 1", "link 2"]}, {"title": "title test 3", "body": "body test 3", "links": ["link 1", "link 2"]}]
-
-////////////////////////////////////////////////////////////////////////////////
-// DUMMY DATA
-////////////////////////////////////////////////////////////////////////////////
-const flashcardTest1 = {
-  title: "Why did the chicken cross the road?",
-  content: "I don't really know",
-  links: [],
-};
-
-const flashcardTest2 = {
-  title: "Hello hello hello",
-  content: "Bye bye bye",
-  links: [],
-};
-
-const flashcardTest3 = {
-  title: "Wei wei wei",
-  content: "wei wei wei",
-  links: [],
-};
-
-const flashcardsTest = [flashcardTest1, flashcardTest2, flashcardTest3];
-localStorage.setItem("flashcards", flashcardsTest);
-
-////////////////////////////////////////////////////////////////////////////////
-
-const flashcards = localStorage.getItem("flashcards");
-
 // Load flashcards
-for (var i = 0; i < flashcards.length; i++) {
-  const accordionItem = document.getElementById("accordion-item-template");
-  const newAccordionItem = accordionItem.cloneNode(true);
+function loadFlashcards() {
+  const section = document.getElementById("section-accordion");
 
-  newAccordionItem.setAttribute("style", "display: block");
-  newAccordionItem.removeAttribute("id");
+  // Clear pre-existing flashcards first except first (initial template)
+  while (section.childNodes.length > 2) {
+    section.removeChild(section.lastChild);
+  }
 
-  // Set up unique id for accordion item to collapse
-  newAccordionItem.querySelector("#collapse-template").id = `collapse-${i}`;
-  newAccordionItem
-    .querySelector(".accordion-button")
-    .setAttribute("data-bs-target", `#collapse-${i}`);
+  flashcards.map((flashcard, index) => {
+    const newFlashcard = document
+      .getElementById("accordion-item-template")
+      .cloneNode(true);
 
-  // Fill flashcard content here
-  newAccordionItem.querySelector(".accordion-title-text").innerText =
-    flashcards[i].title;
-  newAccordionItem.querySelector("#flashcardContent").innerText =
-    flashcards[i].content;
+    newFlashcard.id = `accordion-item-${index}`;
+    newFlashcard.classList.remove("hidden");
 
-  newAccordionItem
-    .querySelector("#flashcardContent")
-    .addEventListener("input", function (event) {
-      var message = newAccordionItem.querySelector("#flashcardContent").value;
+    // Collect DOM elements
+    const flashQuestion = newFlashcard.querySelector("#flashcard-question");
+    const flashCollapseBtn = newFlashcard.querySelector(
+      "button[data-bs-toggle=collapse]"
+    );
+    const flashCollapseBody = newFlashcard.querySelector("#flashcard-collapse");
+    const flashBodyContent = newFlashcard.querySelector("#flashcard-answer");
+    const flashBodyLinks = newFlashcard.querySelector("#flashcard-links");
+    const flashBtnDelete = newFlashcard.querySelector("#flashcard-btn-delete");
+
+    // Render stored values on flashcard
+    flashCollapseBtn.textContent = flashcard.question;
+    flashBodyContent.textContent = flashcard.answer;
+    // Display all links
+    flashcard.links.map((link, index) => {
+      const newLink = document
+        .getElementById("flashcard-link-template")
+        .cloneNode(true);
+      newLink.classList.remove("hidden");
+      newLink.id = `flashcard-link-${index}`;
+
+      newLink.innerHTML = `<a href=${link}>${link}</a>`;
+
+      flashBodyLinks.appendChild(newLink);
     });
 
-  // Accordions are closed by default upon first load
-  newAccordionItem
-    .querySelector(".accordion-button")
-    .setAttribute("aria-expanded", false);
-  newAccordionItem
-    .querySelector(".accordion-button")
-    .classList.add("collapsed");
-  newAccordionItem
-    .querySelector(".accordion-collapse")
-    .classList.remove("show");
+    // Give each flashcard unique ids for collapse to uniquely target
+    flashQuestion.id = `flashcard-question-${index}`;
+    flashCollapseBody.setAttribute("aria-labelledby", flashQuestion.id);
 
-  document.getElementById("accordion-container").appendChild(newAccordionItem);
+    flashCollapseBody.id = `flashcard-collapse-${index}`;
+    flashCollapseBtn.setAttribute("data-bs-target", `#${flashCollapseBody.id}`);
+    flashCollapseBtn.setAttribute("aria-controls", `#${flashCollapseBody.id}`);
+
+    flashBodyContent.id = `flashcard-answer-${index}`;
+    flashBodyLinks.id = `flashcard-links-${index}`;
+    flashBtnDelete.id = `flashcard-btn-delete-${index}`;
+
+    // Delete the flashcard on btn delete click
+    flashBtnDelete.addEventListener("click", () => {
+      removeFlashcard(newFlashcard, index);
+    });
+
+    section.appendChild(newFlashcard);
+  });
 }
 
-//Add Flashcard
-flashcardButton.addEventListener("click", function (event) {
-  const accordionItem = document.getElementById("accordion-item-template");
-  const newAccordionItem = accordionItem.cloneNode(true);
+// Load flashcards on initial load
+loadFlashcards();
 
-  newAccordionItem.setAttribute("style", "display: block");
-  newAccordionItem.removeAttribute("id");
+// Adds a new flashcard
+function addFlashcard(question, answer, links) {
+  let newFlashcard = {
+    question: question,
+    answer: answer,
+    links: links,
+  };
 
-  // Add new flashcard to flashcards array
-  flashcards.push({
-    title: "Question title",
-    content: "Flashcard content",
-    links: [],
-  });
+  // Add flashcard to flashcards array
+  flashcards.push(newFlashcard);
+  // Update localstorage
+  localStorage.setItem("flashcards", JSON.stringify(flashcards));
 
-  // Set up unique id for accordion item to collapse
-  newAccordionItem.querySelector("#collapse-template").id = `collapse-${
-    flashcards.length - 1
-  }`;
-  newAccordionItem
-    .querySelector(".accordion-button")
-    .setAttribute("data-bs-target", `#collapse-${flashcards.length - 1}`);
+  // Rerender displayed flashcards
+  loadFlashcards();
+}
 
-  newAccordionItem.querySelector(".accordion-button").innerText =
-    flashcards[i].title;
-  newAccordionItem.querySelector("#flashcardContent").innerText =
-    flashcards[i].content;
-
-  document.getElementById("accordion-container").appendChild(newAccordionItem);
+flashcardButton.addEventListener("click", () => {
+  addFlashcard("question example", "answer example", ["link1", "link2"]);
 });
 
-// Plan of attack
-// Function to add new flashcard to section
-// Function that creates a flashcard
+// Removes a flashcard
+function removeFlashcard(flashcard, arrIndex) {
+  // Remove from DOM
+  flashcard.remove();
+  // Remove specific single item from array
+  flashcards.splice(arrIndex, 1);
+  localStorage.setItem("flashcards", JSON.stringify(flashcards));
+  loadFlashcards();
+}
 
-// Add new flashcard
-const addFlashcard = () => {
-  let newFlashcard = {};
-};
+function addLink() {}

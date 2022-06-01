@@ -36,23 +36,25 @@
         <h5 contenteditable>Criminal Law</h5>
         <button class="btn btn-primary" id="add-flashcard"> + Flashcard </button>
       </div>
-      <div class="accordion" id="accordion-container">
-          <div class="accordion-item" id="accordion-item-template" style="display:none">
-            <h2 class="accordion-header" id="heading-template">
-              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-template" aria-expanded="true" aria-controls="collapseOne">
-                  <span contenteditable class="accordion-header-text">Accordion Item #1</span>
-                </button>
-            </h2>
-            <div id="collapse-template" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-  
-                  
-                  <textarea name="flashcardContent" id="flashcardContent" class="flashcardContent" cols="30" rows="5"></textarea>
-  
-                  <label for="Link">Link</label>
-                  <input type="text" name="link" id="flashcardLink">
-                </div>
+
+      <div class="accordion accordion-flush" id="section-accordion">
+        <div class="accordion-item hidden" id="accordion-item-template">
+          <h2 class="accordion-header" id="flashcard-question">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flashcard-collapse" aria-expanded="false" aria-controls="flashcard-collapse">
+              Accordion Item #1
+            </button>
+          </h2>
+          <div id="flashcard-collapse" class="accordion-collapse collapse" aria-labelledby="flashcard-question" data-bs-parent="#section-accordion">
+            <div class="accordion-body">
+              <p id="flashcard-answer"></p>
+              <ul id="flashcard-links">
+                <li class="hidden flashcard-link" id="flashcard-link-template">
+                </li>
+              </ul>
+              <button class="btn btn-outline-primary" id="flashcard-btn-add-link">+ Link</button>
+              <button class="btn btn-outline-danger" id="flashcard-btn-delete">Delete</button>
             </div>
+          </div>
         </div>
       </div>
     </div>

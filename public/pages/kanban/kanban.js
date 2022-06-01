@@ -56,6 +56,7 @@ function renderColumn() {
     newColumn.id = `column-${index}`;
     newColumn.classList.add("column-template");
     newColumn.classList.remove("hidden");
+    newColumn.querySelector("#taskList").id = `taskList-${index}`;
     newColumn.querySelector(".column-title").textContent = column.title;
     kanbanBoard.appendChild(newColumn);
   });
@@ -80,7 +81,7 @@ var estimatedTimeInput = document.getElementById("estimatedTimeInput");
 var priorityInput = document.getElementById("priorityInput");
 
 // Access first To-do column of the column array
-const toDoColumn = document.querySelector("#column-0");
+const toDoColumn = document.getElementById("taskList-0");
 
 // Task Form submission event listener
 // taskform.addEventListener("submit", function (event) {
@@ -128,6 +129,20 @@ let taskListArray = [
     estimatedCompletionTime: "01/01/2023",
     dueDate: "August 9th, 2023",
   },
+  {
+    taskName: "Finish Assignment",
+    className: "Maths",
+    priority: "High",
+    estimatedCompletionTime: "01/01/2023",
+    dueDate: "August 9th, 2023",
+  },
+  {
+    taskName: "Finish Assignment",
+    className: "Maths",
+    priority: "High",
+    estimatedCompletionTime: "01/01/2023",
+    dueDate: "August 9th, 2023",
+  },
 ];
 
 //Function to load up flashcards
@@ -139,18 +154,17 @@ function renderTask() {
     newTaskCard.id = `task-card-${index}`;
     newTaskCard.classList.remove("hidden");
     newTaskCard.classList.add("task-card-template");
-    newTaskCard.querySelector(".task-name").innerText = taskName;
-    newTaskCard.querySelector(".task-class-name").innerText = className;
-    newTaskCard.querySelector(".task-priority").innerText = priority;
+    newTaskCard.querySelector(".task-name").innerText = taskcard.taskName;
+    newTaskCard.querySelector(".task-class-name").innerText =
+      taskcard.className;
+    newTaskCard.querySelector(".task-priority").innerText = taskcard.priority;
     newTaskCard.querySelector(".estimated-completion-time").innerText =
-      estimatedCompletionTime;
-    newTaskCard.querySelector(".task-due-date").innerText = dueDate;
+      taskcard.estimatedCompletionTime;
+    newTaskCard.querySelector(".task-due-date").innerText = taskcard.dueDate;
 
     //Append to appropriate column
     toDoColumn.appendChild(newTaskCard);
   });
-
-  window.onload = renderTask();
 
   ///
   ///
@@ -176,6 +190,8 @@ function renderTask() {
   //   // Clear the input form
   //   form.reset();
 }
+
+renderTask();
 
 // // Function to remove item from array
 // function removeItemFromArray(arr, index) {

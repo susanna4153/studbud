@@ -1,4 +1,5 @@
 localStorage.clear();
+
 //Set up local Storage to store flashcards inside columns
 var columns = localStorage.getItem("columns")
   ? JSON.parse(localStorage.getItem("columns"))
@@ -133,6 +134,7 @@ function removeColumn(columnToRemove, arrIndex) {
   //Update local storage
   localStorage.setItem("columns", JSON.stringify(columns));
 
+  //Rerender columns
   renderColumn();
 
   //Rerender drag-drop functionality
@@ -210,8 +212,8 @@ function addTask(
 }
 
 //Function to load up Tasks
-function renderTask(columnTasks, index) {
-  var selectedColumn = document.getElementById(`taskList-${index}`);
+function renderTask(columnTasks, colIndex) {
+  var selectedColumn = document.getElementById(`taskList-${colIndex}`);
 
   //Clear Task List before load to prevent duplicates
   selectedColumn.querySelectorAll(".task-card-template").forEach((taskcard) => {
@@ -219,6 +221,7 @@ function renderTask(columnTasks, index) {
   });
 
   columnTasks.map((taskcard, index) => {
+    //Duplicate taskcard template
     const newTaskCard = document
       .getElementById("task-card-template")
       .cloneNode(true);
@@ -233,10 +236,36 @@ function renderTask(columnTasks, index) {
       taskcard.estimatedCompletionTime;
     newTaskCard.querySelector(".task-due-date").innerText = taskcard.dueDate;
 
-    //Append to appropriate column
+    //Remove Task functionality
+    //Declare HTML button element
+    const deleteTaskButton = newTaskCard.querySelector("#delete-task");
 
+    //Give delete task button a unique id
+    deleteTaskButton.id = `delete-task-${index}`;
+    deleteTaskButton.addEventListener("click", function () {
+      //Get Appropriate Task List Array
+      const taskListArray = columns[colIndex].taskCards;
+      removeTaskcard(newTaskCard, taskListArray, index);
+    });
+
+    //Append to appropriate column
     selectedColumn.appendChild(newTaskCard);
   });
+}
+
+//Function to remove taskcard
+function removeTaskcard(taskcard, taskListArray, arrIndex) {
+  //Remove taskcard HTML element
+  taskcard.remove();
+
+  //Remove taskcard form tasklist array
+  taskListArray.splice(arrIndex, 1);
+
+  //Update local storage
+  localStorage.setItem("columns", JSON.stringify(columns));
+  renderColumn();
+
+  loadDrag();
 }
 
 //Drag Drop functionality for cards

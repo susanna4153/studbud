@@ -2,12 +2,28 @@ var flashcards = localStorage.getItem("flashcards")
   ? JSON.parse(localStorage.getItem("flashcards"))
   : [
       {
-        question: "Why did the chicken cross the road?",
-        answer: "I don't really know",
-        links: ["https://www.facebook.com/messages/t/100008350746646"],
+        question: "What are the key purposes of the criminal law?",
+        answer:
+          "The criminal law prohibits conduct that causes or threatens the public interest; defines and warns people of the acts that are subject to criminal punishment; distinguishes between serious and minor offenses; and imposes punishment to protect society and to satisfy the demands for retribution, rehabilitation, and deterrence.",
+        links: [
+          "https://www.sagepub.com/sites/default/files/upm-binaries/30388_1.pdf",
+        ],
       },
-      { question: "Hello hello hello", answer: "Bye bye bye", links: [] },
-      { question: "Wei wei wei", answer: "wei wei wei", links: [] },
+      {
+        question: "What are the two elements of every crime?",
+        answer:
+          "The actus reus or physical elements. It is the prohibited event spelt out in the definition of an offence (ie, the act/omission, the context, or circumstances, in which it takes place, and any consequences. The second elements is mens rea (fault elements).",
+        links: [],
+      },
+      {
+        question: "What was the key principle in Woolmington v DPP?",
+        answer:
+          "No matter what the charge or where the trial, the principle that the prosecution must prove the guilt of the prisoner is part of the common law of England and no attempt to whittle it down can be entertained. - Lord Sankey LC",
+        links: [
+          "https://www.casemine.com/judgement/uk/5a938b3e60d03e5f6b82ba39",
+          "https://www.alrc.gov.au/publication/traditional-rights-and-freedoms-encroachments-by-commonwealth-laws-alrc-interim-report-127/11-burden-of-proof/a-common-law-principle-7/",
+        ],
+      },
     ];
 
 //Set up DOM Elements
@@ -126,6 +142,7 @@ flashcardModalSubmitButton.addEventListener("click", () => {
   const links = [];
   links.push(document.getElementById("flashcard-links-input").value);
 
+  //Alert if user has not completed form fields
   if (question === "" || answer === "") {
     alert("Please enter a question and answer");
   } else {

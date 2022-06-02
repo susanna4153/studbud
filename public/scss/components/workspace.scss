@@ -24,7 +24,7 @@
   padding: 20px;
 
   .time-features {
-    height: 45vh;
+    min-height: 50vh;
     position: relative;
   }
 }
@@ -94,6 +94,28 @@ div.time-links {
 
   input {
     margin-top: 10px;
+  }
+
+  .setting-component {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    :first-child {
+      width: 80%;
+    }
+
+    .form-range {
+      // width: 100%;
+    }
+
+    .display-box {
+      text-align: end;
+      border: 1px solid #003049;
+      border-radius: 4px;
+      padding: 5px;
+    }
   }
 
   span {

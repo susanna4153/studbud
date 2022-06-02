@@ -147,6 +147,31 @@ const workDuration = document.getElementById("work-duration");
 const breakDuration = document.getElementById("break-duration");
 const numberOfSessions = document.getElementById("number-of-sessions");
 
+// Slider control displayed values
+const workDurationValueLabel = document.getElementById("work-duration-value");
+const breakDurationValueLabel = document.getElementById("break-duration-value");
+const numberOfSessionsValueLabel = document.getElementById(
+  "number-of-sessions-value"
+);
+
+// Update displayed input value
+workDurationValueLabel.textContent = workDuration.value;
+breakDurationValueLabel.textContent = breakDuration.value;
+numberOfSessionsValueLabel.textContent = numberOfSessions.value;
+
+// Update displayed input values on input value change
+workDuration.addEventListener("change", (e) => {
+  workDurationValueLabel.textContent = e.target.value;
+});
+
+breakDuration.addEventListener("change", (e) => {
+  breakDurationValueLabel.textContent = e.target.value;
+});
+
+numberOfSessions.addEventListener("change", (e) => {
+  numberOfSessionsValueLabel.textContent = e.target.value;
+});
+
 //Update pomodoro timer with user input
 function updatePomodoroTimer() {
   workDuration.addEventListener("input", () => {

@@ -124,24 +124,39 @@
             <!--Pomodoro Settings-->
             <div id="settings">
               <div class="pomodoro-settings">
-                <label for="workDuration" class="form-label"><strong>Work Duration</strong></label>
-                <input type="range" class="form-range" id="work-duration" min="20" max="120" value="25" step="5">
-                <span>
-                  <p>20 min</p>
-                  <p>120 min</p>
-                </span>
-                <label for="breakDuration" class="form-label"><strong>Break Duration</strong></label>
-                <input type="range" class="form-range" id="break-duration" min="5" max="45" value="5" step="5">
-                <span>
-                  <p>5 min</p>
-                  <p>45 min</p>
-                </span>
-                <label for="number-of-sessions" class="form-label"><strong>Number of Sessions</strong></label>
-                <input type="range" class="form-range" id="number-of-sessions" min="1" max="12" value="4" step="1">
-                <span>
-                  <p>1</p>
-                  <p>12</p>
-                </span>
+                <div class="setting-component">
+                  <div>
+                    <label for="workDuration" class="form-label"><strong>Work Duration</strong></label>
+                    <input type="range" class="form-range" id="work-duration" min="20" max="120" value="25" step="5">
+                    <span>
+                      <p>20 min</p>
+                      <p>120 min</p>
+                    </span>
+                  </div>
+                  <div class="display-box" id="work-duration-value">25</div>
+                </div>
+                <div class="setting-component">
+                  <div>
+                    <label for="breakDuration" class="form-label"><strong>Break Duration</strong></label>
+                    <input type="range" class="form-range" id="break-duration" min="5" max="45" value="5" step="5">
+                    <span>
+                      <p>5 min</p>
+                      <p>45 min</p>
+                    </span>
+                  </div>
+                  <div class="display-box" id="break-duration-value">5</div>
+                </div>
+                <div class="setting-component">
+                  <div>
+                    <label for="number-of-sessions" class="form-label"><strong>Number of Sessions</strong></label>
+                    <input type="range" class="form-range" id="number-of-sessions" min="1" max="12" value="4" step="1">
+                    <span>
+                      <p>1</p>
+                      <p>12</p>
+                    </span>
+                  </div>
+                  <div class="display-box" id="number-of-sessions-value">4</div>
+                </div>
               </div>
               <div class="time-links">
                 <ul>

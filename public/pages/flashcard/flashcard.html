@@ -46,8 +46,8 @@
 
     <main class="page-content">
       <div class="flashcard-section">
-        <div class="add-section-container">
-          <h5 contenteditable>Criminal Law</h5>
+        <div class="section-header">
+          <h5>My Flashcards</h5>
           <button
             type="button"
             class="btn btn-primary"
@@ -90,11 +90,11 @@
                         id="flashcard-question-input"
                       />
                       <label for="flashcardAnswer">Answer:</label>
-                      <input
+                      <textarea
                         type="textarea"
                         name="flashcardAnswer"
                         id="flashcard-answer-input"
-                      />
+                      ></textarea>
                       <label for="flashcardLinks">Links:</label>
                       <input
                         type="text"
@@ -114,11 +114,11 @@
               </div>
             </div>
           </div>
-          <button class="btn btn-secondary" id="btn-open-all-links">
-            Open all links
-          </button>
+          <button class="btn" id="btn-open-all-links"><img src="../../images/OpenAll.png" alt=""></button>
         </div>
 
+
+        <!--Flashcard Template based off Accordian from Bootstrap-->
         <div class="accordion accordion-flush" id="section-accordion">
           <div class="accordion-item hidden" id="accordion-item-template">
             <h2 class="accordion-header" id="flashcard-question">
@@ -141,25 +141,22 @@
             >
               <div class="accordion-body">
                 <p id="flashcard-answer"></p>
-                <ul id="flashcard-links">
-                  <li
-                    class="hidden flashcard-link"
-                    id="flashcard-link-template"
-                  >
+                
+                <!--Links List-->
+                <ul class="flashcard-links" id="flashcard-links">
+                  <li class="hidden flashcard-link" id="flashcard-link-template">
                     <a href="#" class="flashcard-link-text">Link Text</a>
-                    <button class="btn btn-outline-danger" id="remove-link">
-                      Remove link
+                    <button class="btn btn-outline-danger remove-link-button" id="remove-link">
+                      <img src="../../images/bin.png" alt="">
                     </button>
+
                   </li>
                 </ul>
-                <input type="text" id="flashcard-link-text" />
-                <button class="btn btn-primary" id="add-link">+</button>
-                <button
-                  class="btn btn-outline-danger"
-                  id="flashcard-btn-delete"
-                >
-                  Delete flashcard
-                </button>
+                <div class="flashcard-footer">
+                  <input type="text" id="flashcard-link-text" placeholder="Add Link"/>
+                  <button class="btn btn-primary" id="add-link">+</button>
+                  <button class="btn btn-outline-danger" id="flashcard-btn-delete"> Delete flashcard</button>
+                </div>
               </div>
             </div>
           </div>

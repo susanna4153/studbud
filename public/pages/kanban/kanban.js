@@ -1,5 +1,4 @@
 localStorage.clear();
-
 //Set up local Storage to store flashcards inside columns
 var columns = localStorage.getItem("columns")
   ? JSON.parse(localStorage.getItem("columns"))
@@ -10,7 +9,7 @@ var columns = localStorage.getItem("columns")
           {
             taskName: "Finish Assignment",
             className: "Maths",
-            priority: "High",
+            priorityRating: "High",
             estimatedCompletionTime: "2 hours",
             dueDate: "August 9th, 2023",
           },
@@ -18,7 +17,7 @@ var columns = localStorage.getItem("columns")
           {
             taskName: "Finish this",
             className: "English",
-            priority: "Low",
+            priorityRating: "Low",
             estimatedCompletionTime: "2 hours",
             dueDate: "August 5th, 2023",
           },
@@ -179,6 +178,7 @@ taskForm.addEventListener("submit", function (event) {
       completionTime
     );
   }
+  console.log(priorityRating);
 
   //Close Modal Manually
   var modal = bootstrap.Modal.getInstance(taskModal);
@@ -225,23 +225,25 @@ function renderTask(columnTasks, colIndex) {
     const newTaskCard = document
       .getElementById("task-card-template")
       .cloneNode(true);
+
     newTaskCard.id = `task-card-${index}`;
     newTaskCard.classList.remove("hidden");
     newTaskCard.classList.add("task-card-template");
     newTaskCard.querySelector(".task-name").innerText = taskcard.taskName;
     newTaskCard.querySelector(".task-class-name").innerText =
       taskcard.className;
-    newTaskCard.querySelector(".task-priority").innerText = taskcard.priority;
+    newTaskCard.querySelector(".task-priority").innerText =
+      taskcard.priorityRating;
     newTaskCard.querySelector(".estimated-completion-time").innerText =
       taskcard.estimatedCompletionTime;
     newTaskCard.querySelector(".task-due-date").innerText = taskcard.dueDate;
 
     //Remove Task functionality
-    //Declare HTML button element
+    //Declare HTML button element and give it a unique id
     const deleteTaskButton = newTaskCard.querySelector("#delete-task");
-
-    //Give delete task button a unique id
     deleteTaskButton.id = `delete-task-${index}`;
+
+    //Eventlistener to remove taskcard
     deleteTaskButton.addEventListener("click", function () {
       //Get Appropriate Task List Array
       const taskListArray = columns[colIndex].taskCards;

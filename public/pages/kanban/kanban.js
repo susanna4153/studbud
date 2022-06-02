@@ -1,4 +1,32 @@
-//////////////////////////////////////////////////////////// COLUMN FUNCTIONS ////////////////////////////////////////////////////////////
+localStorage.clear();
+//Set up local Storage to store flashcards inside columns
+var columns = localStorage.getItem("columns")
+  ? JSON.parse(localStorage.getItem("columns"))
+  : [
+      {
+        title: "To Do List",
+        taskCards: [
+          {
+            taskName: "Finish Assignment",
+            className: "Maths",
+            priority: "High",
+            estimatedCompletionTime: "2 hours",
+            dueDate: "August 9th, 2023",
+          },
+
+          {
+            taskName: "Finish this",
+            className: "English",
+            priority: "Low",
+            estimatedCompletionTime: "2 hours",
+            dueDate: "August 5th, 2023",
+          },
+        ],
+      },
+      { title: "In Progress", taskCards: [] },
+      { title: "Done", taskCards: [] },
+    ];
+
 //Set up variables for HTML elements using DOM selection
 const kanbanBoard = document.getElementById("kanban");
 const addTaskButton = document.getElementById("add-task");
@@ -30,16 +58,17 @@ function addColumn(title) {
   };
 
   //Add column object into column array
-  columnArray.push(column);
-  renderColumn();
-}
+  columns.push(column);
 
-// Create global array to track columns
-let columnArray = [
-  { title: "To Do List", taskCards: ["card 1", "card 2", "card 3"] },
-  { title: "In Progress", taskCards: ["card 1", "card 2", "card 3"] },
-  { title: "Done", taskCards: ["card 1", "card 2", "card 3"] },
-];
+  // Update Local Storage
+  localStorage.setItem("columns", JSON.stringify(columns));
+
+  // Rerender displayed columns
+  renderColumn();
+
+  //Rerender drag-drop functionality
+  loadDrag();
+}
 
 // Function to load up columns
 function renderColumn() {
@@ -49,7 +78,7 @@ function renderColumn() {
   });
 
   //Duplicate Column Template
-  columnArray.map((column, index) => {
+  columns.map((column, index) => {
     //Clone HTML column template
     const newColumn = document
       .getElementById("column-template")
@@ -72,83 +101,124 @@ function renderColumn() {
     newColumn.querySelector("#delete-col").id = `delete-col-${index}`;
     var columnDeleteButton = newColumn.querySelector(`#delete-col-${index}`);
     columnDeleteButton.addEventListener("click", function () {
-      document.getElementById(`column-${index}`).remove();
+      removeColumn(newColumn, index);
     });
 
     //Add to Kanbanboard
     kanbanBoard.appendChild(newColumn);
+
+    //Render Task cards within column
+    renderTask(column.taskCards, index);
   });
+
+  //Hide delete button from default columns
+  var toDoColumnDeleteButton0 = document.getElementById("delete-col-0");
+  toDoColumnDeleteButton0.setAttribute("class", "hidden");
+  var toDoColumnDeleteButton1 = document.getElementById("delete-col-1");
+  toDoColumnDeleteButton1.setAttribute("class", "hidden");
+  var toDoColumnDeleteButton2 = document.getElementById("delete-col-2");
+  toDoColumnDeleteButton2.setAttribute("class", "hidden");
 }
 
 //Load up the columns
 renderColumn();
+
+//Delete Column Function
+function removeColumn(columnToRemove, arrIndex) {
+  columnToRemove.remove();
+
+  //Remove from local array
+  columns.splice(arrIndex, 1);
+
+  //Update local storage
+  localStorage.setItem("columns", JSON.stringify(columns));
+
+  renderColumn();
+
+  //Rerender drag-drop functionality
+  loadDrag();
+}
 
 //////////////////////////////////////////////////////////// TASK MODAL  ////////////////////////////////////////////////////////////
 // Basic form DOM elements
 const taskForm = document.getElementById("taskform");
 const button = document.querySelector("#taskform > button");
 
-// Selector for the tasklist output
-var tasklist = document.querySelector("#tasklist > ul");
-
 // DOM elements for the task input fields
 var taskInput = document.getElementById("taskInput");
+var classInput = document.getElementById("classInput");
+var priorityInput = document.getElementById("priorityInput");
 var dueDateInput = document.getElementById("dueDateInput");
 var completionTimeInput = document.getElementById("completionTimeInput");
 var estimatedTimeInput = document.getElementById("estimatedTimeInput");
-var priorityInput = document.getElementById("priorityInput");
 
 // Access first To-do column of the column array
-const toDoColumn = document.getElementById("taskList-0");
+const toDoTaskList = document.getElementById("taskList-0");
 
-// Task Form submission event listener
-// taskform.addEventListener("submit", function (event) {
-//   event.preventDefault();
+// Column Name Form submission event listener
+taskForm.addEventListener("submit", function (event) {
+  //Prevent page from refreshing upon submit
+  event.preventDefault();
 
-//   let task = taskInput.value;
-//   let dueDate = dueDateInput.value;
-//   let completionTime = completionTimeInput.value;
-//   let estimatedTime = estimatedTimeInput.value;
-//   let priorityRating = priorityInput.options[priorityInput.selectedIndex].value;
-//   if (task) {
-//     addTask(
-//       task,
-//       dueDate,
-//       estimatedTime,
-//       priorityRating,
-//       completionTime,
-//       false
-//     );
-//   }
-// });
+  //Obtain user data and set as arguments for addTask function
+  let task = taskInput.value;
+  let className = classInput.value;
+  let priorityRating = priorityInput.options[priorityInput.selectedIndex].value;
+  let dueDate = dueDateInput.value;
+  let completionTime = completionTimeInput.value;
+  let estimatedTime = estimatedTimeInput.value;
+  if (task) {
+    addTask(
+      task,
+      className,
+      priorityRating,
+      dueDate,
+      estimatedTime,
+      completionTime
+    );
+  }
 
-// Create global array to track tasks
-let taskListArray = [
-  {
-    taskName: "Finish Assignment",
-    className: "Maths",
-    priority: "High",
-    estimatedCompletionTime: "01/01/2023",
-    dueDate: "August 9th, 2023",
-  },
+  //Close Modal Manually
+  var modal = bootstrap.Modal.getInstance(taskModal);
+  modal.hide();
+});
 
-  {
-    taskName: "Finish this",
-    className: "English",
-    priority: "Low",
-    estimatedCompletionTime: "03/04/2023",
-    dueDate: "August 5thth, 2023",
-  },
-];
+function addTask(
+  taskName,
+  className,
+  priorityRating,
+  dueDate,
+  estimatedTime,
+  completionTime
+) {
+  //Create taskcard based off user input
+  let task = {
+    taskName,
+    className,
+    priorityRating,
+    dueDate,
+    estimatedTime,
+    completionTime,
+    estimatedTime,
+  };
 
-//Function to load up flashcards
-function renderTask() {
-  //Clear Task List array before load to prevent duplicates
-  toDoColumn.querySelectorAll(".task-card-template").forEach((taskcard) => {
+  columns[0].taskCards.push(task);
+  renderTask(columns[0].taskCards, 0);
+
+  //Re-render drag-drop functionality
+  loadDrag();
+}
+
+//Function to load up Tasks
+function renderTask(columnTasks, index) {
+  var selectedColumn = document.getElementById(`taskList-${index}`);
+
+  //Clear Task List before load to prevent duplicates
+  selectedColumn.querySelectorAll(".task-card-template").forEach((taskcard) => {
     taskcard.remove();
   });
 
-  taskListArray.map((taskcard, index) => {
+  columnTasks.map((taskcard, index) => {
     const newTaskCard = document
       .getElementById("task-card-template")
       .cloneNode(true);
@@ -164,67 +234,64 @@ function renderTask() {
     newTaskCard.querySelector(".task-due-date").innerText = taskcard.dueDate;
 
     //Append to appropriate column
-    toDoColumn.appendChild(newTaskCard);
+
+    selectedColumn.appendChild(newTaskCard);
   });
-
-  ///
-  ///
-  ///
-
-  //   //Delete Button
-  //   let delButton = document.createElement("button");
-  //   let delButtonText = document.createTextNode("Delete Task");
-  //   delButton.appendChild(delButtonText);
-  //   item.appendChild(delButton);
-
-  //   // Event Listeners for DOM elements
-  //   delButton.addEventListener("click", function (event) {
-  //     event.preventDefault();
-  //     let id = event.target.parentElement.getAttribute("data-id");
-  //     let index = taskListArray.findIndex((task) => task.id === Number(id));
-  //     removeItemFromArray(taskListArray, index);
-  //     console.log(taskListArray);
-  //     updateEmpty();
-  //     item.remove();
-  //   });
-
-  //   // Clear the input form
-  //   form.reset();
 }
 
-renderTask();
+//Drag Drop functionality for cards
+function loadDrag() {
+  const draggables = document.querySelectorAll(".draggable");
+  const taskListContainer = document.querySelectorAll(".taskList");
 
-// // Function to remove item from array
-// function removeItemFromArray(arr, index) {
-//   if (index > -1) {
-//     arr.splice(index, 1);
-//   }
-//   return arr;
-// }
+  draggables.forEach((draggable) => {
+    const initialColIndex = draggable.parentNode.id.slice(9);
+    const draggableIndex = draggable.id.slice(10);
 
-// Function to add task with user inputs as parameters
-// function addTask(
-//   taskDescription,
-//   dueDate,
-//   estimatedTime,
-//   priorityRating,
-//   completionTime,
-//   completionStatus
-// ) {
-//   let d = new Date();
-//   let dateCreated = d.getFullYear();
-//   let task = {
-//     id: Date.now(),
-//     taskDescription,
-//     dueDate,
-//     dateCreated,
-//     estimatedTime,
-//     completionTime,
-//     priorityRating,
-//     estimatedTime,
-//     completionStatus,
-//   };
-//   taskListArray.push(task);
-//   console.log(taskListArray);
-//   renderTask(task);
-// }
+    draggable.addEventListener("dragstart", () => {
+      draggable.classList.add("dragging");
+    });
+
+    draggable.addEventListener("dragend", () => {
+      draggable.classList.remove("dragging");
+
+      // Add to new column
+      const endColIndex = draggable.parentNode.id.slice(9);
+      const endCol = columns[parseInt(endColIndex, 10)].taskCards;
+      const initialTaskcard =
+        columns[parseInt(initialColIndex, 10)].taskCards[
+          parseInt(draggableIndex, 10)
+        ];
+      endCol.push(initialTaskcard);
+
+      // Remove from initial column
+      const initialCol = columns[parseInt(initialColIndex, 10)].taskCards;
+      removeFromInitialColumn(initialCol, draggableIndex);
+
+      //Update local storage
+      localStorage.setItem("columns", JSON.stringify(columns));
+      renderColumn();
+
+      loadDrag();
+    });
+  });
+
+  taskListContainer.forEach((container) => {
+    container.addEventListener("dragover", (e) => {
+      const draggable = document.querySelector(".dragging");
+      container.appendChild(draggable);
+    });
+  });
+
+  //Function to remove taskcard from initial column
+  function removeFromInitialColumn(draggableColumnArray, arrIndex) {
+    draggableColumnArray.splice(arrIndex, 1);
+
+    //Update local storage
+    localStorage.setItem("columns", JSON.stringify(columns));
+
+    renderColumn();
+  }
+}
+
+window.onload = loadDrag();

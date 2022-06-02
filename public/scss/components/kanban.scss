@@ -43,7 +43,7 @@
 
   .taskList {
     overflow-y: auto;
-    max-height: calc(77vh - 120px);
+    height: calc(77vh - 120px);
   }
 }
 
@@ -127,4 +127,23 @@
       gap: 7px;
     }
   }
+}
+
+#taskform {
+  input {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  select {
+    margin-bottom: 15px;
+  }
+
+  label {
+    display: block;
+  }
+}
+
+.draggable.dragging {
+  opacity: 0.5;
 }

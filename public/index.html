@@ -36,40 +36,31 @@
         <!--Add Column Button-->
         <button type="button" class="btn btn-primary" id="add-column" data-bs-toggle="modal" data-bs-target="#columnModal" > + Column </button>
         <!--Adding Task Button -->
-        <button type="button" class="btn btn-primary" id="add-task" data-bs-toggle="modal" data-bs-target="#exampleModal"> + Task </button>
+        <button type="button" class="btn btn-primary" id="add-task" data-bs-toggle="modal" data-bs-target="#taskModal"> + Task </button>
       </div>
   
       <!-- Task Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="taskModal" tabindex="-1" aria-labelledby="taskModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <h5 class="modal-title" id="taskModalLabel">Modal title</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <div class="container">
-                <h1>Task List</h1>
                 <form id="taskform">
+                  <!--Task Name-->
                   <label for="task">Task:</label>
                   <input type="text" name="task" id="taskInput">
-            
+                  
                   <br>
-                  <!-- Date input -->
-                  <label for="dueDate">Due Date: </label>
-                  <input type="date" name="dueDate" id="dueDateInput">
+                  <!--Class name-->
+                  <label for="class-name">Class:</label>
+                  <input type="text" name="class-name" id="classInput">
+
                   <br>
-                  <!-- Time input -->
-                  <label for="completionTime">Completion Time: </label>
-                  <input type="time" name="completionTime" id="completionTimeInput">
-            
-                  <br>
-            
-                  <label for="estimatedTime">Estimated completion time (in mins):</label>
-                  <input type="number" name="estimatedTime" id="estimatedTimeInput">
                   <!-- Priority -->
-                  <br>
-            
                   <label for="priority">Task Priority:</label>
                   <select name="prority" id="priorityInput">
                     <option value="">Select one</option>
@@ -78,6 +69,21 @@
                     <option value="High">High</option>
                   </select>
             
+                  <br>
+                  <!-- Date input -->
+                  <label for="dueDate">Due Date: </label>
+                  <input type="date" name="dueDate" id="dueDateInput">
+                  
+                  <br>
+                  <!-- Time input -->
+                  <label for="completionTime">Completion Time: </label>
+                  <input type="time" name="completionTime" id="completionTimeInput">
+            
+                  <br>
+                  <!--Estimated Completion Time-->
+                  <label for="estimatedTime">Estimated completion time (in mins):</label>
+                  <input type="number" name="estimatedTime" id="estimatedTimeInput">
+       
                   <br>
                   <button type="submit"  class="btn btn-primary" id="task-button">Create Task</button>
                 </form>
@@ -112,7 +118,8 @@
       </div>
 
      <section class="row" id="kanban">
-      
+
+      <!-- Kanban Column Template-->
       <div class="col-md-4 hidden" id="column-template">
         <div class="box kanban_column">
           <div class="column-heading">
@@ -124,7 +131,8 @@
         </div>
       </div>
 
-      <div class="task-card hidden" id="task-card-template">
+      <!-- Taskcard Template-->
+      <div class="task-card hidden draggable" id="task-card-template" draggable="true">
         <p><strong class="task-name">Task Name</strong></p>
         <div class="content-information">
           <div class="task-tag green"><p><small class="task-class-name">LAW1023</small></p></div>

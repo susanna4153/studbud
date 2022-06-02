@@ -4,10 +4,14 @@
     margin: 40px 0;
   }
 
-  &.progress-column {
+  &#progress-column {
     background-color: #003049;
     color: #fff;
     height: 100%;
+
+    .column-heading {
+      background-color: #003049;
+    }
   }
 
   &.box-border {

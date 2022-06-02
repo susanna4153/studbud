@@ -44,7 +44,7 @@
         <div class="modal-dialog modal-dialog-scrollable">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="taskModalLabel">Modal title</h5>
+              <h5 class="modal-title" id="taskModalLabel">Add New Task</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -75,11 +75,6 @@
                   <input type="date" name="dueDate" id="dueDateInput">
                   
                   <br>
-                  <!-- Time input -->
-                  <label for="completionTime">Completion Time: </label>
-                  <input type="time" name="completionTime" id="completionTimeInput">
-            
-                  <br>
                   <!--Estimated Completion Time-->
                   <label for="estimatedTime">Estimated completion time (in mins):</label>
                   <input type="number" name="estimatedTime" id="estimatedTimeInput">
@@ -87,7 +82,6 @@
                   <br>
                   <button type="submit"  class="btn btn-primary" id="task-button">Create Task</button>
                 </form>
-                <button type="button" class="btn btn-secondary"> Delete </button>
               </div>
             </div>
           </div>
@@ -109,7 +103,7 @@
                   <label for="column-name">New Column Name</label>
                   <input type="text" name="column-name" id="column-name-input">
                   <p><em>Scroll left to see new column</em></p>
-                  <button type="submit" id="column-form-button" class="btn btn-primary">Submit</button>
+                  <button type="submit" id="column-form-button" class="btn btn-primary">Add Column</button>
                 </form>
               </div>
             </div>
@@ -138,15 +132,15 @@
           <button class="delete-taskcard-btn" id="delete-task"><img src="images/bin.png" alt=""></button>
         </div>
         <div class="content-information">
-          <div class="task-tag green"><p><small class="task-class-name">LAW1023</small></p></div>
-          <div class="task-tag red"><p><small class="task-priority">High</small></p></div>
+          <div class="task-tag green"><p><small class="task-class-name"></small></p></div>
+          <div class="task-tag red"><p><small class="task-priority"></small></p></div>
         </div>
         <div class="time-information">
           <span>
             <img src="images/clock.png" alt="clock icon" class="clock-icon">
-            <p class="estimated-completion-time">2 hours</p>
+            <p class="estimated-completion-time">2</p><p>minutes</p>
           </span>
-          <p class="task-due-date">June 3rd, 2022</p>
+          <p class="task-due-date"></p>
         </div>
       </div>
     </section>

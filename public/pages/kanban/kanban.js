@@ -1,4 +1,3 @@
-localStorage.clear();
 //Set up local Storage to store flashcards inside columns
 var columns = localStorage.getItem("columns")
   ? JSON.parse(localStorage.getItem("columns"))
@@ -7,18 +6,18 @@ var columns = localStorage.getItem("columns")
         title: "To Do List",
         taskCards: [
           {
-            taskName: "Finish Assignment",
-            className: "Maths",
+            taskName: "Read Textbook Chapter 2",
+            className: "LAWS2017",
             priorityRating: "High",
-            estimatedCompletionTime: "2 hours",
+            estimatedTime: 240,
             dueDate: "August 9th, 2023",
           },
 
           {
-            taskName: "Finish this",
-            className: "English",
+            taskName: "Complete Tutorial Question",
+            className: "LAWS3123",
             priorityRating: "Low",
-            estimatedCompletionTime: "2 hours",
+            estimatedTime: 80,
             dueDate: "August 5th, 2023",
           },
         ],
@@ -150,7 +149,6 @@ var taskInput = document.getElementById("taskInput");
 var classInput = document.getElementById("classInput");
 var priorityInput = document.getElementById("priorityInput");
 var dueDateInput = document.getElementById("dueDateInput");
-var completionTimeInput = document.getElementById("completionTimeInput");
 var estimatedTimeInput = document.getElementById("estimatedTimeInput");
 
 // Access first To-do column of the column array
@@ -166,17 +164,9 @@ taskForm.addEventListener("submit", function (event) {
   let className = classInput.value;
   let priorityRating = priorityInput.options[priorityInput.selectedIndex].value;
   let dueDate = dueDateInput.value;
-  let completionTime = completionTimeInput.value;
   let estimatedTime = estimatedTimeInput.value;
   if (task) {
-    addTask(
-      task,
-      className,
-      priorityRating,
-      dueDate,
-      estimatedTime,
-      completionTime
-    );
+    addTask(task, className, priorityRating, dueDate, estimatedTime);
   }
   console.log(priorityRating);
 
@@ -185,14 +175,7 @@ taskForm.addEventListener("submit", function (event) {
   modal.hide();
 });
 
-function addTask(
-  taskName,
-  className,
-  priorityRating,
-  dueDate,
-  estimatedTime,
-  completionTime
-) {
+function addTask(taskName, className, priorityRating, dueDate, estimatedTime) {
   //Create taskcard based off user input
   let task = {
     taskName,
@@ -200,12 +183,11 @@ function addTask(
     priorityRating,
     dueDate,
     estimatedTime,
-    completionTime,
-    estimatedTime,
   };
 
   columns[0].taskCards.push(task);
   renderTask(columns[0].taskCards, 0);
+  localStorage.setItem("columns", JSON.stringify(columns));
 
   //Re-render drag-drop functionality
   loadDrag();
@@ -233,9 +215,9 @@ function renderTask(columnTasks, colIndex) {
     newTaskCard.querySelector(".task-class-name").innerText =
       taskcard.className;
     newTaskCard.querySelector(".task-priority").innerText =
-      taskcard.priorityRating;
+      taskcard.priorityRating || "";
     newTaskCard.querySelector(".estimated-completion-time").innerText =
-      taskcard.estimatedCompletionTime;
+      taskcard.estimatedTime || "0";
     newTaskCard.querySelector(".task-due-date").innerText = taskcard.dueDate;
 
     //Remove Task functionality
@@ -272,9 +254,11 @@ function removeTaskcard(taskcard, taskListArray, arrIndex) {
 
 //Drag Drop functionality for cards
 function loadDrag() {
+  //Set up HTML DOM elements for draggable taskcards and tasklists
   const draggables = document.querySelectorAll(".draggable");
   const taskListContainer = document.querySelectorAll(".taskList");
 
+  //Function for drag drop function
   draggables.forEach((draggable) => {
     const initialColIndex = draggable.parentNode.id.slice(9);
     const draggableIndex = draggable.id.slice(10);
@@ -304,6 +288,8 @@ function loadDrag() {
       renderColumn();
 
       loadDrag();
+
+      loadProgressColumn();
     });
   });
 
@@ -326,3 +312,9 @@ function loadDrag() {
 }
 
 window.onload = loadDrag();
+
+////////////////////////// Update Inprogress Column on Workspace Page ////////////////////////
+function loadProgressColumn() {
+  //Obtain Objects from the In-Progress Column of Columns array
+  let inProgress = columns[1];
+}

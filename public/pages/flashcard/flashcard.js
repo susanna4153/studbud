@@ -61,6 +61,7 @@ function loadFlashcards() {
     flashCollapseBtn.setAttribute("data-bs-target", `#${flashCollapseBody.id}`);
     flashCollapseBtn.setAttribute("aria-controls", `#${flashCollapseBody.id}`);
 
+    //Give unique ids to each of the flashcard elements
     flashBodyContent.id = `flashcard-answer-${index}`;
     flashBodyLinks.id = `flashcard-links-${index}`;
     flashInputAddLink.id = `flashcard-link-text-${index}`;
@@ -136,6 +137,7 @@ flashcardModalSubmitButton.addEventListener("click", () => {
 function removeFlashcard(flashcard, arrIndex) {
   // Remove from DOM
   flashcard.remove();
+
   // Remove specific single item from array
   flashcards.splice(arrIndex, 1);
 

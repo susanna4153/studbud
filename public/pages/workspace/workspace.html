@@ -31,9 +31,31 @@
       <section class="row">
         
         <!-- Kanban Progress Column-->
-        <div class="col-md-4 study-features">
-          <div class="box progress-column">
-            <h2>In Progress</h2>
+        <div class="col-md-4 study-features" id="progress-column-container">
+          <div class="box kanban_column" id="progress-column">
+            <div class="column-heading">
+              <h3 class="column-title">In Progress</h3>
+            </div>
+            <div class="taskList" id="progressColTaskList">
+                <!-- Taskcard Template-->
+                <div class="task-card hidden" id="task-card-template">
+                  <div class="taskcard-heading">
+                    <p><strong class="task-name">Task Name</strong></p>
+                    <button class="delete-taskcard-btn" id="delete-task"><img src="/public/images/bin.png" alt=""></button>
+                  </div>
+                  <div class="content-information">
+                    <div class="task-tag green"><p><small class="task-class-name"></small></p></div>
+                    <div class="task-tag red"><p><small class="task-priority"></small></p></div>
+                  </div>
+                  <div class="time-information">
+                    <span>
+                      <img src="/public/images/clock.png" alt="clock icon" class="clock-icon">
+                      <p class="estimated-completion-time">2</p><p>minutes</p>
+                    </span>
+                    <p class="task-due-date"></p>
+                  </div>
+                </div>
+            </div>
           </div>
         </div>
 
@@ -195,6 +217,7 @@
       </section>
   </main>
 
+  <script src="../kanban/kanban.js"></script>
   <script src="workspace.js"></script>
   <script src="./musicplayer.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

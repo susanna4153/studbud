@@ -58,6 +58,23 @@ div.time-links {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
+    li {
+      margin-bottom: 5px;
+      a {
+        color: grey;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      a.active {
+        color: #457b9d;
+        font-weight: 600;
+      }
+    }
   }
 }
 

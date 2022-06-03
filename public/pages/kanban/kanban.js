@@ -1,4 +1,5 @@
-//Set up local Storage to store flashcards inside columns
+//////////////////////////////////////////////////////////// GLOBAL ARRAY ////////////////////////////////////////////////////////////
+//Set up global array in local storage to set up all kanban columns and the taskcards within
 var columns = localStorage.getItem("columns")
   ? JSON.parse(localStorage.getItem("columns"))
   : [
@@ -10,7 +11,7 @@ var columns = localStorage.getItem("columns")
             className: "LAWS2017",
             priorityRating: "High",
             estimatedTime: 240,
-            dueDate: "August 9th, 2023",
+            dueDate: "09-06-2022",
           },
 
           {
@@ -18,7 +19,7 @@ var columns = localStorage.getItem("columns")
             className: "LAWS3123",
             priorityRating: "Low",
             estimatedTime: 80,
-            dueDate: "August 5th, 2023",
+            dueDate: "07-08-2022",
           },
         ],
       },
@@ -26,6 +27,7 @@ var columns = localStorage.getItem("columns")
       { title: "Done", taskCards: [] },
     ];
 
+//////////////////////////////////////////////////////////// COLUMNS ////////////////////////////////////////////////////////////
 //Set up variables for HTML elements using DOM selection
 const kanbanBoard = document.getElementById("kanban");
 const addTaskButton = document.getElementById("add-task");
@@ -33,7 +35,7 @@ const columnform = document.getElementById("column-form");
 const columnNameInput = document.getElementById("column-name-input");
 const columnModal = document.getElementById("columnModal");
 
-// Column Name Form submission event listener
+// Column Modal form submission event listener
 columnform.addEventListener("submit", function (event) {
   //Prevent page from refreshing upon submit
   event.preventDefault();
@@ -47,6 +49,8 @@ columnform.addEventListener("submit", function (event) {
   //Close Modal Manually
   var modal = bootstrap.Modal.getInstance(columnModal);
   modal.hide();
+
+  columnform.reset();
 });
 
 // Function to add column with user inputs as parameters
@@ -168,7 +172,6 @@ taskForm.addEventListener("submit", function (event) {
   if (task) {
     addTask(task, className, priorityRating, dueDate, estimatedTime);
   }
-  console.log(priorityRating);
 
   //Close Modal Manually
   var modal = bootstrap.Modal.getInstance(taskModal);

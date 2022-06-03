@@ -20,7 +20,7 @@
       <ul>
         <li>
           <a href="../../index.html"
-            ><img src="../../images/SelectedKanbanboardIcon.png" alt=""
+            ><img src="../../images/kanbanboardIcon.png" alt=""
           /></a>
         </li>
         <li>
@@ -30,7 +30,7 @@
         </li>
         <li>
           <a href="flashcard.html"
-            ><img src="../../images/FlashcardIcon.png" alt=""
+            ><img src="../../images/SelectedFlashcardIcon.png" alt=""
           /></a>
         </li>
       </ul>
@@ -59,7 +59,7 @@
           </button>
 
 
-          <!-- Flashcard Modal -->
+          <!-- Flashcard Modal based off Boostrap -->
           <div
             class="modal fade"
             id="addFlashcardModal"
@@ -83,31 +83,20 @@
                 <div class="modal-body">
                   <div class="container">
                     <form id="flashcardForm">
+                      <!--Flashcard Question Input -->
                       <label for="flashcardQuestion">Question:</label>
-                      <input
-                        type="text"
-                        name="flashcardQuestion"
-                        id="flashcard-question-input"
-                      />
+                      <input type="text" name="flashcardQuestion" id="flashcard-question-input"/>
+
+                      <!--Flashcard Answer Input-->
                       <label for="flashcardAnswer">Answer:</label>
-                      <textarea
-                        type="textarea"
-                        name="flashcardAnswer"
-                        id="flashcard-answer-input"
-                      ></textarea>
-                      <label for="flashcardLinks">Links:</label>
-                      <input
-                        type="text"
-                        name="flashcardLinks"
-                        id="flashcard-links-input"
-                      />
-                      <button
-                        type="submit"
-                        class="btn btn-primary"
-                        id="flashcard-button-submit"
-                      >
-                        Create flashcard
-                      </button>
+                      <textarea type="textarea" name="flashcardAnswer" id="flashcard-answer-input"></textarea>
+
+                      <!--Flashcard link input -->
+                      <label for="flashcardLinks">Link:</label>
+                      <input type="text" name="flashcardLinks" id="flashcard-links-input"/>
+                      
+                      <!--Submit Button-->
+                      <button type="submit" class="btn btn-primary" id="flashcard-button-submit"> Create flashcard</button>
                     </form>
                   </div>
                 </div>
@@ -122,6 +111,7 @@
         <div class="accordion accordion-flush" id="section-accordion">
           <div class="accordion-item hidden" id="accordion-item-template">
             <h2 class="accordion-header" id="flashcard-question">
+              <!-- Flashcard Question displayed in header-->
               <button
                 class="accordion-button collapsed"
                 type="button"
@@ -140,6 +130,8 @@
               data-bs-parent="#section-accordion"
             >
               <div class="accordion-body">
+
+                <!--Flashcard Answer-->
                 <p id="flashcard-answer"></p>
                 
                 <!--Links List-->
@@ -149,12 +141,16 @@
                     <button class="btn btn-outline-danger remove-link-button" id="remove-link">
                       <img src="../../images/bin.png" alt="">
                     </button>
-
                   </li>
                 </ul>
+
+                <!--Flashcard Footer-->
                 <div class="flashcard-footer">
+                  <!--Add Link-->
                   <input type="text" id="flashcard-link-text" placeholder="Add Link"/>
                   <button class="btn btn-primary" id="add-link">+</button>
+                  
+                  <!--Delete Flashcard-->
                   <button class="btn btn-outline-danger" id="flashcard-btn-delete"> Delete flashcard</button>
                 </div>
               </div>

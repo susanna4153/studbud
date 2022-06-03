@@ -19,7 +19,7 @@
   }
 }
 
-//Creating two columns - left column for progress kanban column, right for pomodoro timer/stopwatch and music player
+//Creating two columns for study features and time features
 .study-features {
   padding: 20px;
 
@@ -29,11 +29,13 @@
   }
 }
 
-//Responsive Design
+//Responsive Design for Workspace layout
 @media screen and (max-width: 768px) {
   .study-features {
     .time-features {
       height: 85vh;
+      display: flex;
+      align-items: center;
     }
 
     .music-player {
@@ -42,12 +44,20 @@
   }
 }
 
-//Time Features - Positioning Links
+//Time Features - Styling links
 div.time-links {
-  width: 200px;
+  width: fit-content;
+  height: 60px;
   position: absolute;
   right: 30px;
   top: 20px;
+
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 //Pomodoro Timer Styling
@@ -84,6 +94,13 @@ div.time-links {
   justify-content: space-around;
 }
 
+@media screen and (max-width: 768px) {
+  #pomodoro-timer,
+  #stopwatch {
+    width: 100%;
+  }
+}
+
 //Settings - Slider Stlying
 .pomodoro-settings {
   display: flex;
@@ -106,10 +123,6 @@ div.time-links {
       width: 80%;
     }
 
-    .form-range {
-      // width: 100%;
-    }
-
     .display-box {
       text-align: end;
       border: 1px solid #003049;
@@ -127,5 +140,11 @@ div.time-links {
   label {
     width: 100%;
     text-align: left;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .pomodoro-settings {
+    width: 100%;
   }
 }

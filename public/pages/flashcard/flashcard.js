@@ -211,7 +211,8 @@ btnOpenAllLinks.addEventListener("click", () => {
   // Loop through all links and open each one
   flashcards.map((flashcard, index) => {
     flashcard.links.map((link, index) => {
-      window.open(link, "_blank");
+      console.log(link);
+      window.open(link);
     });
   });
 });

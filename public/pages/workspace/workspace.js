@@ -1,49 +1,4 @@
-////////////////////////// Load up in progress column ////////////////////////
-var columns = localStorage.getItem("columns")
-  ? JSON.parse(localStorage.getItem("columns"))
-  : [];
-
-// Render the in progress column
-function renderInProgressColumn() {
-  // In progress column is always 2nd column in columns object
-  columns[1].taskCards.map((taskcard, index) => {
-    // Render each taskcard in the "in progress" column in DOM
-    const newTaskCard = document
-      .getElementById("task-card-template")
-      .cloneNode(true);
-
-    newTaskCard.id = `task-card-${index}`;
-    newTaskCard.classList.remove("hidden");
-    newTaskCard.classList.add("task-card-template");
-    newTaskCard.querySelector(".task-name").innerText = taskcard.taskName;
-    newTaskCard.querySelector(".task-class-name").innerText =
-      taskcard.className;
-    newTaskCard.querySelector(".task-priority").innerText =
-      taskcard.priorityRating || "";
-    newTaskCard.querySelector(".estimated-completion-time").innerText =
-      taskcard.estimatedTime || "0";
-    newTaskCard.querySelector(".task-due-date").innerText = taskcard.dueDate;
-
-    //Remove Task functionality
-    //Declare HTML button element and give it a unique id
-    const deleteTaskButton = newTaskCard.querySelector("#delete-task");
-    deleteTaskButton.id = `delete-task-${index}`;
-
-    //Eventlistener to remove taskcard
-    deleteTaskButton.addEventListener("click", function () {
-      //Get Appropriate Task List Array
-      const taskListArray = columns[1].taskCards;
-      removeTaskcard(newTaskCard, taskListArray, index);
-    });
-
-    // Add to DOM
-    document.getElementById("progressColTaskList").appendChild(newTaskCard);
-  });
-}
-
-renderInProgressColumn();
-
-////////////////////////// Navigation between Time Links ////////////////////////
+///////////////////////// Navigation between Time Links ////////////////////////
 
 //Setting up HTML DOM Elements
 const pomodoroLink = document.getElementsByClassName("pomodoro-link");
@@ -311,3 +266,48 @@ function timer() {
 function stopInterval() {
   clearInterval(startTimer);
 }
+
+////////////////////////// Load up in progress column ////////////////////////
+var columns = localStorage.getItem("columns")
+  ? JSON.parse(localStorage.getItem("columns"))
+  : [];
+
+// Render the in progress column
+function renderInProgressColumn() {
+  // In progress column is always 2nd column in columns object
+  columns[1].taskCards.map((taskcard, index) => {
+    // Render each taskcard in the "in progress" column in DOM
+    const newTaskCard = document
+      .getElementById("task-card-template")
+      .cloneNode(true);
+
+    newTaskCard.id = `task-card-${index}`;
+    newTaskCard.classList.remove("hidden");
+    newTaskCard.classList.add("task-card-template");
+    newTaskCard.querySelector(".task-name").innerText = taskcard.taskName;
+    newTaskCard.querySelector(".task-class-name").innerText =
+      taskcard.className;
+    newTaskCard.querySelector(".task-priority").innerText =
+      taskcard.priorityRating || "";
+    newTaskCard.querySelector(".estimated-completion-time").innerText =
+      taskcard.estimatedTime || "0";
+    newTaskCard.querySelector(".task-due-date").innerText = taskcard.dueDate;
+
+    //Remove Task functionality
+    //Declare HTML button element and give it a unique id
+    const deleteTaskButton = newTaskCard.querySelector("#delete-task");
+    deleteTaskButton.id = `delete-task-${index}`;
+
+    //Eventlistener to remove taskcard
+    deleteTaskButton.addEventListener("click", function () {
+      //Get Appropriate Task List Array
+      const taskListArray = columns[1].taskCards;
+      removeTaskcard(newTaskCard, taskListArray, index);
+    });
+
+    // Add to DOM
+    document.getElementById("progressColTaskList").appendChild(newTaskCard);
+  });
+}
+
+renderInProgressColumn();

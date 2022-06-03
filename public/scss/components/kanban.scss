@@ -1,3 +1,14 @@
+//Hidden Functional Class
+.hidden {
+  display: none;
+}
+
+//Functional dragging class
+.draggable.dragging {
+  opacity: 0.5;
+}
+
+//Add column & add taskcard buttons at top
 .kanban-buttons {
   right: 10px;
   display: block;
@@ -8,31 +19,65 @@
   gap: 10px;
 }
 
+//Column Modal
 #column-form {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   gap: 30px;
 
-  #column-name {
+  //Column Name Input Field
+  input {
     padding: 5px 10px;
-    border: 1px solid #a4a4a4;
-    border-radius: 5px;
-    width: 100%;
+    border: solid 1.5px #d4d4d4;
+    border-radius: 3px;
   }
 
+  //Submit Add Column For button
   #column-form-button {
     width: fit-content;
     margin-left: auto;
   }
 }
 
+//Task Modal
+#taskform {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  //Input fields
+  input {
+    width: 100%;
+    padding: 5px 10px;
+    border: solid 1.5px #d4d4d4;
+    border-radius: 3px;
+  }
+
+  label {
+    display: block;
+  }
+
+  //Priority
+  select {
+    padding: 8px 10px;
+    border: solid 1.5px #d4d4d4;
+    border-radius: 3px;
+  }
+
+  #task-button {
+    margin-left: auto;
+  }
+}
+
+//Kanban Column Styling
 .kanban_column {
   background-color: #e4e4e4;
   border-radius: 5px;
   height: 77vh;
   margin-bottom: 30px;
 
+  //Column Heading Styling
   .column-heading {
     display: flex;
     justify-content: space-between;
@@ -41,33 +86,14 @@
     width: 100%;
   }
 
+  //Taskcard container Styling
   .taskList {
     overflow-y: auto;
     height: calc(77vh - 120px);
   }
 }
 
-.kanban_columnn:not(:last-child) {
-  margin-right: 30px;
-}
-
-.kanban_column-title {
-  margin-bottom: 20px;
-  user-select: none;
-}
-
-.kanban_item-input {
-  padding: 10px 15px;
-  box-sizing: border-box;
-  background: white;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.hidden {
-  display: none;
-}
-
+//Task Card Styling
 .task-card {
   background-color: white;
   height: auto;
@@ -77,21 +103,25 @@
   margin-bottom: 10px;
   color: #000;
 
+  //Remove default styling
   p {
     margin-bottom: 0;
   }
 
+  //Task Heading (both Task Name and delete button)
   .taskcard-heading {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
 
+    //Styling for delete button
     img {
       width: 20px;
       height: auto;
     }
 
+    //Remove default styling
     button {
       background: none;
       color: inherit;
@@ -103,6 +133,7 @@
     }
   }
 
+  //Content information (class tag and priority tag)
   .content-information {
     display: flex;
     align-items: center;
@@ -110,6 +141,7 @@
     gap: 5px;
     margin-bottom: 40px;
 
+    //Tag styling
     .task-tag {
       padding: 3px;
       width: fit-content;
@@ -133,49 +165,24 @@
     }
   }
 
+  //Time information (duedate and estimated completion time)
   .time-information {
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
 
-    .clock-icon {
-      width: 15px;
-      height: 15px;
-    }
-
+    //Estimated completion time
     span {
       display: flex;
       align-items: center;
       gap: 7px;
+
+      //Estimated completion time icon
+      .clock-icon {
+        width: 15px;
+        height: 15px;
+      }
     }
   }
-}
-
-#taskform {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-
-  input {
-    width: 100%;
-  }
-
-  label {
-    display: block;
-  }
-
-  select {
-    padding: 8px 10px;
-    border: solid 1.5px #d4d4d4;
-    border-radius: 3px;
-  }
-}
-
-.draggable.dragging {
-  opacity: 0.5;
-}
-
-#task-button {
-  margin-left: auto;
 }

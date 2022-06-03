@@ -18,15 +18,18 @@
   justify-content: space-between;
   align-items: center;
 
+  //Section Heading
   h5 {
     margin-bottom: 0;
     margin-right: auto;
   }
 
+  //Add flashcard button
   button:first-of-type {
     margin-right: 6px;
   }
 
+  //Open all links button
   #btn-open-all-links {
     img {
       height: 20px;
@@ -35,7 +38,16 @@
   }
 }
 
-//Flashcard Link Styling
+//Flashcard Accordian Styling
+.accordion {
+  width: 100%;
+}
+
+.accordion-item {
+  width: 100%;
+}
+
+//Flashcard links list styling
 .flashcard-links {
   display: flex;
   flex-direction: column;
@@ -48,21 +60,22 @@
       width: fit-content;
     }
   }
-}
 
-.remove-link-button {
-  background: none;
-  color: inherit;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
-  margin-left: 20px;
+  //Remove link bin button
+  .remove-link-button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    margin-left: 20px;
 
-  img {
-    height: 21px;
-    width: auto;
+    img {
+      height: 21px;
+      width: auto;
+    }
   }
 }
 
@@ -81,15 +94,6 @@
     width: 40%;
     margin-right: 10px;
   }
-}
-
-//Flashcard Accordian Styling
-.accordion {
-  width: 100%;
-}
-
-.accordion-item {
-  width: 100%;
 }
 
 //Flashcard Form Styling

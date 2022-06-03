@@ -13,7 +13,11 @@ var columns = localStorage.getItem("columns")
             estimatedTime: 240,
             dueDate: "09-06-2022",
           },
-
+        ],
+      },
+      {
+        title: "In Progress",
+        taskCards: [
           {
             taskName: "Complete Tutorial Question",
             className: "LAWS3123",
@@ -23,7 +27,6 @@ var columns = localStorage.getItem("columns")
           },
         ],
       },
-      { title: "In Progress", taskCards: [] },
       { title: "Done", taskCards: [] },
     ];
 

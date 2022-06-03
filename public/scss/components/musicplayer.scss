@@ -22,7 +22,15 @@
   align-items: center;
   justify-content: flex-start;
   flex: 3;
-  margin: -20px;
+  margin: -21px;
+  border-radius: 0px 3px 3px 0px;
+  height: 350px;
+}
+
+@media screen and (max-width: 768px) {
+  .playlist {
+    border-radius: 0px 0px 3px 3px;
+  }
 }
 
 .playlist-body {

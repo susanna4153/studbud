@@ -16,6 +16,7 @@
 
   &.box-border {
     border: 1px solid #a4a4a4;
+    height: 350px;
   }
 }
 
@@ -101,42 +102,61 @@ div.time-links {
   }
 }
 
-//Settings - Slider Stlying
+//Settings Styling
 .pomodoro-settings {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  width: 50%;
+  width: 60%;
 
   input {
     margin-top: 10px;
   }
 
+  //Slider setting
   .setting-component {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
+    //Actual Slider width
     :first-child {
       width: 80%;
     }
 
-    .display-box {
-      text-align: end;
-      border: 1px solid #003049;
-      border-radius: 4px;
-      padding: 5px;
+    //User input display box
+    .display-box-container {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      p {
+        margin-bottom: 0 !important;
+      }
+
+      .display-box {
+        text-align: center;
+        width: 40px;
+        border: 1.5px solid #a4a4a4;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin-left: 15px;
+      }
     }
   }
 
+  //Slider minimum and maximum range
   span {
     display: flex;
     justify-content: space-between;
     width: 100%;
   }
 
+  //Slider label
   label {
     width: 100%;
     text-align: left;
@@ -146,5 +166,19 @@ div.time-links {
 @media screen and (max-width: 768px) {
   .pomodoro-settings {
     width: 100%;
+  }
+}
+
+//Stopwatch styling
+.stopwatch-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  #stopwatch-minutes,
+  #stopwatch-seconds,
+  #stopwatch-tens {
+    padding: 0 10px;
+    min-width: 60px;
   }
 }

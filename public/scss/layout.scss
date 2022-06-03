@@ -91,6 +91,10 @@ main {
     flex-wrap: wrap;
     overflow-x: none;
   }
+
+  main.page-content {
+    margin-bottom: 80px;
+  }
 }
 
 .box {

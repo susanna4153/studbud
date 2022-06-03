@@ -7,19 +7,22 @@ const settingsLink = document.getElementsByClassName("settings-link");
 
 //Add an event listener to each time feature link
 for (var i = 0; i < pomodoroLink.length; i++) {
-  pomodoroLink[i].addEventListener("click", function () {
+  pomodoroLink[i].addEventListener("click", (e) => {
+    e.preventDefault();
     show("pomodoro-timer", "stopwatch", "settings");
   });
 }
 
 for (var i = 0; i < stopwatchLink.length; i++) {
-  stopwatchLink[i].addEventListener("click", function () {
+  stopwatchLink[i].addEventListener("click", (e) => {
+    e.preventDefault();
     show("stopwatch", "pomodoro-timer", "settings");
   });
 }
 
 for (var i = 0; i < settingsLink.length; i++) {
-  settingsLink[i].addEventListener("click", function () {
+  settingsLink[i].addEventListener("click", (e) => {
+    e.preventDefault();
     show("settings", "stopwatch", "pomodoro-timer");
   });
 }
@@ -96,7 +99,7 @@ function startStopwatch() {
   }
 }
 
-//////////////////////// Settings ////////////////////////
+//////////////////////////////////////////////// Settings ////////////////////////
 //Slider Controls
 const workDuration = document.getElementById("work-duration");
 const breakDuration = document.getElementById("break-duration");

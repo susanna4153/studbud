@@ -106,7 +106,7 @@
             
             <!--Stopwatch-->
             <div id="stopwatch">
-              <h2><span id="stopwatch-minutes">00</span>:<span id="stopwatch-seconds">00</span>:<span id="stopwatch-tens">00</span></h2>
+              <h2 class="stopwatch-display"><span id="stopwatch-minutes">00</span>:<span id="stopwatch-seconds">00</span>:<span id="stopwatch-tens">00</span></h2>
               <div class="stopwatch-buttons">
                 <button class="btn btn-primary" id="stopwatch-start">Start</button>
                 <button class="btn btn-secondary" id="stopwatch-stop">Stop</button>
@@ -124,28 +124,37 @@
             <!--Pomodoro Settings-->
             <div id="settings">
               <div class="pomodoro-settings">
+                <!--Work Duration Slider-->
                 <div class="setting-component">
                   <div>
                     <label for="workDuration" class="form-label"><strong>Work Duration</strong></label>
                     <input type="range" class="form-range" id="work-duration" min="20" max="120" value="25" step="5">
                     <span>
-                      <p>20 min</p>
-                      <p>120 min</p>
+                      <p>20</p>
+                      <p>120</p>
                     </span>
                   </div>
-                  <div class="display-box" id="work-duration-value">25</div><p>minutes</p>
+                  <div class="display-box-container">
+                    <div class="display-box" id="work-duration-value">25</div>
+                    <p>minutes</p>
+                  </div>
                 </div>
+                <!--Break Duration Slider-->
                 <div class="setting-component">
                   <div>
                     <label for="breakDuration" class="form-label"><strong>Break Duration</strong></label>
                     <input type="range" class="form-range" id="break-duration" min="5" max="45" value="5" step="5">
                     <span>
-                      <p>5 min</p>
-                      <p>45 min</p>
+                      <p>5</p>
+                      <p>45</p>
                     </span>
                   </div>
-                  <div class="display-box" id="break-duration-value">5</div><p>minutes</p>
+                  <div class="display-box-container">
+                    <div class="display-box" id="break-duration-value">5</div>
+                    <p>minutes</p>
+                  </div>
                 </div>
+                <!--Number of Sessions Slider-->
                 <div class="setting-component">
                   <div>
                     <label for="number-of-sessions" class="form-label"><strong>Number of Sessions</strong></label>
@@ -155,7 +164,10 @@
                       <p>12</p>
                     </span>
                   </div>
-                  <div class="display-box" id="number-of-sessions-value">4</div><p>sessions</p>
+                  <div class="display-box-container">
+                    <div class="display-box" id="number-of-sessions-value">4</div>
+                    <p>sessions</p>
+                  </div>
                 </div>
               </div>
               <div class="time-links">

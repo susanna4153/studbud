@@ -4,7 +4,7 @@ var columns = localStorage.getItem("columns")
   ? JSON.parse(localStorage.getItem("columns"))
   : [
       {
-        title: "To Do List",
+        title: "To Do",
         taskCards: [
           {
             taskName: "Read Textbook Chapter 2",
@@ -13,11 +13,6 @@ var columns = localStorage.getItem("columns")
             estimatedTime: 240,
             dueDate: "09-06-2022",
           },
-        ],
-      },
-      {
-        title: "In Progress",
-        taskCards: [
           {
             taskName: "Complete Tutorial Question",
             className: "LAWS3123",
@@ -26,6 +21,10 @@ var columns = localStorage.getItem("columns")
             dueDate: "07-08-2022",
           },
         ],
+      },
+      {
+        title: "In Progress",
+        taskCards: [],
       },
       { title: "Done", taskCards: [] },
     ];

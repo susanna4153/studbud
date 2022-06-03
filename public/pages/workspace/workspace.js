@@ -1,5 +1,4 @@
 ///////////////////////// Navigation between Time Links ////////////////////////
-
 //Setting up HTML DOM Elements
 const pomodoroLink = document.getElementsByClassName("pomodoro-link");
 const stopwatchLink = document.getElementsByClassName("stopwatch-link");

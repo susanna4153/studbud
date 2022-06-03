@@ -16,6 +16,10 @@
 
 The StudBud web-protoype relies on **Bootstrap** for some of its CSS and JS compontents, in particular for the form modals on the Kanban Board page and the accordian structure of the Flashcard page. Its responsive design and grid system also proved extremely useful for building an MVP.
 
+## Challenges
+
+One immense challenge that I encountered during my development process was the presence of a **large file (151 mb!) in my parcel cache which prohibited me from pushing changes into github**. At this stage, I had a couple of componenents already half done so this was pretty frustrating. I tried deleting the parcel cache on git hub, then executing a git pull command to re-download my code, this time without the cache folder. This did not work. Ultimately, I created a new repository and migrated all my files. I also included a **git ignore** file in this new repository to exclude the parcel cache file from being pushed. One positive of this challenge was that it prompted me to **streamline and edit my code during the migration process** and delete unrelated plugins.
+
 ## Reflection on the Development Journey
 
 One key reflection from my tutor's feedback on the Web App Pitch was to construct **a more granular development roadmap** to _"help breakdown large tasks into smaller components and to ensure [I] stay on track for implementation."_ Due to the lack of specificity in my original roadmap, I underestimated the complexity of some features. Subsequently, I downgraded certain functional specs to a 'low priority' and simplified a lot of my designs for a more realistic development process. The following two examples demonstrate this process of simplification and streamlining.
@@ -38,10 +42,6 @@ One key reflection from my tutor's feedback on the Web App Pitch was to construc
 - As an improvement, the **prototype displays the break timer** to avoid creating another hidden page. This is particularly the case considering that the 'time-feature' section already has three sub-components (pomodoro timer, stopwatch and settings). Having another button to transition to another hidden break-timer page would overcomplicate the user experience and pose another distraction.
 - Another purposeful change was the use of different buttons for the start, stop and reset features to differentiate the pomodoro timer from the music player. This relates to the **mapping** design principle where different features serving different purposes should utilitse distinct visual iconography to distinguish their functional differences.
 - Whilst the radial progress bar was not implemented due to time constraints, in the context of the new design with the break timer, it would not have made sense to have two radial progress bars. Therefore, in future iterations, if this second design is retained, the use of a **linear progress bar** may be more appropriate to track the completion of each session.
-
-## Challenges
-
-One immense challenge that I encountered during my development process was the presence of a **large file (151 mb!) in my parcel cache which prohibited me from pushing changes into github**. At this stage, I had a couple of componenents already half done so this was pretty frustrating. I tried deleting the parcel cache on git hub, then executing a git pull command to re-download my code, this time without the cache folder. This did not work. Ultimately, I created a new repository and migrated all my files. I also included a **git ignore** file in this new repository to exclude the parcel cache file from being pushed. One positive of this challenge was that it prompted me to **streamline and edit my code during the migration process** and delete unrelated plugins.
 
 ## Sources
 

@@ -2,6 +2,8 @@
 
 > **NOTE:** This Web Prototype is most suitable on Chrome. Please ensure that pop-ups are enabled to ensure that the open all links feature of the Flaschards section works.
 
+![Press the circled button to adjust pop-up settings](/docs/chrome.png)
+
 ## Project Description
 
 **StudBud** is a study application targetted at law students to allow for more effective task, time and content mangagement. According to recent studies, law students experience stress, anxiety and depression at rates significantly higher than their contemporaries who do not study law due to the heavy workload and academic pressure. That's where Studbud comes in to implemenet structure and organisation to legal studies by providing:
@@ -37,9 +39,24 @@ One key reflection from my tutor's feedback on the Web App Pitch was to construc
 - Another purposeful change was the use of different buttons for the start, stop and reset features to differentiate the pomodoro timer from the music player. This relates to the **mapping** design principle where different features serving different purpose should utilitse distinct visual iconography to distinguish these differences.
 - Whilst the radial progress bar was not implemented due to time constraints, in the context of the new design with the break timer, it would not have made sense to have two radial progress bars. Therefore, in future iterations, if this second design is retained, the use of a **linear progress bar** may be more appropriate to track the completion of each session.
 
+## Challenges
+
+One immense challenge that I encountered during my development process was the presence of a **large file (151 mb!) in my parcel cache which prohibited me from pushing changes into github**. At this stage, I had a couple of componenents already half done so this was extremely frustrating. I tried deleting the parcel cache on git hub, then executing a git pull command to re-download my code, this time without the cache folder. This did not work. Ultimately, I created a new repository and migrated all my files. I also included a **git ignore** file in this new repository to exlude the parcel cache file from being pushed. One positive of this challenge was that it prompted me to **streamline and edit my code during the migration process**.
+
+## Sources
+
+During my development process, I followed a couple of tutorials which I subsequently modified and changed to better accomodate for StudBud's purposes. But here are the sources regardless:
+
+- **Music Player**: https://www.geeksforgeeks.org/create-a-music-player-using-javascript/ (sayantanm19, 2022)
+- **Task List**: https://replit.com/@robdongas/Modular-WebApp-Demo (Dongas, 2022)
+- **Drag and Drop feature**: https://www.youtube.com/watch?v=jfYWwQrtzzY&t=653s&ab_channel=WebDevSimplified (WebDeSimplified, 2020)
+- **Pomodoro timer**: https://www.youtube.com/watch?v=vAEG6OVCass&ab_channel=learn-webdev (learn-webdev, 2020)
+- **Flashcard Accordion**: https://getbootstrap.com/docs/5.0/components/accordion/ (Bootstrap, n.d.)
+- **Modal**: https://getbootstrap.com/docs/4.0/components/modal/ (Bootstrap, n.d.)
+
 ## Future Development & Endeavours
 
-Some future development goals and endeavours for StudBud include:
+Some future development opportunities for StudBud include:
 
 - **Implementing medium priority features** for a more pleasant, interactive and richer user experience. This includes developing 'editing' features for taskcards and flashcards as well as 'to-do lists'. The latter feature facilitates a key user goal in being able to breakdown large tasks into smaller tasks, however it was not possible to implement them in this initial development stage.
 - Another medium priority feature that should be incorporated in future iterations are **more progress markers**, especially for the 'in-progress' column and pomodoro timer to allow users to feel a greater sense of satisfication and motivation when completing tasks. Again, due to the time constraints, this was not implemented for this MVP.

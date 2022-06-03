@@ -242,12 +242,12 @@ function renderTask(columnTasks, colIndex) {
     const deleteTaskButton = newTaskCard.querySelector("#delete-task");
     deleteTaskButton.id = `delete-task-${index}`;
 
-    //Create an Event listener to remove taskcard upon click
+    //Add an Event listener to remove taskcard upon click
     deleteTaskButton.addEventListener("click", function () {
       //Get Appropriate Task List Array in which the taskcard will be deleted
       const taskListArray = columns[colIndex].taskCards;
 
-      //Call function to remove taskcard with current task card, its parent array, and index within the array as arguments
+      //Call function to remove taskcard
       removeTaskcard(newTaskCard, taskListArray, index);
     });
 
@@ -258,7 +258,7 @@ function renderTask(columnTasks, colIndex) {
 
 //Function to remove taskcard
 function removeTaskcard(taskcard, taskListArray, arrIndex) {
-  //Remove taskcard HTML element
+  //Remove taskcard from DOM
   taskcard.remove();
 
   //Remove taskcard from the appropriate tasklist array
@@ -305,7 +305,7 @@ function loadDrag() {
       //Access the tasklist array of that END COLUMN
       const endCol = columns[parseInt(endColIndex, 10)].taskCards;
 
-      //Copy the taskcard object that is being moved, from it's intial position int he array. Done by
+      //Copy the moving taskcard object that is being moved, from it's intial array and push to another array. Done by
       // 1. Finding which column object it belongs to in the global array (using the column index number)
       // 2. Accessing the taskcard array within that columns object
       // 3. Locating the moving taskcard object (using the draggable index declared above)
@@ -313,12 +313,13 @@ function loadDrag() {
         columns[parseInt(initialColIndex, 10)].taskCards[
           parseInt(draggableIndex, 10)
         ];
+
       //Push to new tasklist array
       endCol.push(initialTaskcard);
 
       // Remove the taskcard from initial column by
       // 1. Locating the initial column object by using the initial column index again
-      // 2. Accesing the taskcard array within that columns object
+      // 2. Accessing the taskcard array within that columns object
       // 3. Calling the 'remove function' and pass in the moving object's parent tasklist array and its index
       const initialCol = columns[parseInt(initialColIndex, 10)].taskCards;
       removeFromInitialColumn(initialCol, draggableIndex);
@@ -334,7 +335,7 @@ function loadDrag() {
     });
   });
 
-  //For each tasklist array (ie. each column), add an event listener which allows the moving taskcard to be added as a DOM element
+  //For each tasklist array (ie. each column), add an event listener which allows the moving taskcard to be added
   taskListContainer.forEach((container) => {
     container.addEventListener("dragover", (e) => {
       const draggable = document.querySelector(".dragging");

@@ -37,7 +37,7 @@ function show(shown, hidden1, hidden2) {
 window.onload = show("pomodoro-timer", "stopwatch", "settings");
 
 //////////////////////////////////////////////////////////// STOPWATCH ////////////////////////////////////////////////////////////
-// Set up HTML DOM elements
+// Set up DOM elements
 var stopwatchMinutes = 00;
 var stopwatchSeconds = 00;
 var stopwatchTens = 00;
@@ -76,7 +76,7 @@ function startStopwatch() {
   //Increment milliseconds
   stopwatchTens++;
 
-  //For single digit milliseconds, append a 0 in front for double digit format
+  // Adding a zero to the single digit time values
   if (stopwatchTens <= 9) {
     appendTens.innerHTML = "0" + stopwatchTens;
   }
@@ -87,7 +87,7 @@ function startStopwatch() {
   }
 
   //Once 99 milliseconds have passed, increment seconds
-  //If single digit seconds, then append a 0 in front for double digit format
+  // Adding a zero to the single digit time values
   if (stopwatchTens > 99) {
     stopwatchSeconds++;
     appendSeconds.innerHTML = "0" + stopwatchSeconds;
@@ -101,7 +101,7 @@ function startStopwatch() {
   }
 
   //Once 59 seconds have passed, increment minutes
-  //If single digit minutes, then append a 0 in front for double digit format
+  // Adding a zero to the single digit time values
   if (stopwatchSeconds > 59) {
     stopwatchMinutes++;
     appendMinutes.innerHTML = "0" + stopwatchMinutes;
@@ -185,7 +185,7 @@ pomodoroStart.addEventListener("click", function () {
   //Start countdown
   countdown();
 
-  //If startTimer variable ie not defined (ie. if the countdown has not began) set interval to milliseconds for countdown function
+  //If startTimer variable ie not defined (ie. if the countdown has not began) set an interval of 1000 milliseconds for countdown function
   //Otherwise alert user that timer is already running
   if (startTimer === undefined) {
     startTimer = setInterval(countdown, 1000);
@@ -228,7 +228,7 @@ function countdown() {
   //If work seconds are not at zero, decrement seconds
   if (displayWorkSeconds.innerText != 0) {
     displayWorkSeconds.innerText--;
-    //If work seconds are single digit, append a 0 for double digit format
+    // Adding a zero to the single digit time values
     if (
       displayWorkSeconds.innerText <= 9 &&
       displayWorkSeconds.innerText != 0
@@ -236,7 +236,7 @@ function countdown() {
       displayWorkSeconds.innerText = "0" + displayWorkSeconds.innerText;
     }
 
-    //If work seconds are at 0, append a 0 for double digit format
+    /// Adding a zero to the single digit time values
     if (displayWorkSeconds.innerText == 0) {
       displayWorkSeconds.innerText = "00";
     }
@@ -258,7 +258,7 @@ function countdown() {
     if (displayBreakSeconds.innerText != 0) {
       displayBreakSeconds.innerText--;
 
-      //If work seconds are single digit, append a 0 for double digit format
+      // Adding a zero to the single digit time values
       if (
         displayBreakSeconds.innerText <= 9 &&
         displayBreakSeconds.innerText != 0
@@ -266,7 +266,7 @@ function countdown() {
         displayBreakSeconds.innerText = "0" + displayBreakSeconds.innerText;
       }
 
-      //If break seconds are at 0, append a 0 for double digit format
+      // Adding a zero to the single digit time values
       if (displayBreakSeconds.innerText == 0) {
         displayBreakSeconds.innerText = "00";
       }

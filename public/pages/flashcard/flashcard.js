@@ -204,7 +204,7 @@ function renderLink(link, index, parent, flashcard) {
     .getElementById("flashcard-link-template")
     .cloneNode(true);
 
-  //Collect DOM element for remove link button
+  //DOM element for remove link button
   const btnRemoveLink = newLink.querySelector("#remove-link");
 
   //Remove hidden class to show

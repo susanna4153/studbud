@@ -68,6 +68,7 @@ let track_list = [
   },
 ];
 
+//Function to load up tracks
 function loadTrack(track_index) {
   clearInterval(updateTimer);
   resetValues();

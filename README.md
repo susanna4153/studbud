@@ -1,6 +1,6 @@
 # StudBud Web Prototype - README
 
-> **NOTE:** This Web Prototype is most suitable on Chrome. Please ensure that pop-ups are enabled for the open all links feature of the Flaschards section.
+> **NOTE:** This Web Prototype is most suitable on Chrome. Please ensure that pop-ups are enabled for the open all links feature of the Flashcards section.
 
 ![Press the circled button to adjust pop-up settings](/docs/chrome.png)
 

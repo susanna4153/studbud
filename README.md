@@ -18,7 +18,7 @@ The StudBud web-protoype relies on **Bootstrap** for some of its CSS and JS comp
 
 ## Challenges
 
-One immense challenge that I encountered during my development process was the presence of a **large file (151 mb!) in my parcel cache which prohibited me from pushing changes into github**. At this stage, I had a couple of componenents already half done so this was pretty frustrating. I tried deleting the parcel cache on git hub, then executing a git pull command to re-download my code, this time without the cache folder. This did not work. Ultimately, I created a new repository and migrated all my files. I also included a **git ignore** file in this new repository to exclude the parcel cache file from being pushed. One positive of this challenge was that it prompted me to **streamline and edit my code during the migration process** and delete unrelated plugins.
+One immense challenge that I encountered during my development process was the presence of a **large file (151 mb!) in my parcel cache which prohibited me from pushing changes into github**. At this stage, I had a couple of components half done and there was about a week to the deadline so this was pretty frustrating. I tried deleting the parcel cache on git hub, then executing a git pull command to re-download my code, this time without the cache folder. This did not work. Ultimately, I created a new repository and migrated all my files. I also included a **git ignore** file in this new repository to exclude the parcel cache file from being pushed. One positive of this challenge was that it prompted me to **streamline and edit my code during the migration process** and delete unrelated plugins. In future, I aim to commit more frequently to ensure that issues like this do not arise.
 
 ## Reflection on the Development Journey
 
@@ -26,7 +26,7 @@ One key reflection from my tutor's feedback on the Web App Pitch was to construc
 
 ### Kanban Board
 
-![Kanbanboard comparison between mock-up(top) and prototype (bottom)](/docs/kanban.png)
+![Kanbanboard comparison between mock-up (top) and prototype (bottom)](/docs/kanban.png)
 
 - As mentioned above, the Kanban board experienced huge **simplifications for development purposes**. This process of development allowed me to reflect on the most crucial features for necessary for the user journey, and **remove any redundant features** for the time being.
 - For example, **the "+" button within each column was removed** because the "+ Task" button served the same purpose. Completing the task modal prompted by the "+ Task" button automatically adds the new task to the 'To Do' column where the user can later drag and drop the task between columns. This process more closely aligns with the user journey from task creation to completion. Furthermore, it was unlikely that a user would add a task to the 'Done' column anyways, therefore the "+" buttons didn't seem to provide any additional affordance and was omitted.
@@ -36,7 +36,7 @@ One key reflection from my tutor's feedback on the Web App Pitch was to construc
 
 ### Pomodoro Timer
 
-![Pomodoro Timer comparison between mock-up(top) and prototype (bottom)](/docs/pomodoro.png)
+![Pomodoro Timer comparison between mock-up (top) and prototype (bottom)](/docs/pomodoro.png)
 
 - Similar to the Kanban Board, the pomodoro timer also underwent some simplifications and improvements during the development process.
 - As an improvement, the **prototype displays the break timer** to avoid creating another hidden page. This is particularly the case considering that the 'time-feature' section already has three sub-components (pomodoro timer, stopwatch and settings). Having another button to transition to another hidden break-timer page would overcomplicate the user experience and pose another distraction.

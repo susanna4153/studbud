@@ -101,7 +101,7 @@ function renderColumn() {
     //Give unique id to the tasklist within (they will be storing the taskcards)
     newColumn.querySelector("#taskList").id = `taskList-${index}`;
 
-    //Enter in user input for the column name
+    //Render stored value on column name
     newColumn.querySelector(".column-title").textContent = column.title;
 
     //Give delete button a unique id
@@ -222,7 +222,7 @@ function renderTask(columnTasks, colIndex) {
       .getElementById("task-card-template")
       .cloneNode(true);
 
-    //Set each key within taskcard object to user inputted data
+    //Render each flashcard with stored value
     newTaskCard.id = `task-card-${index}`;
     newTaskCard.classList.remove("hidden");
     newTaskCard.classList.add("task-card-template");

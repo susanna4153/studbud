@@ -1,4 +1,4 @@
-///////////////////////// Navigation between Time Links ////////////////////////
+//////////////////////////////////////////////////////////// NAVIGATION LINKS OF TIME FEATURES ////////////////////////////////////////////////////////////
 //Setting up HTML DOM Elements
 const pomodoroLink = document.getElementsByClassName("pomodoro-link");
 const stopwatchLink = document.getElementsByClassName("stopwatch-link");
@@ -33,11 +33,11 @@ function show(shown, hidden1, hidden2) {
   document.getElementById(hidden2).style.display = "none";
 }
 
-//Setting default to pomodoro-timer on page load
+//Set default to pomodoro-timer on page load
 window.onload = show("pomodoro-timer", "stopwatch", "settings");
 
-////////////////////////// Stopwatch ////////////////////////
-// modelled off Clathy Dutton's JavaScript Stopwatch
+//////////////////////////////////////////////////////////// STOPWATCH ////////////////////////////////////////////////////////////
+// Set up HTML DOM elements
 var stopwatchMinutes = 00;
 var stopwatchSeconds = 00;
 var stopwatchTens = 00;
@@ -49,15 +49,18 @@ const stopwatchStop = document.getElementById("stopwatch-stop");
 const stopwatchReset = document.getElementById("stopwatch-reset");
 var stopwatchInterval;
 
+//Add an event listener for when user presses start butotn
 stopwatchStart.addEventListener("click", () => {
   clearInterval(stopwatchInterval);
   stopwatchInterval = setInterval(startStopwatch, 10);
 });
 
+//Add event listener for when user presses stop button
 stopwatchStop.addEventListener("click", () => {
   clearInterval(stopwatchInterval);
 });
 
+//Add event listner for when user presses reset button
 stopwatchReset.addEventListener("click", () => {
   clearInterval(stopwatchInterval);
   stopwatchTens = "00";
@@ -68,17 +71,23 @@ stopwatchReset.addEventListener("click", () => {
   appendMinutes.innerHTML = stopwatchMinutes;
 });
 
+//Function for when user starts stopwatch
 function startStopwatch() {
+  //Increment milliseconds
   stopwatchTens++;
 
+  //For single digit milliseconds, append a 0 in front for double digit format
   if (stopwatchTens <= 9) {
     appendTens.innerHTML = "0" + stopwatchTens;
   }
 
+  //For double digit milliseconds, leave as normal
   if (stopwatchTens > 9) {
     appendTens.innerHTML = stopwatchTens;
   }
 
+  //Once 99 milliseconds have passed, increment seconds
+  //If single digit seconds, then append a 0 in front for double digit format
   if (stopwatchTens > 99) {
     stopwatchSeconds++;
     appendSeconds.innerHTML = "0" + stopwatchSeconds;
@@ -86,10 +95,13 @@ function startStopwatch() {
     appendTens.innerHTML = "0" + 0;
   }
 
+  //For double digit seconds, leave as normal
   if (stopwatchSeconds > 9) {
     appendSeconds.innerHTML = stopwatchSeconds;
   }
 
+  //Once 59 seconds have passed, increment minutes
+  //If single digit minutes, then append a 0 in front for double digit format
   if (stopwatchSeconds > 59) {
     stopwatchMinutes++;
     appendMinutes.innerHTML = "0" + stopwatchMinutes;
@@ -98,25 +110,25 @@ function startStopwatch() {
   }
 }
 
-//////////////////////////////////////////////// Settings ////////////////////////
+//////////////////////////////////////////////////////////// SETTINGS ////////////////////////////////////////////////////////////
 //Slider Controls
 const workDuration = document.getElementById("work-duration");
 const breakDuration = document.getElementById("break-duration");
 const numberOfSessions = document.getElementById("number-of-sessions");
 
-// Slider control displayed values
+// Get HTML DOM elements for slider control displayed values
 const workDurationValueLabel = document.getElementById("work-duration-value");
 const breakDurationValueLabel = document.getElementById("break-duration-value");
 const numberOfSessionsValueLabel = document.getElementById(
   "number-of-sessions-value"
 );
 
-// Update displayed input value
+// Update displayed input value according to user-input
 workDurationValueLabel.textContent = workDuration.value;
 breakDurationValueLabel.textContent = breakDuration.value;
 numberOfSessionsValueLabel.textContent = numberOfSessions.value;
 
-// Update displayed input values on input value change
+// Add an event listener to update displayed input values on input value change
 workDuration.addEventListener("change", (e) => {
   workDurationValueLabel.textContent = e.target.value;
 });
@@ -149,13 +161,15 @@ function updatePomodoroTimer() {
   });
 }
 
+//Ensure timer is up to date with user inputed value upon load
 window.onload = updatePomodoroTimer();
 
-////////////////////////// Pomodoro Timer ////////////////////////
+//////////////////////////////////////////////////////////// POMODORO TIMER ////////////////////////////////////////////////////////////
 //Set up button HTML DOM Elements
 var pomodoroStart = document.getElementById("pomodoro-start");
 var pomodoroStop = document.getElementById("pomodoro-stop");
 var pomodoroReset = document.getElementById("pomodoro-reset");
+
 //Set up respective pomodoro timer and break HTML DOM Elements
 var displayWorkMinutes = document.getElementById("pomodoro-minutes");
 var displayWorkSeconds = document.getElementById("pomodoro-seconds");
@@ -166,10 +180,15 @@ var currentSession = document.getElementById("current-session");
 //Store a reference to a timer variable
 var startTimer;
 
+//Add an event listener when start button is pressed
 pomodoroStart.addEventListener("click", function () {
-  timer();
+  //Start countdown
+  countdown();
+
+  //If startTimer variable ie not defined (ie. if the countdown has not began) set interval to milliseconds for countdown function
+  //Otherwise alert user that timer is already running
   if (startTimer === undefined) {
-    startTimer = setInterval(timer, 1000);
+    startTimer = setInterval(countdown, 1000);
   } else {
     alert("Timer is already running");
   }
@@ -177,28 +196,39 @@ pomodoroStart.addEventListener("click", function () {
 
 //Timer Reset
 pomodoroReset.addEventListener("click", function () {
+  //Render stored values according to user inputed data in settings page
   displayWorkMinutes.innerHTML = document.getElementById("work-duration").value;
   displayWorkSeconds.innerHTML = "00";
   displayBreakMinutes.innerHTML =
     document.getElementById("break-duration").value;
   displayBreakSeconds.innerHTML = "00";
 
+  //Upon reset, set the current session number to 1 again.
   document.getElementById("current-session").innerText = 1;
+
+  //Stop timer from running
   stopInterval();
+
+  //Return to intial value of startTimer variable (which was undefined)
   startTimer = undefined;
 });
 
-//Timer Pause
+//Add event listener when stop button is pressed
 pomodoroStop.addEventListener("click", function () {
+  //Stop timer from running
   stopInterval();
+
+  //Return to intial value of startTimer variable (which was undefined)
   startTimer = undefined;
 });
 
 //Start Timer Function
-function timer() {
+function countdown() {
   //Work timer Countdown
+  //If work seconds are not at zero, decrement seconds
   if (displayWorkSeconds.innerText != 0) {
     displayWorkSeconds.innerText--;
+    //If work seconds are single digit, append a 0 for double digit format
     if (
       displayWorkSeconds.innerText <= 9 &&
       displayWorkSeconds.innerText != 0
@@ -206,6 +236,7 @@ function timer() {
       displayWorkSeconds.innerText = "0" + displayWorkSeconds.innerText;
     }
 
+    //If work seconds are at 0, append a 0 for double digit format
     if (displayWorkSeconds.innerText == 0) {
       displayWorkSeconds.innerText = "00";
     }
@@ -221,10 +252,13 @@ function timer() {
   }
 
   //Break Timer Countdown
+  //Begin break timer once work timer has expended
   if (displayWorkMinutes.innerText == 0 && displayWorkSeconds.innerText == 0) {
+    //If break seconds are not at zero, decrement seconds
     if (displayBreakSeconds.innerText != 0) {
       displayBreakSeconds.innerText--;
 
+      //If work seconds are single digit, append a 0 for double digit format
       if (
         displayBreakSeconds.innerText <= 9 &&
         displayBreakSeconds.innerText != 0
@@ -232,6 +266,7 @@ function timer() {
         displayBreakSeconds.innerText = "0" + displayBreakSeconds.innerText;
       }
 
+      //If break seconds are at 0, append a 0 for double digit format
       if (displayBreakSeconds.innerText == 0) {
         displayBreakSeconds.innerText = "00";
       }
@@ -244,14 +279,14 @@ function timer() {
     }
   }
 
-  //Upon session completion, reset timer and increment current session number by one
+  //If both work and break timer are expended, reset timer and increment current session number by one
   if (
     displayWorkMinutes.innerText == 0 &&
     displayWorkSeconds.innerText == 0 &&
     displayBreakMinutes.innerText == 0 &&
     displayBreakSeconds.innerText == 0
   ) {
-    //Reset Timer values
+    //Reset Timer values to user inputted data
     displayWorkMinutes.innerHTML =
       document.getElementById("work-duration").value;
     displayBreakMinutes.innerHTML = "00";
@@ -269,7 +304,8 @@ function stopInterval() {
   clearInterval(startTimer);
 }
 
-////////////////////////// Load up in progress column ////////////////////////
+////////////////////////////////////////////////////////////LOAD UP IN PROGRESS COLUMN ///////////////////////////////////////////////////////////////////////////////////
+//
 var columns = localStorage.getItem("columns")
   ? JSON.parse(localStorage.getItem("columns"))
   : [];
@@ -279,10 +315,12 @@ function renderInProgressColumn() {
   // In progress column is always 2nd column in columns object
   columns[1].taskCards.map((taskcard, index) => {
     // Render each taskcard in the "in progress" column in DOM
+    //Clone the taskcard template
     const newTaskCard = document
       .getElementById("task-card-template")
       .cloneNode(true);
 
+    //Render stored data
     newTaskCard.id = `task-card-${index}`;
     newTaskCard.classList.remove("hidden");
     newTaskCard.classList.add("task-card-template");
@@ -300,16 +338,17 @@ function renderInProgressColumn() {
     const deleteTaskButton = newTaskCard.querySelector("#delete-task");
     deleteTaskButton.id = `delete-task-${index}`;
 
-    //Eventlistener to remove taskcard
+    //Event listener to remove taskcard
     deleteTaskButton.addEventListener("click", function () {
       //Get Appropriate Task List Array
       const taskListArray = columns[1].taskCards;
       removeTaskcard(newTaskCard, taskListArray, index);
     });
 
-    // Add to DOM
+    //Add to DOM
     document.getElementById("progressColTaskList").appendChild(newTaskCard);
   });
 }
 
+//Call the render in progress column function
 renderInProgressColumn();

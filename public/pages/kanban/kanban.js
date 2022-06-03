@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////// GLOBAL ARRAY ////////////////////////////////////////////////////////////
 //Set up global array in local storage to set up all kanban columns and the taskcards within
 var columns = localStorage.getItem("columns")
   ? JSON.parse(localStorage.getItem("columns"))
@@ -30,28 +29,31 @@ var columns = localStorage.getItem("columns")
     ];
 
 //////////////////////////////////////////////////////////// COLUMNS ////////////////////////////////////////////////////////////
-//Set up variables for HTML elements using DOM selection
+//Collect DOM elements for Columns
 const kanbanBoard = document.getElementById("kanban");
 const addTaskButton = document.getElementById("add-task");
 const columnform = document.getElementById("column-form");
 const columnNameInput = document.getElementById("column-name-input");
 const columnModal = document.getElementById("columnModal");
 
-// Column Modal form submission event listener
-columnform.addEventListener("submit", function (event) {
+// Column modal event listener
+columnform.addEventListener("submit", (e) => {
   //Prevent page from refreshing upon submit
-  event.preventDefault();
+  e.preventDefault();
 
-  //Run add column function with user-inputed column name as argument
+  //Run add column function with user-inputed data
   let columnName = columnNameInput.value;
   if (columnName) {
     addColumn(columnName);
+  } else {
+    alert("Please enter column name");
   }
 
   //Close Modal Manually
   var modal = bootstrap.Modal.getInstance(columnModal);
   modal.hide();
 
+  //Reset form
   columnform.reset();
 });
 
@@ -71,7 +73,7 @@ function addColumn(title) {
   // Rerender displayed columns
   renderColumn();
 
-  //Rerender drag-drop functionality
+  //Rerender drag-drop functionality for taskcards within
   loadDrag();
 }
 
@@ -82,21 +84,21 @@ function renderColumn() {
     column.remove();
   });
 
-  //Duplicate Column Template
+  //Map through global column array and create a column for each object
   columns.map((column, index) => {
     //Clone HTML column template
     const newColumn = document
       .getElementById("column-template")
       .cloneNode(true);
 
-    //Give it a unique id
+    //Give each column a unique id
     newColumn.id = `column-${index}`;
     newColumn.classList.add("column-template");
 
     //Remove hidden class to show on page
     newColumn.classList.remove("hidden");
 
-    //Give unique id to tasklist within
+    //Give unique id to the tasklist within (they will be storing the taskcards)
     newColumn.querySelector("#taskList").id = `taskList-${index}`;
 
     //Enter in user input for the column name
@@ -105,14 +107,14 @@ function renderColumn() {
     //Give delete button a unique id
     newColumn.querySelector("#delete-col").id = `delete-col-${index}`;
     var columnDeleteButton = newColumn.querySelector(`#delete-col-${index}`);
-    columnDeleteButton.addEventListener("click", function () {
+    columnDeleteButton.addEventListener("click", () => {
       removeColumn(newColumn, index);
     });
 
     //Add to Kanbanboard
     kanbanBoard.appendChild(newColumn);
 
-    //Render Task cards within column
+    //Render Taskcards within column
     renderTask(column.taskCards, index);
   });
 
@@ -145,10 +147,11 @@ function removeColumn(columnToRemove, arrIndex) {
   loadDrag();
 }
 
-//////////////////////////////////////////////////////////// TASK MODAL  ////////////////////////////////////////////////////////////
-// Basic form DOM elements
+//////////////////////////////////////////////////////////// TASKS  ////////////////////////////////////////////////////////////
+// Collect Basic DOM Elements for columns
 const taskForm = document.getElementById("taskform");
 const button = document.querySelector("#taskform > button");
+const toDoTaskList = document.getElementById("taskList-0");
 
 // DOM elements for the task input fields
 var taskInput = document.getElementById("taskInput");
@@ -157,10 +160,7 @@ var priorityInput = document.getElementById("priorityInput");
 var dueDateInput = document.getElementById("dueDateInput");
 var estimatedTimeInput = document.getElementById("estimatedTimeInput");
 
-// Access first To-do column of the column array
-const toDoTaskList = document.getElementById("taskList-0");
-
-// Column Name Form submission event listener
+// Task Form event listener
 taskForm.addEventListener("submit", function (event) {
   //Prevent page from refreshing upon submit
   event.preventDefault();
@@ -180,6 +180,7 @@ taskForm.addEventListener("submit", function (event) {
   modal.hide();
 });
 
+//Function to add task
 function addTask(taskName, className, priorityRating, dueDate, estimatedTime) {
   //Create taskcard based off user input
   let task = {
@@ -190,29 +191,38 @@ function addTask(taskName, className, priorityRating, dueDate, estimatedTime) {
     estimatedTime,
   };
 
+  //Add tasks to the to-do column
   columns[0].taskCards.push(task);
+
+  //Rerender tasks in the to-do column
   renderTask(columns[0].taskCards, 0);
+
+  //Update local storage
   localStorage.setItem("columns", JSON.stringify(columns));
 
-  //Re-render drag-drop functionality
+  //Rerender drag-drop functionality
   loadDrag();
 }
 
 //Function to load up Tasks
 function renderTask(columnTasks, colIndex) {
-  var selectedColumn = document.getElementById(`taskList-${colIndex}`);
+  var selectedTaskList = document.getElementById(`taskList-${colIndex}`);
 
   //Clear Task List before load to prevent duplicates
-  selectedColumn.querySelectorAll(".task-card-template").forEach((taskcard) => {
-    taskcard.remove();
-  });
+  selectedTaskList
+    .querySelectorAll(".task-card-template")
+    .forEach((taskcard) => {
+      taskcard.remove();
+    });
 
+  //Map through the task-list array within each column object and create a taskcard for each task object
   columnTasks.map((taskcard, index) => {
     //Duplicate taskcard template
     const newTaskCard = document
       .getElementById("task-card-template")
       .cloneNode(true);
 
+    //Set each key within taskcard object to user inputted data
     newTaskCard.id = `task-card-${index}`;
     newTaskCard.classList.remove("hidden");
     newTaskCard.classList.add("task-card-template");
@@ -225,20 +235,22 @@ function renderTask(columnTasks, colIndex) {
       taskcard.estimatedTime || "0";
     newTaskCard.querySelector(".task-due-date").innerText = taskcard.dueDate;
 
-    //Remove Task functionality
-    //Declare HTML button element and give it a unique id
+    /////////////////// REMOVE TASK BUTTON  FUNCTIONALITY //////////////////
+    //Call HTML button element and give it a unique id
     const deleteTaskButton = newTaskCard.querySelector("#delete-task");
     deleteTaskButton.id = `delete-task-${index}`;
 
-    //Eventlistener to remove taskcard
+    //Create an Event listener to remove taskcard upon click
     deleteTaskButton.addEventListener("click", function () {
-      //Get Appropriate Task List Array
+      //Get Appropriate Task List Array in which the taskcard will be deleted
       const taskListArray = columns[colIndex].taskCards;
+
+      //Call function to remove taskcard with current task card, its parent array, and index within the array as arguments
       removeTaskcard(newTaskCard, taskListArray, index);
     });
 
-    //Append to appropriate column
-    selectedColumn.appendChild(newTaskCard);
+    //Append taskcards to appropriate column
+    selectedTaskList.appendChild(newTaskCard);
   });
 }
 
@@ -247,57 +259,80 @@ function removeTaskcard(taskcard, taskListArray, arrIndex) {
   //Remove taskcard HTML element
   taskcard.remove();
 
-  //Remove taskcard form tasklist array
+  //Remove taskcard from the appropriate tasklist array
   taskListArray.splice(arrIndex, 1);
 
   //Update local storage
   localStorage.setItem("columns", JSON.stringify(columns));
   renderColumn();
 
+  //Rerender drag and drop functionality
   loadDrag();
 }
 
-//Drag Drop functionality for cards
+//Drag and drop functionality for cards
 function loadDrag() {
   //Set up HTML DOM elements for draggable taskcards and tasklists
   const draggables = document.querySelectorAll(".draggable");
   const taskListContainer = document.querySelectorAll(".taskList");
 
   //Function for drag drop function
+  //Apply function to each task card
   draggables.forEach((draggable) => {
+    //Locate the index of the taskcard list array which corresponds with the column index for the INITIAL COLUMN
     const initialColIndex = draggable.parentNode.id.slice(9);
+
+    //Locate the index of the taskcard within the tascard list array
     const draggableIndex = draggable.id.slice(10);
 
+    //Event listener for when the user starts dragging
     draggable.addEventListener("dragstart", () => {
+      //Apply dragging class to lower opacity whilst dragging
       draggable.classList.add("dragging");
     });
 
+    //Event listener for when the user stops dragging
     draggable.addEventListener("dragend", () => {
+      //Rmove the dragging class to return to original opacity
       draggable.classList.remove("dragging");
 
-      // Add to new column
+      // Add the flashcard to tasklist array of the new column
+      // Locate the index of the taskcard list array which corresponds with the column index for the END COLUMN
       const endColIndex = draggable.parentNode.id.slice(9);
+
+      //Access the tasklist array of that END COLUMN
       const endCol = columns[parseInt(endColIndex, 10)].taskCards;
+
+      //Copy the taskcard object that is being moved, from it's intial position int he array. Done by
+      // 1. Finding which column object it belongs to in the global array (using the column index number)
+      // 2. Accessing the taskcard array within that columns object
+      // 3. Locating the moving taskcard object (using the draggable index declared above)
       const initialTaskcard =
         columns[parseInt(initialColIndex, 10)].taskCards[
           parseInt(draggableIndex, 10)
         ];
+      //Push to new tasklist array
       endCol.push(initialTaskcard);
 
-      // Remove from initial column
+      // Remove the taskcard from initial column by
+      // 1. Locating the initial column object by using the initial column index again
+      // 2. Accesing the taskcard array within that columns object
+      // 3. Calling the 'remove function' and pass in the moving object's parent tasklist array and its index
       const initialCol = columns[parseInt(initialColIndex, 10)].taskCards;
       removeFromInitialColumn(initialCol, draggableIndex);
 
       //Update local storage
       localStorage.setItem("columns", JSON.stringify(columns));
+
+      //Rerender columns to update changes
       renderColumn();
 
+      //Rerender drag and drop functionality
       loadDrag();
-
-      loadProgressColumn();
     });
   });
 
+  //For each tasklist array (ie. each column), add an event listener which allows the moving taskcard to be added
   taskListContainer.forEach((container) => {
     container.addEventListener("dragover", (e) => {
       const draggable = document.querySelector(".dragging");
@@ -312,14 +347,10 @@ function loadDrag() {
     //Update local storage
     localStorage.setItem("columns", JSON.stringify(columns));
 
+    //Rerender columns to update changes
     renderColumn();
   }
 }
 
+//Load the drag and drop function on initial load so that all taskcards can be dragged.
 window.onload = loadDrag();
-
-////////////////////////// Update Inprogress Column on Workspace Page ////////////////////////
-function loadProgressColumn() {
-  //Obtain Objects from the In-Progress Column of Columns array
-  let inProgress = columns[1];
-}

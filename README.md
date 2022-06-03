@@ -16,9 +16,9 @@
 
 The StudBud web-protoype relies on **Bootstrap** for some of its CSS and JS frameworks particularly in regards to the form modals on the Kanban Board page and the accordian structure of the Flashcard page. Its responsive design and grid system also proved extremely useful for building an MVP.
 
-## Development Journey
+## Reflection on the Development Journey
 
-One key reflection from my tutor's feedback on the Web App Pitch was to construct **a more granular development roadmap** to _"help breakdown large tasks into smaller components and to ensure [I] stay on track for implementation."_ Due to the lack of specificity in my original roadmap, I underestimated the complexity of some features. Subsequently, in this new roadmap I downgraded certain functional specs to a 'low priority' and simplified a lot of my designs for a more realistic and structure development process (as will be seen).
+One key reflection from my tutor's feedback on the Web App Pitch was to construct **a more granular development roadmap** to _"help breakdown large tasks into smaller components and to ensure [I] stay on track for implementation."_ Due to the lack of specificity in my original roadmap, I underestimated the complexity of some features. Subsequently, in this new roadmap I downgraded certain functional specs to a 'low priority' and simplified a lot of my designs for a more realistic and structured development process. The following two examples demonstrate this process of simplification and streamlining.
 
 ### Kanban Board
 

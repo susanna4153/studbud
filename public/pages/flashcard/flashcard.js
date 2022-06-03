@@ -1,3 +1,4 @@
+//Create a global array to store Flashcards in local storage
 var flashcards = localStorage.getItem("flashcards")
   ? JSON.parse(localStorage.getItem("flashcards"))
   : [
@@ -29,15 +30,16 @@ var flashcards = localStorage.getItem("flashcards")
 //Set up DOM Elements
 const flashcardButton = document.getElementById("add-flashcard");
 
-// Load flashcards
+// Function to Load flashcards
 function loadFlashcards() {
   const section = document.getElementById("section-accordion");
 
-  // Clear pre-existing flashcards first except first (initial template)
+  // Clear pre-existing flashcards every load for except first (initial template)
   while (section.childNodes.length > 2) {
     section.removeChild(section.lastChild);
   }
 
+  //Use map method to cycle through all the flashcards in array and load their respective keys
   flashcards.map((flashcard, index) => {
     const newFlashcard = document
       .getElementById("accordion-item-template")
@@ -72,7 +74,6 @@ function loadFlashcards() {
     // Give each flashcard unique ids for collapse to uniquely target
     flashQuestion.id = `flashcard-question-${index}`;
     flashCollapseBody.setAttribute("aria-labelledby", flashQuestion.id);
-
     flashCollapseBody.id = `flashcard-collapse-${index}`;
     flashCollapseBtn.setAttribute("data-bs-target", `#${flashCollapseBody.id}`);
     flashCollapseBtn.setAttribute("aria-controls", `#${flashCollapseBody.id}`);

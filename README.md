@@ -27,6 +27,7 @@ One key reflection from my tutor's feedback on the Web App Pitch was to construc
 ### Kanban Board
 
 ![Kanbanboard comparison between mock-up (top) and prototype (bottom)](/docs/kanban.png)
+Kanbanboard comparison between mock-up (top) and prototype (bottom)
 
 - As mentioned above, the Kanban board experienced huge **simplifications for development purposes**. This process of development allowed me to reflect on the most crucial features for necessary for the user journey, and **remove any redundant features** for the time being.
 - For example, **the "+" button within each column was removed** because the "+ Task" button served the same purpose. Completing the task modal prompted by the "+ Task" button automatically adds the new task to the 'To Do' column where the user can later drag and drop the task between columns. This process more closely aligns with the user journey from task creation to completion. Furthermore, it was unlikely that a user would add a task to the 'Done' column anyways, therefore the "+" buttons didn't seem to provide any additional affordance and was omitted.
@@ -37,6 +38,7 @@ One key reflection from my tutor's feedback on the Web App Pitch was to construc
 ### Pomodoro Timer
 
 ![Pomodoro Timer comparison between mock-up (top) and prototype (bottom)](/docs/pomodoro.png)
+Pomodoro Timer comparison between mock-up (top) and prototype (bottom)
 
 - Similar to the Kanban Board, the pomodoro timer also underwent some simplifications and improvements during the development process.
 - As an improvement, the **prototype displays the break timer** to avoid creating another hidden page. This is particularly the case considering that the 'time-feature' section already has three sub-components (pomodoro timer, stopwatch and settings). Having another button to transition to another hidden break-timer page would overcomplicate the user experience and pose another distraction.

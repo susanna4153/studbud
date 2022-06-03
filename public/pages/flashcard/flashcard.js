@@ -39,13 +39,17 @@ function loadFlashcards() {
     section.removeChild(section.lastChild);
   }
 
-  //Use map method to cycle through all the flashcards in array and load their respective keys
+  //Map through all the flashcards in array and load their respective keys
   flashcards.map((flashcard, index) => {
+    //Clone flashcard template
     const newFlashcard = document
       .getElementById("accordion-item-template")
       .cloneNode(true);
 
+    //Give each flashcard a unique id
     newFlashcard.id = `accordion-item-${index}`;
+
+    //Remove hidden class to show
     newFlashcard.classList.remove("hidden");
 
     // Collect DOM elements
@@ -133,11 +137,14 @@ function addFlashcard(question, answer, links) {
   loadFlashcards();
 }
 
+//Form Submission
 const flashcardModalSubmitButton = document.getElementById(
   "flashcard-button-submit"
 );
+
+//Add an event listener for when user submits flashcard form
 flashcardModalSubmitButton.addEventListener("click", () => {
-  // Collect input values
+  // Collect user input values
   const question = document.getElementById("flashcard-question-input").value;
   const answer = document.getElementById("flashcard-answer-input").value;
   const links = [];
@@ -151,25 +158,30 @@ flashcardModalSubmitButton.addEventListener("click", () => {
   }
 });
 
-// Removes a flashcard
+// Function to remove a flashcard
 function removeFlashcard(flashcard, arrIndex) {
-  // Remove from DOM
+  // Remove flashcard from DOM
   flashcard.remove();
 
-  // Remove specific single item from array
+  // Remove specific single flashcard from the flashcards array, using its index
   flashcards.splice(arrIndex, 1);
 
   //Replace old flashcards with new flascards to update the array
   localStorage.setItem("flashcards", JSON.stringify(flashcards));
+
+  //Rerender flashcards
   loadFlashcards();
 }
 
 // Removes a link from given flashcard
 function removeLink(link, flashcard, arrIndex) {
-  // Remove from DOM
+  // Remove link from DOM
   link.remove();
-  // Remove specific single item from array
+
+  // Remove specific single link item from links array
   flashcard.links.splice(arrIndex, 1);
+
+  //Update local storage
   localStorage.setItem("flashcards", JSON.stringify(flashcards));
 }
 
@@ -178,36 +190,49 @@ function addLink(link, index, parent, flashcard) {
   // Add to DOM
   renderLink(link, index, parent, flashcard);
 
+  //Add link to links array
   flashcard.links.push(link);
-  // Update localstorage
+
+  // Update local storage
   localStorage.setItem("flashcards", JSON.stringify(flashcards));
 }
 
-// Function to add a new link to the DOM
+// Function to render links in each flashcard
 function renderLink(link, index, parent, flashcard) {
+  //Clone the flashcard Links template
   const newLink = document
     .getElementById("flashcard-link-template")
     .cloneNode(true);
 
+  //Collect DOM element for remove link button
   const btnRemoveLink = newLink.querySelector("#remove-link");
+
+  //Remove hidden class to show
   newLink.classList.remove("hidden");
+
+  //Give each link and and its corresponding delete button a unique id
   newLink.id = `flashcard-link-${index}`;
   btnRemoveLink.id = `remove-link-${index}`;
 
+  //Give 'a' tag its appropriate href attribute and set it to user inputted url
   newLink.querySelector("a").setAttribute("href", link);
+
+  //Set href to user inputed url
   newLink.querySelector("a").textContent = link;
 
-  // Remove link on button remove click event
+  // Remove link on button click event
   btnRemoveLink.addEventListener("click", (e) => {
     e.preventDefault();
     removeLink(newLink, flashcard, index);
   });
 
+  //Add new link to DOM
   parent.appendChild(newLink);
 }
 
-// Open all links
+// Open all links button
 const btnOpenAllLinks = document.getElementById("btn-open-all-links");
+//Add an event listener to detect user click
 btnOpenAllLinks.addEventListener("click", () => {
   // Loop through all links and open each one
   flashcards.forEach((flashcard, index) => {

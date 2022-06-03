@@ -1,4 +1,4 @@
-//Flashcard Section Styling
+/* Flashcard Section Styling */
 .flashcard-section {
   margin: 60px 0;
   padding: 10px 40px 30px;
@@ -10,7 +10,7 @@
   flex-direction: column;
 }
 
-//Section Header Styling
+/* Section Header Styling */
 .section-header {
   width: 100%;
   padding: 20px 0;
@@ -18,18 +18,18 @@
   justify-content: space-between;
   align-items: center;
 
-  //Section Heading
+  /* Section Heading */
   h5 {
     margin-bottom: 0;
     margin-right: auto;
   }
 
-  //Add flashcard button
+  /* Add flashcard button */
   button:first-of-type {
     margin-right: 6px;
   }
 
-  //Open all links button
+  /* Open all links button */
   #btn-open-all-links {
     img {
       height: 20px;
@@ -38,7 +38,7 @@
   }
 }
 
-//Flashcard Accordian Styling
+/* Flashcard Accordian Styling */
 .accordion {
   width: 100%;
 }
@@ -47,7 +47,7 @@
   width: 100%;
 }
 
-//Flashcard links list styling
+/* Flashcard links list styling */
 .flashcard-links {
   display: flex;
   flex-direction: column;
@@ -61,7 +61,7 @@
     }
   }
 
-  //Remove link bin button
+  /* Remove link bin button */
   .remove-link-button {
     background: none;
     color: inherit;
@@ -79,7 +79,7 @@
   }
 }
 
-//Flashcard Footer Styling
+/* Flashcard Footer Styling */
 .flashcard-footer {
   display: flex !important;
   align-items: center;
@@ -99,7 +99,7 @@
   }
 }
 
-//Flashcard Form Styling
+/* Flashcard Form Styling */
 form#flashcardForm {
   display: flex;
   align-items: flex-start;

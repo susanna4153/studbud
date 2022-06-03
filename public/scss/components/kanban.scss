@@ -1,52 +1,67 @@
-//Hidden Functional Class
+/* Hidden Functional Class */
 .hidden {
   display: none;
 }
 
-//Functional dragging class
+/* Functional dragging class */
 .draggable.dragging {
   opacity: 0.5;
 }
 
-//Add column & add taskcard buttons at top
+/* Add column & add taskcard buttons at top */
 .kanban-buttons {
   right: 10px;
-  display: block;
   display: flex;
   justify-content: flex-end;
   width: 95%;
   margin-bottom: 20px;
   gap: 10px;
+  align-items: center;
+
+  small {
+    margin-right: auto;
+    opacity: 0.7;
+    margin-bottom: 0;
+    word-wrap: break-word;
+  }
 }
 
-//Column Modal
+@media screen and (max-width: 768px) {
+  .kanban-buttons {
+    small {
+      display: none;
+    }
+  }
+}
+
+/* Column Modal */
 #column-form {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   gap: 30px;
 
-  //Column Name Input Field
+  /* Column Name Input Field */
   input {
     padding: 5px 10px;
     border: solid 1.5px #d4d4d4;
     border-radius: 3px;
   }
 
-  //Submit Add Column For button
+  /* Submit Add Column For button */
   #column-form-button {
     width: fit-content;
     margin-left: auto;
   }
 }
 
-//Task Modal
+/* Task Modal */
 #taskform {
   width: 100%;
   display: flex;
   flex-direction: column;
 
-  //Input fields
+  /* Input fields */
   input {
     width: 100%;
     padding: 5px 10px;
@@ -58,7 +73,7 @@
     display: block;
   }
 
-  //Priority
+  /* Priority */
   select {
     padding: 8px 10px;
     border: solid 1.5px #d4d4d4;
@@ -70,14 +85,14 @@
   }
 }
 
-//Kanban Column Styling
+/* Kanban Column Styling */
 .kanban_column {
   background-color: #e4e4e4;
   border-radius: 5px;
   height: 77vh;
   margin-bottom: 30px;
 
-  //Column Heading Styling
+  /* Column Heading Styling */
   .column-heading {
     display: flex;
     justify-content: space-between;
@@ -86,14 +101,14 @@
     width: 100%;
   }
 
-  //Taskcard container Styling
+  /* Taskcard container Styling */
   .taskList {
     overflow-y: auto;
     height: calc(77vh - 120px);
   }
 }
 
-//Task Card Styling
+/* Task Card Styling */
 .task-card {
   background-color: white;
   height: auto;
@@ -103,25 +118,25 @@
   margin-bottom: 10px;
   color: #000;
 
-  //Remove default styling
+  /* Remove default styling */
   p {
     margin-bottom: 0;
   }
 
-  //Task Heading (both Task Name and delete button)
+  /* Task Heading (both Task Name and delete button) */
   .taskcard-heading {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    //Styling for delete button
+    /* Styling for delete button */
     img {
       width: 20px;
       height: auto;
     }
 
-    //Remove default styling
+    /* Remove default styling */
     button {
       background: none;
       color: inherit;
@@ -133,7 +148,7 @@
     }
   }
 
-  //Content information (class tag and priority tag)
+  /* Content information (class tag and priority tag) */
   .content-information {
     display: flex;
     align-items: center;
@@ -141,23 +156,11 @@
     gap: 5px;
     margin-bottom: 40px;
 
-    //Tag styling
+    /* Tag styling */
     .task-tag {
       padding: 3px;
       width: fit-content;
       border-radius: 3px;
-
-      &.red {
-        background-color: #f94144;
-      }
-
-      &.green {
-        background-color: #43aa8b;
-      }
-
-      &.orange {
-        background-color: #f8961e;
-      }
 
       p {
         color: white;
@@ -165,20 +168,20 @@
     }
   }
 
-  //Time information (duedate and estimated completion time)
+  /* Time information (duedate and estimated completion time) */
   .time-information {
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
 
-    //Estimated completion time
+    /* Estimated completion time */
     span {
       display: flex;
       align-items: center;
       gap: 7px;
 
-      //Estimated completion time icon
+      /* Estimated completion time icon */
       .clock-icon {
         width: 15px;
         height: 15px;

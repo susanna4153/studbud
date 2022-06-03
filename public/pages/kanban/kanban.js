@@ -10,21 +10,18 @@ var columns = localStorage.getItem("columns")
             className: "LAWS2017",
             priorityRating: "High",
             estimatedTime: 240,
-            dueDate: "09-06-2022",
+            dueDate: "2022-06-08",
           },
           {
             taskName: "Complete Tutorial Question",
             className: "LAWS3123",
-            priorityRating: "Low",
+            priorityRating: "Medium",
             estimatedTime: 80,
-            dueDate: "07-08-2022",
+            dueDate: "2022-06-12",
           },
         ],
       },
-      {
-        title: "In Progress",
-        taskCards: [],
-      },
+      { title: "In Progress", taskCards: [] },
       { title: "Done", taskCards: [] },
     ];
 
@@ -84,7 +81,7 @@ function renderColumn() {
     column.remove();
   });
 
-  //Map through global column array and create a column for each object
+  //Map through global column array and render a column for each object
   columns.map((column, index) => {
     //Clone HTML column template
     const newColumn = document
@@ -171,13 +168,18 @@ taskForm.addEventListener("submit", function (event) {
   let priorityRating = priorityInput.options[priorityInput.selectedIndex].value;
   let dueDate = dueDateInput.value;
   let estimatedTime = estimatedTimeInput.value;
-  if (task) {
+  if ((task, className, priorityRating, dueDate, estimatedTime)) {
     addTask(task, className, priorityRating, dueDate, estimatedTime);
+  } else {
+    alert("Please fill out all task details");
   }
 
   //Close Modal Manually
   var modal = bootstrap.Modal.getInstance(taskModal);
   modal.hide();
+
+  //Clear form
+  taskForm.reset();
 });
 
 //Function to add task
@@ -215,7 +217,7 @@ function renderTask(columnTasks, colIndex) {
       taskcard.remove();
     });
 
-  //Map through the task-list array within each column object and create a taskcard for each task object
+  //Map through the task-list array within each column object and render a taskcard for each task object
   columnTasks.map((taskcard, index) => {
     //Duplicate taskcard template
     const newTaskCard = document
@@ -332,7 +334,7 @@ function loadDrag() {
     });
   });
 
-  //For each tasklist array (ie. each column), add an event listener which allows the moving taskcard to be added
+  //For each tasklist array (ie. each column), add an event listener which allows the moving taskcard to be added as a DOM element
   taskListContainer.forEach((container) => {
     container.addEventListener("dragover", (e) => {
       const draggable = document.querySelector(".dragging");

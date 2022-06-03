@@ -5,14 +5,15 @@
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="description" content="" />
-    <link rel="stylesheet" href="scss/main.scss">
+    <meta name="description" content="Study app for law students" />
+    <meta name="keywords" content="task management, time management, content management, study">
+    <meta name="author" content="Susanna Pang">
         
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
     <!-- Custom SCSS -->
-    <link href="./scss/layout.scss" rel="stylesheet" type="text/css" />
+    <link href="./scss/main.scss" rel="stylesheet" type="text/css" />
     
   </head>
   
@@ -20,9 +21,9 @@
     <!--SideBar-->
     <nav class="sidenav">
       <ul>
-        <li><a href="index.html"><img src="images/SelectedKanbanboardIcon.png" alt=""></a></li>
-        <li><a href="./pages/workspace/workspace.html"><img src="images/WorkspaceIcon.png" alt=""></a></li>
-        <li><a href="./pages/flashcard/flashcard.html"><img src="images/FlashcardIcon.png" alt=""></a></li>
+        <li><a href="index.html"><img src="images/SelectedKanbanboardIcon.png" alt="kanban icon"></a></li>
+        <li><a href="./pages/workspace/workspace.html"><img src="images/WorkspaceIcon.png" alt="workspace icon"></a></li>
+        <li><a href="./pages/flashcard/flashcard.html"><img src="images/FlashcardIcon.png" alt="flashcards icon"></a></li>
       </ul>
     </nav>
   
@@ -34,10 +35,12 @@
   
     <main class="page-content">
       <div class="kanban-buttons">
+        <!--In Progress Message -->
+        <small id="workspace-message">In-Progress tasks appear in the Workspace</small>
         <!--Add Column Button-->
-        <button type="button" class="btn btn-primary" id="add-column" data-bs-toggle="modal" data-bs-target="#columnModal" > + Column </button>
+        <button type="button" class="btn btn-primary blue" id="add-column" data-bs-toggle="modal" data-bs-target="#columnModal" > + Column </button>
         <!--Adding Task Button -->
-        <button type="button" class="btn btn-primary" id="add-task" data-bs-toggle="modal" data-bs-target="#taskModal"> + Task </button>
+        <button type="button" class="btn btn-primary blue" id="add-task" data-bs-toggle="modal" data-bs-target="#taskModal"> + Task </button>
       </div>
   
       <!-- Task Modal -->
@@ -103,7 +106,7 @@
                 <form id="column-form">
                   <label for="column-name">New Column Name</label>
                   <input type="text" name="column-name" id="column-name-input">
-                  <p><em>Scroll left to see new column</em></p>
+                  <p style="opacity: 0.5">New columns appear on the right</p>
                   <button type="submit" id="column-form-button" class="btn btn-primary">Add Column</button>
                 </form>
               </div>
@@ -112,7 +115,7 @@
         </div>
       </div>
 
-
+      <!--Kanban board-->
      <section class="row" id="kanban">
       <!-- Kanban Column Template-->
       <div class="col-md-4 hidden" id="column-template">
@@ -130,7 +133,7 @@
       <div class="task-card hidden draggable" id="task-card-template" draggable="true">
         <div class="taskcard-heading">
           <p><strong class="task-name">Task Name</strong></p>
-          <button class="delete-taskcard-btn" id="delete-task"><img src="images/bin.png" alt=""></button>
+          <button class="delete-taskcard-btn" id="delete-task"><img src="images/bin.png" alt="grey bin icon"></button>
         </div>
         <div class="content-information">
           <div class="task-tag green"><p><small class="task-class-name"></small></p></div>

@@ -1,3 +1,5 @@
+//Based off tutorial: https://www.geeksforgeeks.org/create-a-music-player-using-javascript/ (sayantanm19, 2022)
+//Collect DOM elements
 let track_art = document.querySelector(".track-art");
 let track_name = document.querySelector(".track-name");
 let track_artist = document.querySelector(".track-artist");
@@ -33,7 +35,7 @@ let track_list = [
     name: "Enthusiast",
     artist: "Tours",
     image:
-      "https://images.pexels.com/photos/3100835/pexels-photo-3100835.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250&w=250",
+      "https://images.pexels.com/photos/11502645/pexels-photo-11502645.jpeg?auto=compress&cs=tinysrgb&h=250&w=250",
     path: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3",
   },
   {
@@ -44,11 +46,25 @@ let track_list = [
     path: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Shipping_Lanes.mp3",
   },
   {
-    name: "Shipping Lanes",
-    artist: "Chad Crouch",
+    name: "Dytopian Delight",
+    artist: "Wax Lyricist",
     image:
-      "https://images.pexels.com/photos/1717969/pexels-photo-1717969.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250&w=250",
-    path: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Shipping_Lanes.mp3",
+      "https://images.pexels.com/photos/12017866/pexels-photo-12017866.jpeg?auto=compress&cs=tinysrgb&h=250&w=250",
+    path: "https://files.freemusicarchive.org//storage-freemusicarchive-org//tracks//mesfvUXBR1sw8n0kpM28IeO4VAFLaWd7urAmemK7.mp3",
+  },
+  {
+    name: "Out of the Labyrinth",
+    artist: "Loco Lobo",
+    image:
+      "https://images.pexels.com/photos/11908917/pexels-photo-11908917.jpeg?auto=compress&cs=tinysrgb&h=250&w=250",
+    path: "https://files.freemusicarchive.org//storage-freemusicarchive-org//tracks//9AezUI2VAW0uduoEyEjNKdBTUViSxucd1XqOC7mK.mp3",
+  },
+  {
+    name: "Strategy",
+    artist: "Scott Holmes",
+    image:
+      "https://images.pexels.com/photos/10027235/pexels-photo-10027235.jpeg?auto=compress&cs=tinysrgb&h=250&w=250",
+    path: "https://files.freemusicarchive.org//storage-freemusicarchive-org//tracks//PJdJdbexAvuFVlOXDv4j2zxLIb428hlyvFVSIWPf.mp3",
   },
 ];
 

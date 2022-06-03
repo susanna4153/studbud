@@ -1,9 +1,11 @@
+/* Music Player Section Styling */
 .music-player {
   display: flex;
   justify-content: space-between;
   width: inherit;
 }
 
+/* Current Song Styling */
 .player {
   height: 100%;
   display: flex;
@@ -14,6 +16,7 @@
   flex: 5;
 }
 
+/* Side playlist Styling */
 .playlist {
   background-color: #113049;
   height: auto;
@@ -25,6 +28,60 @@
   margin: -21px;
   border-radius: 0px 3px 3px 0px;
   height: 350px;
+
+  //"Playlist" title section
+  .playlist-title {
+    color: white;
+    padding-top: 10px;
+  }
+
+  //Actual playlist of songs styling
+  .playlist-body {
+    width: 100%;
+    overflow-y: auto;
+
+    //Track Image
+    .playlist-track-image {
+      width: 50px;
+      height: 50px;
+      margin: 0 0.5rem;
+    }
+
+    //Runnign track number
+    .playlist-track-number {
+      margin-right: 1rem;
+    }
+
+    //Hover Styling
+    .playlist-card:hover {
+      cursor: pointer;
+      background-color: #ffffff6d;
+    }
+
+    //Track Name and Artist
+    .playlist-card-details {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+
+      .playlist-track-name {
+        margin-left: 1rem;
+      }
+
+      .playlist-track-artist {
+        margin-left: 1rem;
+      }
+    }
+  }
+
+  .playlist-card {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: white;
+    padding: 1rem;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -33,56 +90,8 @@
   }
 }
 
-.playlist-body {
-  width: 100%;
-  overflow-y: auto;
-}
-
-.playlist-title {
-  color: white;
-  padding-top: 10px;
-}
-
-.playlist-card {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  color: white;
-  padding: 1rem;
-}
-
-.playlist-card:hover {
-  cursor: pointer;
-  background-color: #ffffff6d;
-}
-
 .active {
   background-color: #ffffff6d;
-}
-
-.playlist-card-details {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.playlist-track-name {
-  margin-left: 1rem;
-}
-
-.playlist-track-artist {
-  margin-left: 1rem;
-}
-
-.playlist-track-image {
-  width: 50px;
-  height: 50px;
-  margin: 0 0.5rem;
-}
-
-.playlist-track-number {
-  margin-right: 1rem;
 }
 
 .hidden {

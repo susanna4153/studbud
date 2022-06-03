@@ -3,6 +3,7 @@
 
 <head>
   <title>StudBud</title>
+  <link rel="icon" type="image/x-icon" href="../../images/favicon.ico">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="" />
@@ -17,8 +18,8 @@
   <!--SideBar-->
   <nav class="sidenav">
     <ul>
-      <li><a href="../../index.html"><img src="../../images/SelectedKanbanboardIcon.png" alt=""></a></li>
-      <li><a href="workspace.html"><img src="../../images/WorkspaceIcon.png" alt=""></a></li>
+      <li><a href="../../index.html"><img src="../../images/KanbanboardIcon.png" alt=""></a></li>
+      <li><a href="workspace.html"><img src="../../images/SelectedWorkspaceIcon.png" alt=""></a></li>
       <li><a href="../flashcard/flashcard.html"><img src="../../images/FlashcardIcon.png" alt=""></a></li>
     </ul>
   </nav>
@@ -37,16 +38,19 @@
               <h3 class="column-title">In Progress</h3>
             </div>
             <div class="taskList" id="progressColTaskList">
-                <!-- Taskcard Template-->
+              <!-- Taskcard Template-->
                 <div class="task-card hidden" id="task-card-template">
+                  <!-- Taskname and delete button-->
                   <div class="taskcard-heading">
                     <p><strong class="task-name">Task Name</strong></p>
                     <button class="delete-taskcard-btn" id="delete-task"><img src="/public/images/bin.png" alt=""></button>
                   </div>
+                  <!--Class tag and Priority-->
                   <div class="content-information">
                     <div class="task-tag green"><p><small class="task-class-name"></small></p></div>
                     <div class="task-tag red"><p><small class="task-priority"></small></p></div>
                   </div>
+                  <!-- Estimated Duration Time and Due date-->
                   <div class="time-information">
                     <span>
                       <img src="/public/images/clock.png" alt="clock icon" class="clock-icon">
@@ -60,13 +64,14 @@
         </div>
 
         
-        <!--Study features - Pomodoro Timer, Stopwatch, Music layer-->
+        <!--Study features: Pomodoro Timer, Stopwatch, Music Player-->
         <div class="col-md-8 study-features">
           <div class="box box-border time-features">
             
             <!--Pomodoro Timer-->
             <div id="pomodoro-timer">
               <div class="timer" id ="timer">
+                <!--Work Timer-->
                 <div id ="work-timer">
                   <h2>
                     <span id="pomodoro-minutes">25</span>
@@ -75,6 +80,7 @@
                   </h2>
                   <p>FOCUS</p>
                 </div>
+                <!--Break Timer-->
                 <div id="break-timer">
                   <h2>
                     <span id="break-minutes">5</span>
@@ -84,6 +90,7 @@
                   <p>BREAK</p>
                 </div>
               </div>
+              <!--Start, Stop & Reset Buttons-->
               <div class="pomodoro-buttons">
                 <button class="btn btn-primary" id="pomodoro-start">Start</button>
                 <button class="btn btn-secondary" id="pomodoro-stop">Stop</button>
@@ -95,6 +102,7 @@
                   <span id="total-sessions">4</span>
                   <span> sessions</span>
               </div>
+              <!--Navigation Links -->
               <div class="time-links">
                 <ul>
                   <li><a href="#" class="pomodoro-link">Pomodoro</a></li>
@@ -106,12 +114,15 @@
             
             <!--Stopwatch-->
             <div id="stopwatch">
+              <!--Stopwatch Timer Display-->
               <h2 class="stopwatch-display"><span id="stopwatch-minutes">00</span>:<span id="stopwatch-seconds">00</span>:<span id="stopwatch-tens">00</span></h2>
+              <!--Stopwatch Buttons -->
               <div class="stopwatch-buttons">
                 <button class="btn btn-primary" id="stopwatch-start">Start</button>
                 <button class="btn btn-secondary" id="stopwatch-stop">Stop</button>
                 <button class ="btn btn-outline-warning" id="stopwatch-reset">Reset</button>
               </div>
+              <!--Navigation Links -->
               <div class="time-links">
                 <ul>
                   <li><a href="#" class="pomodoro-link">Pomodoro</a></li>
@@ -170,6 +181,7 @@
                   </div>
                 </div>
               </div>
+              <!--Navigation Links -->
               <div class="time-links">
                 <ul>
                   <li><a href="#" class="pomodoro-link">Pomodoro</a></li>
@@ -179,15 +191,10 @@
               </div>
             </div>
           </div>
-
-          
-          
-          
           
           <!--Music Player -->
           <div class="box box-border">
             <div class="music-player">
-
               <!--Current Song Playing-->
               <div class="player">
                 <div class="details">

@@ -209,10 +209,9 @@ function renderLink(link, index, parent, flashcard) {
 const btnOpenAllLinks = document.getElementById("btn-open-all-links");
 btnOpenAllLinks.addEventListener("click", () => {
   // Loop through all links and open each one
-  flashcards.map((flashcard, index) => {
-    flashcard.links.map((link, index) => {
-      console.log(link);
-      window.open(link);
+  flashcards.forEach((flashcard, index) => {
+    flashcard.links.map((link) => {
+      window.open(link, "_blank");
     });
   });
 });
